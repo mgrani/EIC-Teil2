@@ -1,0 +1,70 @@
+\documentclass{bs-reading}
+\usepackage{xparse}
+\usepackage{todo}
+\usepackage{amsmath}
+\usepackage{../../EIC-medien-generic/EIC-medien} %
+
+\usepackage[latin1]{inputenc}
+\bsauthor{GRANITZER M., KOSCH H.}
+\bsyear{2014}
+
+
+\input{listing_xml_preamble}
+
+\renewcommand{\outline}{
+\begin{bsslide}[\bsparthead]
+\bspar1
+\begin{bspartenumerate}[1]
+\coloritem[\emcolor]
+EIC Teil 2- Medium Bild
+\begin{itemize}
+\small
+\coloritem
+Farbwahrnehmung und Farbmodelle
+\coloritem
+Digitalisierung und Kodierung von Bildern
+\coloritem
+JPEG Kompression (\"Uberblick, nicht pr\"ufungsrelevant)
+\coloritem
+Vektorgrafiken am Beispiel SVG (Scalable Vector Graphics)
+\end{itemize}
+\end{bspartenumerate}
+\end{bsslide}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Ressources
+%% Malaka Book Chapter 3
+%%
+\begin{document}
+
+\bscollection{Medientechnik}
+\bspartname{Medium Bild}
+\setcounter{bspart}{4}
+\begin{bsslide}
+\bspar9
+\begin{center}
+{\large\bfseries Einf\"uhrung Internet Computing Teil 2 \bspar1 Medien und Information}
+\bspar4
+ Kapitel 2: Medium Bild
+\bspar4
+\small 
+Michael Granitzer
+\bspar2
+Harald Kosch
+\bspar2
+Universität Passau
+\end{center}
+\end{bsslide}
+
+
+\outline
+\input{unit-de-farbwahrnehmung-und-farbmodelle}
+\outline
+\input{unit-de-digitalisierung-und-kodierung}
+\outline
+\input{unit-de-bild-kompression}
+\outline
+\input{unit-de-svg}
+
+\end{document}

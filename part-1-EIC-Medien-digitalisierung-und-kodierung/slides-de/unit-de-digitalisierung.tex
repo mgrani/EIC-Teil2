@@ -1,0 +1,530 @@
+%%% DATE.  September, 1st, 2012
+
+\clearpage
+%%% Unit statistics.
+%%%
+%%% corollary:   0
+%%% definition:  0
+%%% lemma:       0
+%%% page:        0
+%%% proof:       0
+%%% theorem:     0
+
+%%%%%%%%%%%%%%% METADATA %%%%%%%%%%%%%%%%
+\bsunitname{Digitalisierung}
+\setcounter{bsunit}{2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 2]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Digitalisierung - Analog und Digital}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Analoge Signale}
+    \bspar1
+    \begin{definition} [Analoges Signal]
+      Ein analoges Signal ist die deterministische Änderung einer
+      physikalischen Größe (entlang Raum und/oder Zeit) entsprechend
+      einem Messwert der zu übertragenen Information. Das analoge Signal kann
+      als wertkontinuierliche Funktion $f(x_1,x_2,\ldots)$ von ein bis
+      mehrerer unabh\"angigen kontinuierlichen Variablen (z.B. Raum, Zeit) aufgefasst werden.
+    \end{definition}
+    \bspar1
+    \textbf{Eigenschaften von Signalen}
+    \begin{itemize}
+      \item Kontinuierlich bedeutet, dass f\"ur jeden beliebigen Wert
+        der unabh\"angigen Variablen, das Signal einen Wert aus einem beliebig
+        genauen Wertebereich annehmen kann 
+      \item In analogen Signalen sind prinzipiell "`beliebig"' genaue Beobachtung möglich (bei idealen Messgeräten)
+      \item Analoge Signale sind störanfällig bei Übertragung oder Vervielfältigung
+    \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \begin{bsslide}[\textbufferB]
+    \colortext{Beispiele für analoge Signale}
+    \bspar2
+    \begin{itemize}
+      \setlength{\itemsep}{2ex}
+      \item Helligkeit einer Lichtquelle in Candela
+      \item Farbton einer Lichtquelle (Wellenlänge)
+      \item Luftdruck Schwankungen als Schall
+      \item Drehzahl eines rotierenden Objekts
+      \item Mechanische Kraft
+      \item Elektrische Spannung
+      \item Elektrischer Widerstand, elektrische Kapazität
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Digitales Signal}
+    \bspar1
+    \begin{definition}[Digitales Signal]
+      Ein digitales Signal ist die Repr\"asentation eines analogen
+      Signals durch eine abz\"ahlbare, diskrete
+      Anzahl von Werten zu einer diskreten, abz\"ahlbaren Anzahl von
+      Zust\"anden. Das digitale Signal kann
+      als Funktion $f(x_1,x_2,\ldots)$ mit abz\"ahlbaren, diskreten
+      Wertebereiche von ein bis
+      mehrerer unabh\"angigen, diskreten Variablen (z.B. Raum, Zeit) aufgefasst werden
+    \end{definition}
+\small
+   \textbf{ Eigenschaften Digitales Signal}
+    \begin{itemize}
+      \item Raum- und Zeitwerte eines Signals werden durch einen endlichen (meist numerischen) Zeichenvorrat repräsentiert
+      \item Digitale Signale sind Annäherungen an das Originalsignal
+      \item Digitale Signale sind eine \textbf{Reihe von binär repräsentierten Zahlen}, welche verlustfrei vervielfältigt werden können
+      \item Entstehung digitaler Signale:
+      \begin{itemize}
+        \item \textbf{Synthese}: Digitales Signal wird aus anderen digitalen Signale errechnet
+        \item \textbf{Abtastung}: Ein gegebenes analoges Signal wird
+          diskretisiert. 
+          \begin{itemize}
+          \item \small Bemerkung: Ein "`analoges Signal"' kann auch als
+            ideale mathematische Funktion (z.B. 3D Modell für Film)
+            vorliegen
+          \end{itemize}
+      \end{itemize}
+    \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \begin{bsslide}[\textbufferB]
+    \colortext{Digitales Signal - Beispiel}
+    \bspar1
+    \bsfigurecaption[0.6]{digitales-signal}{\tiny Bildquelle Wikipedia}
+    \bspar1
+    Digitales Signal:
+    \begin{tabular}{|c|ccccccccc|}
+      \hline
+      f(t) & 0 & 4 & 5 & 4 & 3 & 4 & 6 & 7 & $\ldots$ \\
+      t    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & $\ldots$ \\
+      \hline
+    \end{tabular}
+    \bspar1
+    Unterscheidung: \textbf{Diskretisierung} vs. \textbf{Quantisierung}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 2]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Digitalisierung - Abtastung}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Digitales Signal - Diskretisierung/Quantisierung}
+    \bspar1
+    Die Umwandlung eines analogen in ein digitales Signal, die \textbf{Digitalisierung}, entsteht durch Abtastung entlang des \textbf{Signalverlaufs (Diskretisierung)} und der \textbf{Signalstärke (Quantisierung)}
+    \bspar1
+    \begin{definition}[Diskretisierung (Sampling)]
+      Bei der (Abtastachsen-)Diskretisierung wird ein festes Raster
+      von Messpunkten gleichen Abstands $\Delta t$ auf der Achse
+      festgelegt, über die sich das analoge Signal verändert. Der
+      aktuelle Wert des Signals zu den Messpunkten dieses Rasters bezeichnet man als Sample (Messwert).
+    \end{definition}
+    \bspar1
+    \begin{itemize}
+      \item Die Dichte der Messwerte wird als \textbf{Abtastrate
+          (Sampling Rate)} bezeichnet.
+      \item Das feste Raster können Zeitpunkte sein (Beispiel Audiosignal) oder aber auch Raumdimensionen (Beispiel Pixel)
+      \item Die Höhe der Abtastrate spezifiziert wie genau das Originalsignal wieder rekonstruiert werden kann
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Digitales Signal - Diskretisierung/Quantisierung}
+    \bspar1
+    \begin{definition}[Quantisierung]
+      Die Quantisierung entspricht der Überführung der bei der
+      Diskretisierung erhaltenen Messwerte auf einen diskreten, abz\"ahlbaren Wertebereich (meist im Binärsystem).
+    \end{definition}
+    \bspar1
+    Eigenschaften:
+    \begin{itemize}
+      \item Jedem Messwert wird einer Zahl in einem abz\"ahlbaren Wertebereich zugeschrieben
+      \item Die Kodierung erfolgt im Allgemeinen im binären Zahlensystem
+      \item \textbf{Auflösung}: Bits pro Sample (bit resolution)
+      \item Die Genauigkeit abhängig von der Anzahl der Bits pro Messwert
+    \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kategorisierung von Signalen}
+    \bspar4
+    \bsfigurecaption[1.2]{abtastung-vergleich}{\tiny Bildquelle Wikipedia}
+  \end{bsslide}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kategorisierung von Digitalisierungsverfahren}
+ \bspar1
+    Das Verfahren wird auch als \textbf{Pulse Code Modulation (PCM)}
+    oder\textbf{waveform encoding} bezeichnet. In der technischen
+    Realisierung der PCM k\"onnen folgende Verfahren unterschieden werden:
+    \bspar1
+    Eigenschaften:
+    \begin{itemize}
+      \item \textbf{Lineare PCM:} Die Quantisierung findet in fixen
+        Intervallen gleicher Gr\"o\ss e statt.
+      \item \textbf{Dynamische PCM:} Die Quantisierung findet in fixen
+        Intervallen unterschiedlicher Gr\"o\ss e statt
+        (z.B. logarithmische Skala bei Audio Signalen zur Optimierung
+        f. d. menschliche Wahrnehmung).
+      \item \textbf{Differenz PCM:} Es werden nur die Differenzen
+        zweier Abtastwerte kodiert. Bei sich langsam ver\"andernden
+        Signalen kann so die ben\"otigte Kodierungsgr\"o\ss e
+        reduziert werden. 
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Digitalisierung unterschiedlicher Medienarten}
+    \bspar1
+    Verschiedene (Repräsentations-)Medien haben \textbf{verschiedene Arten von Bezugs- und Wertachsen} für die Signale (abweichende Terminologie)
+    \bspar1
+    \textbf{Audio}
+    \begin{itemize}
+      \item x-Achse = Zeit, y-Achse = Amplitude
+      \item Genauigkeit der Diskretisierung = Abtastrate (sampling rate) (Hz)
+      \item Genauigkeit der Quantisierung = Auflösung (resolution) (Bit)
+    \end{itemize}
+    \bspar1
+    \textbf{Bild}
+    \begin{itemize}
+      \item Zwei räumliche Achsen (x,y), z-Achse = Helligkeit/Farbwert
+      \item Genauigkeit der Diskretisierung = räumliche Auflösung (Dichte der Bildelemente, z.B. dots per inch)
+      \item Genauigkeit der Quantisierung = Farb- bzw. Grauwertauflösung (color resolution in bit, z.B. 16 Bit Farbtiefe)
+    \end{itemize}   
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Generalisierung der Darstellungsdimension}
+    \bspar1
+    Ein Medium kann bis zu drei räumliche Dimensionen und eine zeitlich Dimension enthalten
+    \begin{itemize}
+      \item Text: Eine räumliche (oder zeitliche) Dimension
+      \item Bild: Zwei räumliche Dimensionen
+      \item Video: Zwei räumliche Dimensionen, eine zeitliche Dimension
+      \item Raumklang und 3D-Video: Drei räumliche Dimensionen, eine zeitliche Dimension
+    \end{itemize}
+    Man spricht von raumabhängigen und zeitabhängigen Medien
+    \bspar1
+    Informationserhaltende Transformationen möglich
+    \begin{itemize}
+      \item z.B. Scrollen (Raum $\Rightarrow$ Zeit)
+      \item z.B. Notenschrift (Zeit $\Rightarrow$ Raum)
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Vorteile digitaler Signale }
+    \bspar1
+    \bsfigurecaption[0.8]{analoge-signale-stoersignale.png}{Bildquelle \bscite{Malaka et.al. 2009}}
+    \bspar1
+    \bsfigurecaption[0.8]{digitale-signale-stoersignale.png}{Bildquelle \bscite{Malaka et.al. 2009}}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Vor- und Nachteile}
+    \bspar1
+    \textbf{Vorteile}
+    \begin{itemize}
+      \item Unempfindlichkeit gegen Störungen des Übertragungs- bzw. Speichermediums (e.g. magnetische Instabilität)
+      \item Fehlererkennung/-korrektur durch entsprechende Codierung möglich ("`error correcting codes"')
+      \item Verlustfrei kopierbar
+      \item Viele Signale entstehen bereits in digitaler Form
+    \end{itemize}
+    \bspar1
+    \textbf{Nachteile}
+    \begin{itemize}
+      \item Informationsverlust
+      \item Hoher Speicheraufwand/große Kanalkapazität
+      \item Konvertierung mit Rechenaufwand verbunden
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 2]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Digitalisierung - Abtasttheorem}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Abtasttheorem}
+    \bspar1
+    Fragen:
+    \begin{itemize}
+      \item Wie gut kann das Originalsignal repräsentiert werden?
+      \item Was sind gute Diskretiesierungsintervalle?
+    \end{itemize}
+    \bspar2
+    Lehrziel:
+    \begin{itemize}
+      \item Einführung einer präziseren Definition von Signalen
+      \item Erklärung Abtasttheorem: $f_{abtastung}> 2* f_{max}$
+      \item Effekte unzureichender Abtastung
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \begin{bsslide}[\textbufferB]
+    \colortext{Eigenschaften Analoger Signale}
+    \bspar1 \small
+    Analoge Signale können als Summe von potentiell unendlich vielen
+    periodische Sinusoiden-Signalen aufgefasst werden.
+    \begin{itemize}      
+      \item Periodische bedeutet, dass sich der Signalverlauf regelmäßig wiederholt
+      \item \textbf{Amplitude A}: Auslenkung des Signals
+      \item \textbf{Periodenlänge T}: Dauer bis zum Beginn der nächsten Wiederholung
+      \item \textbf{Frequenz f}: Anzahl der Wiederholungen pro Sekunde
+      \item Zusammenhang: $T=\frac{1}{f}$
+      \item \textbf{Phasenverschiebung $\Phi$}: Verschiebung des Startzeitpunktes des Signals
+      \item \textbf{Offset/Gleichanteil $DC$}: Verschiebung des Signals um einen konstanten Faktor 
+    \end{itemize}
+    \bspar1
+    \begin{minipage}[t]{0.45\linewidth}
+      \bsfigurecaption[0.45]{sinus-signal-butz}{Quelle Prof. Butz, LMU}
+    \end{minipage}
+    \begin{minipage}[t]{0.45\linewidth}
+      \bsfigurecaption[0.45]{phase-verschiebung}{}
+    \end{minipage}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+    \colortext{Modell zur Entstehung sinusoider Signale}
+    \bspar1
+    Enstehung \"uber einen sich am Einheitskreis mit der Zeit drehenden Zeiger.
+    \begin{itemize}
+      \item \textbf{Bogenmaß}: Angabe des Winkels als Teil des Umfangs eines Einheitskreises ($2\pi$) z.B. (90° = $\pi/2$, 360° = $2\pi$)
+      \item \textbf{Kreisfrequenz $\color{buworange}\omega$}: Pro Sekunde von einem drehenden Zeiger\\ \centering{${\color{buworange}\omega}=2\pi\cdot {\color{buworange} f}=2\pi/{\color{buworange} T}$} (Anmerkung: Winkelangabe in Radian, d.h. $2\pi = 360°$)
+    \end{itemize}
+    \bsfigure[scale=0.55]{einheitskreis-sinus}
+    \small
+    Sinusoide Signale: Sinus plus variable Phasenverschiebung. \\
+{\tiny (Demo unter  \url{http://www.wi.uni-muenster.de/qm/organisation/terveer/analysis_brueckenkurs/DGS_5/Sources/abb_5_7_sinusfunktion_genese.html})}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+    \colortext{Überlagerung von sinusoider Signale}
+    \bspar1
+    Wie sieht dies nun für komplexere Signale aus?
+    \bspar1\small
+\begin{minipage}{0.70\linewidth}
+    \bsfigurecaption[0.65]{signal-erzeugung-rechteckschwingung-durch-sinus.pdf}{Bildquelle Wikipedia}  
+    \end{minipage}
+\begin{minipage}{0.28\linewidth}
+      \textbf{Fourier Theorem}: Jedes periodische Signal kann durch
+      eine potentiell unendliche Anzahl von Cosinus u. Sinus
+      konstruiert werden. D.h. wir k\"onnen uns bei der Analyse
+      analoger Signale auf die Analyse sinusoider Funktionen beschr\"anken.
+    \end{minipage}    
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Beispiele periodischer Signale}
+    \bspar1
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.7]{signale-beispiel-einfach-periodisch}{Bildquelle Wikipedia}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.7]{periodische-signale-butz}{Quelle Prof. Butz, LMU}
+    \end{minipage}
+    \begin{itemize}
+      \item Können die Originalsignale nach Digitalisierung rekonstruiert werden?
+      \item Welche Effekte erzeugt eine zu niedrige Abtastrate?
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  % \begin{bsslide}[\textbufferB]
+  %   \colortext{Was passiert bei zu geringer Abtastrate?}
+  %   \bspar1
+  %   Propeller Effekt
+  %   \bspar1
+  %   \bsfigure[scale=0.9]{propeller-effect.png}
+  %   \bspar1
+  %   \tiny\url{http://www.youtube.com/watch?v=ttvSzoqGQlY}
+  % \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \begin{bsslide}[\textbufferB]
+    \colortext{Was passiert bei zu geringer Abtastrate?}
+    \bspar2
+    Beispiel eines komplexeren periodischen Beispielsignals
+    \bspar4
+    \bsfigure{abtastung-periodisches-signal}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Was passiert bei zu geringer Abtastrate?}
+    \bspar2
+    Zu niedrige Abtastrate
+    \bspar2
+    \bsfigure{abtastung-periodisches-signal-zu-niedrig}
+    \bspar2
+    Das Abastsignal ist als idealisierters periodisches Impulssignal
+    (in schwarz) dargestellt und definiert die Diskretisierungseitpunkte.
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Was passiert bei zu geringer Abtastrate?}
+    \bspar2
+    Zu niedrige Abtastrate
+    \bspar4
+    \bsfigure{abtastung-periodisches-signal-zu-niedrig-2}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Was passiert bei zu geringer Abtastrate?}
+    \bspar2
+    \begin{minipage}{0.55\linewidth}
+      \bsfigurecaption[0.7]{abtastung-sinus} { Bildquelle Wikipedia}
+    \end{minipage}
+    \begin{minipage}{0.38\linewidth}
+      \begin{itemize}
+       \small
+      \item Fixe Abtastrate (Punkte)
+      \item Steigende Signalfrequenz (von oben nach unten)
+      \item Liegt die h\"ochste Signalfrequenz \"uber der halben
+        Abtastfrequenz kann das Signal nicht mehr korrekt
+        rekonstruiert werden (siehe gestrichelte Linie)
+      \end{itemize}
+    \end{minipage}
+  \end{bsslide}
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \begin{bsslide}[\textbufferB]
+    \colortext{Abtasttheorem (Nyquist-Shannon-Abtasttheorem)}
+    \bspar1
+    \begin{theorem}[Abtasttheorem (Nyquist-Shannon-Abtasttheorem)] Wenn eine Funktion (Signal) mit höchster vorkommender Frequenz $f_g$ (Bandbegrenzung) mit einer Abtastrate $f_S$ abgetastet wird, so dass \\
+      \centering{$f_S>2*f_g$}, \\
+      dann kann diese Funktion eindeutig aus den Abtastwerten rekonstruiert werden.
+    \end{theorem}
+    \bspar3
+    Entwickelt von Harry Nyquist (1928) und bewiesen durch Claude Shannon
+    \bspar1
+    Beispiele:
+    \begin{itemize}
+      \item Abtastrate für Audio CDs ist 44,1 kHz bei maximaler Höhrfrequenz des Menschen mit 20 kHz
+      \item Telefonsprachverbindung (ISDN): 8 kHz (ausreichend für menschliche Sprache)
+    \end{itemize}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Aliasing}
+    \bspar1
+    Wird ein Signal mit zu geringer Frequenz abgetastet, spricht man vom "`Aliasing"' (Alias ist der Stellvertreter)
+    \bspar2
+    Beispiel Audio: liegt die Frequenz des Signals über der halben Abtastfrequenz, sinkt die Frequenz des Digitalen Signals
+    \bsfigure[scale=0.7]{abtastfehler-audio}
+    \bspar1\tiny
+    Applet unter \url{http://www.aw-bc.com/lee_varaiya/protected/week13/aliasing.html}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Aliasing}
+    \small
+    \bspar1
+    \textbf{Klassische Aliasing} Effekte bei Bilddarstellung 
+    \bsfigure[scale=0.5]{aliasing-bild}
+    \bspar1
+    \textbf{Morie Effect}: Ziegelwand mit Morie-Effekt entstanden durch nicht ausreichende Abtastfrequenz bei wellenförmiger Helligkeitsverläufe
+    \bspar1
+    \begin{minipage}{0.45\linewidth}
+      \bsfigure[scale=0.6]{abtastfehler-bild-ohne-morie}
+      \small \centering {Ohne Morie-Effekt}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \bsfigure[scale=0.6]{abtastfehler-bild-mit-morie}
+      \small \centering {mit Morie-Effekt}
+    \end{minipage}
+    \bspar2
+    Vermeidung von Aliasing durch Filterung aller Frequenzen im analog Signal mit höheren Anteilen als die Abtastrate $(\geq 0.5 f_s)$
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Speicherbedarf für Digitale Medien}
+    \bspar1
+    Aus den Abtastraten lässt sich der Speicherbedarf von Digitalen Medien einfach ermitteln.
+    \bspar3
+    \begin{itemize}
+      \item Audio: 44 kHz pro Sekunde, 16 Bit pro Sample (=$2^{16}$ unterschiedliche Töne) $\Rightarrow$ 1,4 MBit/s bzw. 635 MByte pro Stunde
+      \item Bilder: 8 Millionen Pixel, 3 Farbkanäle, 8 bit pro Kanal $\Rightarrow$ 24 MByte pro Bild
+    \end{itemize}
+    \bspar2
+    Relativ hoher Speicherbedarf im Rohformat. Notwendigkeit für effiziente Kodierung und Kompression (siehe nächste Abschnitte)
+  \end{bsslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 2]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Digitalisierung -Zusammenfassung}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{bsslide}[Zusammenfassung]
+    \colortext{Digitalisierung und Abtasttheorem}
+    \bspar1
+    Gegeben Analoges Signal als ver\"anderliche physikalische Gr\"o\ss e:
+    \begin{itemize}	
+      \item Diskretisierung der Ausbreitungsrichtung (räumlich und/oder zeitlich) eines Signals
+      \item Quantisierung der Signalstärke
+      \item[$\Rightarrow$] Digitales Signal
+    \end{itemize}
+    Zu ber\"ucksichtigen:
+  \begin{itemize}
+     \item Signale k\"onnen als \"Uberlagerung von potentiell
+       unendlich vielen Sinus/Cosnius Signalen aufgefast werden
+       (Fourier Theorem)
+      \item Abtasttheorem/Nyquist-Frequenz: Mehr als doppelte Abtastfrequenz der höchsten im Signal vorkommenden Frequenz garantiert vollständige Rekonstruktion des Signals (unter der Annahme periodischer Signale und genügender Quantisierung)
+      \item Aliasing entsteht, wenn das Abtasttheorem verletzt wird.
+    \end{itemize}
+ 
+  \end{bsslide}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "part-de-mt-digitalisierung"
+%%% End: 

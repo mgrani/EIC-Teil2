@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Thu May 31 10:45:14 CEST 2012
+markTmpDer=true
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=DM-UEBlatt8-Lsg-SS12-Konzept-Lernen-Evaluierung.tex
+outputFile=DM-UEBlatt8-Lsg-SS12-Konzept-Lernen-Evaluierung.pdf
+langSpell=de
+markDer=true
+srcDir=

@@ -1,0 +1,635 @@
+%%% DATE.  September, 1st, 2012
+
+\clearpage
+\bsauthor{GRANITZER}
+\bsyear{2012}
+
+%%% Unit statistics.
+%%%
+%%% corollary:   0
+%%% definition:  0
+%%% lemma:       0
+%%% page:        0
+%%% proof:       0
+%%% theorem:     0
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 7.1 und 7.2]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{bsslide}[Vektorgrafik Allgemein]
+  \colortext{Lernziel}
+  \bspar1
+  \textbf{Unterthemen}
+  \begin{itemize}
+    \item Beschreibung Vektorgraphik/Unterschied zu Rastergrafiken
+    \item Koordinatensystem, Punkte, Geraden
+    \item Überblick Bezier-Kurven und Splines
+    \item Rendering-Pipeline
+    \begin{itemize}
+      \item Szenegraph und Koordinatensysteme
+      \item Clipping
+      \item Rasterisierung
+    \end{itemize}
+  \end{itemize}
+\end{bsslide}
+
+\renewcommand{\textbufferB}{Grundlegende Beschreibung von 2D Vektorgraphiken}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Bilder vs. Grafiken}
+    \bspar1
+    \textbf{Digitales Bild} besteht aus N Zeilen und je M Bildpunkten
+    Anwendungsbereiche:
+    \begin{itemize}
+      \item Pixeln bzw. Picture Elements (Auflösung, Farbtiefe etc.)
+      \item Bild kann aus der realen Welt kommen oder virtuell sein
+      \item Wie beschreiben wir digital erstellte Grafiken?
+    \end{itemize}
+    \bspar1
+    \textbf{(Vektor-)Grafiken}: durch grafische Primitive und ihre Attribute spezifiziert
+    \begin{itemize}
+      \item Primitive 2D Objekte: Linien, Rechtecke, Kreise, Ellipsen, Texte
+      \item 2D Formate: SVG,PostScript, Windoes Metafile, CorelDraw, PDF $\ldots$
+      \item Primitive 3D Objekte: Polyeder, Kugeln, $\ldots$
+      \item Formate 3D: VRML, X3D
+      \item Attribute: Stil der Linie, Breite, Farbe etc
+    \end{itemize}
+  \end{bsslide}
+  
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Vektorgrafiken}
+    \bspar1
+    \begin{definition}[Vektorgrafik]
+      Als Vektorgrafiken bezeichnet man \textbf{mathematisch und programmatisch} definierte Zeichenanweisungen in einem Koordinatensystem,
+       aus welchen Rastergrafiken generiert, gespeichert und präsentiert werden können.
+    \end{definition}
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.6]{beispiel-vektorgraphic-logo.jpg}{\tiny Bildquelle zz-logo.de}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \small
+      \textbf{Eigenschaften}
+      \begin{itemize}
+        \item Vektorgrafiken können einfach und exakt geometrisch transformiert werden
+        \begin{itemize}
+          \item Rotation, Skalierung, Verschiebung
+          \item Separierung einzelner Bildelemente (Gruppierung, Ebenen)
+          \item Änderung der Attribute einzelner Elemente (Farbe einer Fläche etc)
+          \item Im Grunde ein perfektes mathematisches Modell, welches jedoch in ein Rasterbild überführt werden muss
+        \end{itemize}
+      \end{itemize}
+    \end{minipage}
+  \end{bsslide}
+  
+    \begin{bsslide}[\textbufferB]
+    \colortext{Bilder vs. Grafiken}
+    \bspar1
+     Unterschiede zu Rasterbild
+    \begin{itemize}
+      \item Erstellungsformat - Editor, Vektorgrafik-Programm
+      \item Speicherformat - XML, properitär (nicht in binären Daten)
+      \item Ausgabeformat - Rendering
+      \item Falls keine Konvertierung in ein Standardformat, sind je Editorensystem eigene Previewer nötig
+      \item Für einen Ausdruck sind (fast) immer Konvertierungen nötig (z.B. nach Postscript)
+    \end{itemize}
+  \end{bsslide}
+  
+\renewcommand{\textbufferB}{Grundlegende Beschreibung von 2D Vektorgrafiken}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Koordinatensystem}
+    \bspar1
+    \textbf{Koordinatensystem: }Grundlage jeder 2D Vektorgrafik ist ein zweidimensionaler Vektorraum
+    \begin{itemize}
+      \item X/Horizontal- und Y/Vertikalachse
+      \item i.A. gleicher Abstand auf beiden Achsen
+    \end{itemize}
+    \bspar1
+    \textbf{Elemente}
+    \begin{itemize}
+      \item Punkt beschrieben durch X/Y Koordinate
+      \item Gerade beschrieben durch Start- und Endpunkt
+      \item Polygon aus mehreren Geraden
+      \begin{itemize}
+        \item Geschlossenes Polygon (Fläche)
+        \item Offenes Polygon
+      \end{itemize}
+      \item Kreis - Radius und Mittelpunkt
+    \end{itemize}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Koordinatensystem}
+    \bspar1
+    \bsfigurecaption[0.4]{koordinatensystem.png}{\tiny Bildquelle \cite{Malaka et.al. 2009}}
+    \bspar1
+    \textbf{Canvas: }Die vom Koordinatensystem aufgespannte Zeichenfläche wird auch Canvas bezeichnet
+    \begin{itemize}
+      \item Je nach Format liegt der Ursprung des Koordinatensystems woanders
+      \item Java/SVG/Web: Links Oben; PostScript-Standard Links unten
+    \end{itemize}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kurven Formen im Koordinatensystem}
+    \bspar1
+    Wie zeichnet man Kurven?
+    \bspar1
+    \textbf{Interpolationskurven oder Splines} werden durch \textbf{Kontroll- oder Stützpunkte} beschrieben
+    \bspar1
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.4]{splines}{\tiny Bildquelle \cite{Malaka et.al. 2009}}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \small
+      \begin{itemize}
+        \item Eine Spline Kurve $n-ten$ Grades ist stückweise aus Polynomen maximal $n-ten$ Grades zusammen gesetzt
+        \item Angabe der Randbedingungen für jedes Stück (1.-3. Grad der Ableitung) bestehend aus \textbf{Steigung, Krümmung und Krümmungsänderung}
+        \item Randpunkte eralten somit die Glätte und Stetigkeit
+        \item Angabe in Grafikprogrammen duch \textbf{Kontrollinien}
+        \begin{itemize}
+          \item Richtung = Steigung
+          \item Länge = Steifigkeit/Krümmung
+        \end{itemize}
+      \end{itemize}
+    \end{minipage}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kurven Formen im Koordinatensystem}
+    \bspar1\small
+    Eine \textbf{Bezier-Kurven} $n-ten$ Grades ist eine spezielle Art der Interpolationskurve welche durch $n+1$ Kontrollpunkte beschrieben wird.
+    \begin{itemize}
+      \item Entwickelt von Bezier und Casteljau bei Renault bzw. Citroen zur Formgebung bei Autos
+      \item Der Kurvenlauf lässt sich mit dem Algoritmus von Casteljau ermitteln
+    \end{itemize}
+    \bspar2
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.7]{berzier-kurven}{\tiny Bildquelle \cite{Malaka et.al. 2009}}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \small
+      \textbf{Skizze des Algorithmus:}
+      \begin{itemize}
+        \item[1.] Gegeben: $n+1$ Kontrollpunkte $P$ einer Berzier Kurve $n-ten$ Grades
+        \item[2.] Initalisiere Laufparameter $t\in [0:1]$ mit einem kleinen Wert
+        \item[3.] Setze $P'=P$
+        \item[4.] Teile die durch $P'$ definierten Geraden im Verhältnis $t$ 
+        \item[5.] Verwende die Teilungspunkte als neue Kontrollpunkte $P'$
+        \item[6.] Wenn $|P'|>1$ gehe zu 4
+        \item[7.] Wenn $|P'|==1$ zeichne den Punkte an Position $P'$, erhöhe $t$
+        \item[8.] Solange $t<1$ gehe zu 3.
+      \end{itemize}
+    \end{minipage}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kurven Formen im Koordinatensystem}
+    \bspar1
+    Konstruktionsbeispiel f. Kurve erster Ordnung
+    \bspar4
+    \animategraphics{10}{berzier-1-}{0}{50}
+    \bspar1\tiny
+    \url{http://en.wikipedia.org/wiki/B%C3%A9zier_curve
+    }
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kurven Formen im Koordinatensystem}
+    \bspar1
+    Konstruktionsbeispiele für Kurve 2. Ordnung
+    \animategraphics{10}{bezier-2-}{0}{50}
+    \bspar1\tiny
+    
+    \url{http://en.wikipedia.org/wiki/B%C3%A9zier_curve
+    }
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kurven Formen im Koordinatensystem}
+    \bspar1
+    Konstruktionsbeispiele für Kurve 3. Ordnung
+    \bspar1
+    \animategraphics{10}{bezier-4-}{0}{50}
+    \bspar1\tiny
+        \url{http://en.wikipedia.org/wiki/B%C3%A9zier_curve
+    }
+  \end{bsslide}
+  
+  
+%   \begin{bsslide}[\textbufferB]
+%     \colortext{Kurven Formen im Koordinatensystem}
+%     Konstruktionsbeispiele (Animation) (Quelle Wikipedia)
+%     Höherer Ordnung
+%    % \animategraphics{10}{bezier-complex-}{0}{48}
+%     \bspar1\tiny
+%     
+%     \url{http://en.wikipedia.org/wiki/B%C3%A9zier_curve
+%     }
+%   \end{bsslide}
+  
+%   
+%   \begin{bsslide}[\textbufferB]
+%     \colortext{Kurven Formen im Koordinatensystem}
+%     \bspar1
+%     Aus einer Menge solcher Berzier-Kurven lassen sich nun beliebig lange harmonisch gebogene Spline Kurven, die sogenannten B-Splines, zusammensetzen.\bspar1
+%     An den Grenzpunkten wird dabei sichergestellt, dass Steigung und Krümmung der beiden Kurvensegmente übereinstimmen
+%     \bspar4
+%     $\Rightarrow$ Details nicht teil dieser Vorlesung.
+%   \end{bsslide}
+%   
+  \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen}
+    \bspar1
+    Wie bei den Bildoperationen, können Punkte im Koordinatensystem geometrisch transformiert werden.
+    \begin{itemize}
+      \item Translation
+      \item Rotation
+      \item Skalierung
+      \item Scherung
+    \end{itemize}
+    \bspar4
+    Sie VO Einheit Bildoperationen
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Formate und Beispiel}
+    \bspar1
+    Formate:
+    \begin{itemize}
+      \item Vektor-Grafik-Formate
+      \item PostScript (.ps, .eps). PDF
+      \item Windows Metafile (*.wmf, *.emf)
+      \item Corel Draw (*.cdr)
+      \item ScalableVector Graphics (*.svg)
+      \item VRML (3D)
+      \item u.a.m.
+    \end{itemize}
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.7]{beispiel-vektorgrapfik-msdraw.png}{}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      vgl. z.b. Grafikerstellung mit MS Draw
+      \begin{itemize}
+        \item Einzelobjekt zusammengesetzt aus verschiedenen Grundprimitiven
+        \item Objektorientierte-Sichtweise
+        \item Gruppierungen müssen möglich sein
+        \item Typische Größe 10-100 KByte
+      \end{itemize}
+    \end{minipage}
+    
+  \end{bsslide}
+  
+
+
+\renewcommand{\textbufferB}{Rendering}
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rendering}
+    \bspar1
+    Wie erfolgt das Zeichnen/Darstellen einer Vektorgrafik am Ausgabegerät?
+    \bspar1
+    \bsfigurecaption[0.5]{beispiel-car}{\tiny Bildquelle \cite{Malaka et.al. 2009}}
+    \bspar1
+    \begin{definition}[Rendering]
+      Als \textbf{Rendering} bezeichnet man die Darstellung/das Zeichen von Vektorgrafiken auf Repräsentationsmedien (meist Bildschirm).
+    \end{definition}
+    \bspar1
+    Rendering kann als Digitalisierungsprozess von einem idealen, mathematischen Modell in dessen Darstellung angesehen werden. D.h. es können die gleichen Effekte wie bei der Digitalisierung von Licht auftreten.
+    \bspar1
+    Unterschiede zwischen 2D und 3D Modellen. Wir betrachten nur 2D Rendering.
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rendering}
+    \bspar1
+    \textbf{Rendering Prozess}: Etablierte Abfolge von Arbeitsschritten zur Darstellung der Vektorgrafik an Raster-basierten Präsentationsmedien
+    \bspar1
+    \bsfigurecaption{rendering-pipelin}{\tiny Bildquelle \cite{Malaka et.al. 2009}}
+    \begin{itemize}
+      \small
+      \item\textbf{ Ausgangspunkt Szenegraph}: 2D Objekte als Gruppe primitiver 2D
+        Objekte
+      \item Transformation der Objekte in Weltkoordinaten
+      \item \textbf{Clipping:} Beschneiden des Anzeigebereichs 
+      \item Transformation von Weltkoordinaten in Bildschirmkoordinanten
+      \item \textbf{Rasterisierung}: Zeichen von Linien und Punkten
+    \end{itemize}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rendering Pipeline - Transformation Bild-/Weltkoordinaten}
+    \bspar1
+    Die zu zeichnenden Elemente sind in dem sogenannten \textbf{Szenengraph} definiert\bspar1
+    Der Szenegraph ist ein gerichteter-azyklischer Graph von darzustellenden geometrischen Objekten und kann im einfachsten Fall als Baum aufgefasst werden.
+    \begin{itemize}
+      \small
+      \item Blatt-Knoten definieren primitive geometrische Objekte (Linien, Polygone)
+      \item Inner Knoten definieren 2D Transformationen auf abhängige Objekte
+      \item Gerichtete Kanten spezifizieren Zusammensetzung von einfacheren Objekten/Primitives zu komplexeren Objekten
+      \item Eigenschaften können vererbt werden (z.B. Farbe eines Objektes)
+      \item Objekte im Szenengraphen sind anhand eines Objekt-lokalen Bezugskoordinatensystems (Objektkoordinaten) definiert (z.B. Mittelpunt des Rades ist Punkt 0,0) 
+      \item Objektkoordinaten müssen beim darstellen der Szene in das Weltkoordinatensystem überführt werden (Position des Rades in der Szene) 
+      \item Das Weltkoordinatensystem ist das Bezugskoordinatensystem der Szene in dem alle relevanten Objekte (inkl. Kamera, Lichter etc.) positioniert werden
+    \end{itemize}
+  \end{bsslide}
+  
+   \begin{bsslide}[\textbufferB]
+    \colortext{Rendering Pipeline - Transformation Bild-/Weltkoordinaten}
+    \bspar1
+    \textbf{Beispiel eines Szenengraphen}
+    \bsfigurecaption{szenegraph}{\tiny Bildquelle \cite{Malaka et.al. 2009}}
+  \end{bsslide}
+
+   \begin{bsslide}[\textbufferB]
+    \colortext{Rendering Pipeline - Transformation Bild-/Weltkoordinaten}
+    \bspar1
+    \textbf{Beispiel eines Szenengraphen}
+    \bsfigurecaption[0.5]{szenegraph-koordinaten}{\tiny Bildquelle \cite{Malaka et.al. 2009}}
+  \end{bsslide}
+
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rendering Pipeline - Transformation Bild-/Weltkoordinaten}
+    \bspar1
+    \textbf{Transformation in einem Knoten}
+    \bsfigurecaption[0.7]{szenegraph-knoten}{}
+    \bspar1
+    Erinnerung: Transformationen sind assoziativ, d.h. eine Kette von Transformationen auf einem Objekt kann als eine Matrix ausgedrückt werden.
+  \end{bsslide}
+  
+ \begin{bsslide}[\textbufferB]
+    \colortext{Rendering Pipeline - Clipping}
+    \bspar1
+    Das Weltkoordinatensystem ist unendlich groß. Die Darstellungsfläche ist jedoch endlich.
+    \bspar4
+    \begin{minipage}{0.45\linewidth}
+      Zwei Schritte sind notwendig
+      \begin{itemize}
+        \item Beschneiden des Szenegraphen auf den durch ein Fenster definierten sichtbaren Bereich (Clipping)
+        \item Transformation in Bildschirmkoordinaten
+      \end{itemize}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \begin{center}
+        \bsfigure[0.8]{beispiel-car-clipping}
+      \end{center}
+    \end{minipage}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rendering Pipeline - Clipping}
+    \bspar1
+    \textbf{Beobachtungen}
+    \begin{itemize}
+      \item Die Szene besteht eigentlich nur aus Punkten oder Linien, d.h. es genügt wenn wir uns damit beschäftigen wie wir Linien beschneiden (wir ignorieren Splines hier).
+     \item Das Fenster kann Punkte ganz oder gar nicht beinhalten
+      \item Das Fenster kann teilweise Linien vollständig beinhalten, gar nicht oder teilweise
+    \end{itemize}
+    $\Rightarrow$ Clipping von Punkten\\
+    $\Rightarrow$ Linienclipping nach Cohen und Sutherland
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rendering Pipeline - Clipping}
+    \bspar1
+    \textbf{Clipping von Punkten}
+    \bspar2
+    \bsfigurecaption{clipping-punkt}{\tiny Bildquelle \url{http://www.cs.princeton.edu/courses/archive/fall99/cs426/lectures/pipeline/index.htm}}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rendering Pipeline - Clipping}
+    \bspar1
+    \textbf{Linien-Clipping nach Cohen und Shuterland}
+    \bspar1
+    Ausgangspunkt und Zielsetzung:
+    \bsfigurecaption[0.6]{clipping-before-after}{\tiny Bildquelle \url{http://www.cs.princeton.edu/courses/archive/fall99/cs426/lectures/pipeline/index.htm}}
+  \end{bsslide}
+  
+   \begin{bsslide}[\textbufferB]
+    \colortext{Rendering Pipeline - Clipping}
+   \bspar1 \small
+      9 Segmente beschrieben durch 4-Bit Code
+      \begin{itemize}
+        \item ersten 2-Bit definieren horizontal-position (rechts=10,mitte=00,links=01)
+        \item zweiten 2-Bit definieren vertikal-position (unten=10, mitte=00, oben=01)
+      \end{itemize}
+      \bspar1
+    \begin{minipage}{0.45\linewidth}
+      Logische Bitoperationen auf Linie ($P_1$,$P_2$)
+      \begin{itemize}
+        \item[1.] $P_1\;OR\;P_2=0000\Rightarrow$ Linie ist im Clipping Fenster
+        \item[2.] $P_1\;AND\;P_2\neq 0000\Rightarrow$ Linie ist in den Randbereichen, d.h. nicht zu zeichnen
+        \item[3.] Falls $P_1\neq 0000$ prüfe Schnitt mit Rand (e.g. $0010$=rechter Rand)
+        \item[4.] Falls $P_2\neq 0000$ prüfe Schnitt mit Rand (e.g. $0010$=rechter Rand)
+        \item[5.] Bei Schnitt wähle Schnittpunkt $P_1'$ als neuen Linienpunkt.
+      \end{itemize}
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}{0.45\linewidth}
+      \small
+      \bsfigurecaption[0.55]{clipping-bit-regions}{\tiny Bildquelle \url{http://www.cs.princeton.edu/courses/archive/fall99/cs426/lectures/pipeline/index.htm}}
+    \end{minipage}
+   \end{bsslide}
+   
+   \begin{bsslide}[\textbufferB]
+     \colortext{Rendering Pipeline - Clipping}
+     \bspar1
+     Schritte 1. und 2.: schnelle Klassifikation von Linien ohne Schnittpunkte mit Fenstergrenzen
+     \bspar3
+     \begin{minipage}{0.45\linewidth}
+       \bsfigurecaption[0.5]{clipping-step1-AND}{\tiny Bildquelle \url{http://www.cs.princeton.edu/courses/archive/fall99/cs426/lectures/pipeline/index.htm}}
+     \end{minipage}
+     \hspace{0.5cm}
+     \begin{minipage}{0.45\linewidth}
+       \bsfigurecaption[0.5]{clipping-step1-AND-2}{\tiny Bildquelle \url{http://www.cs.princeton.edu/courses/archive/fall99/cs426/lectures/pipeline/index.htm}}
+     \end{minipage}
+   \end{bsslide}
+   
+   
+   \begin{bsslide}[\textbufferB]
+     \colortext{Rendering Pipeline - Clipping}
+     \bspar1
+     Schritte 3.-5.: ermitteln von Schnittpunkten für Linien mit Schnittpunkten
+     \bspar3
+     \begin{minipage}{0.45\linewidth}
+       \bsfigurecaption[0.5]{clipping-step3-5-intersection}{\tiny Bildquelle \url{http://www.cs.princeton.edu/courses/archive/fall99/cs426/lectures/pipeline/index.htm}}
+     \end{minipage}
+     \hspace{0.5cm}
+     \begin{minipage}{0.45\linewidth}
+       \bsfigurecaption[0.5]{clipping-step3-5-intersection-2}{\tiny Bildquelle \url{http://www.cs.princeton.edu/courses/archive/fall99/cs426/lectures/pipeline/index.htm}}
+     \end{minipage}
+   \end{bsslide}
+   
+   \begin{bsslide}[\textbufferB]
+     \colortext{Von Welt- nach Bildkoordinaten}
+     \bspar1
+     Clipping erfolgte noch im Weltkoordinatensystem, d.h wir benötigen ein Transformation in das Bildkoordinatensystem des Rasterbilds
+    \bspar1 
+    \bsfigurecaption[0.8]{welt-zu-bild-koordinate.png}{\tiny \cite{Malaka et.al. 2009}}
+    \bspar2
+    \begin{center}
+      \small
+      $x_{bild}=x0_{bild}+(x_{welt}-x0_{welt})*(x1_{bild}-x0_{bild})/(x1_{welt}-x0_{welt})$
+      \bspar1
+      $y_{bild}=y0_{bild}+(y_{welt}-y0_{welt})*(y1_{bild}-y0_{bild})/(y1_{welt}-y0_{welt})$
+    \end{center}
+   \end{bsslide}
+   
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rasterisierung}
+    \bspar1
+    Nach Bestimmung der darzustellenden Punkte und Linien müssen deren darzustellende Pixel ermittelt und gezeichnet werden (Ausnahme: Vektorgrafikgeräten wie Plotter, Laserprojektor, Fräsmaschinen)
+    \bspar1
+    \textbf{Naiver Ansatz zur Rasterisierung von Linien}
+    \bspar1
+    \begin{minipage}{0.45\linewidth}
+    \begin{itemize}
+      \small
+        \item Annahme: Punkte bereits in Bildkoordinaten und X-Richtung ist länger als Y-Richtung
+        \item Ermittle Steigung der Linie $k=(y_1-y_2)/(x_1-x_2)$
+        \item Laufe in einer Schleife über all $x$ Werte zwischen $x_1$ und $x_2$
+        \item Setze Pixel $y=round(k*(x-x_1))+y_1$ auf 1 (d.h. wir nehmen immer das nächstgelegene Pixel)
+      \end{itemize}  
+      %TODO: Check algorithm
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.7]{rasterisierung-linie-naive}{\tiny \cite{Malaka et. al. 2009}}
+    \end{minipage}
+  \end{bsslide}
+  
+   \begin{bsslide}[\textbufferB]
+    \colortext{Rasterisierung - Bresenham-Algorithmus}
+    \bspar1
+    \small
+   Naiver Ansatz ist zeitintensive, da für jeden Punkt eine Multiplikation notwendig ist. Der Bresenham-Algorithmus kommt nur mit vergleichen, addieren und Bit-verschieben aus.\bspar4
+   Grundidee:
+   
+    \begin{minipage}{0.35\linewidth}
+\bsfigurecaption[0.4]{rasterrize-bresenham-skizze}{\tiny Bildquelle Wikipedia}
+  \end{minipage}
+  \begin{minipage}{0.55\linewidth}
+    \begin{itemize}
+      \small
+      \item ermittle eine schnelle Richtung (Richtung in der die Koordinate schneller wächst) und eine langsame Richtung
+      \\{\tiny Bei einer Steigung $k<1$ wächst $x$-Achse schneller als die $y$-Achse}
+      \item Fehlerterm: Abweichung im Bereich $[-0.5:0.5]$ zwischen gezeichneten (gerundeten) Pixel zum wirklichen Linienwert
+      \item Erhöhen den Fehlerterm mit jedem Schritt in die schnelle Richtung um die Steigung der Kurve $k=\frac{y_2-y_1}{x_2-x_1}$ 
+      \item Liegt der Fehler über $0.5$, erhöhe die langsame Richtung um 1 und reduziere den Fehler um $1.0$ 
+    \end{itemize}
+  \end{minipage}
+   \end{bsslide}
+   
+   
+%    \begin{bsslide}[\textbufferB]
+%     \colortext{Rasterisierung - Bresenham-Algorithmus}
+%     \bspar1
+%     Algorithmus in Pseudo-Code
+%     \bspar1
+%     \bsfigurecaption[0.65]{rasterrize-bresenham}{\tiny Bildquelle Wikipedia}
+%   \end{bsslide}
+
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rasterisierung - Antialiasing mit Algorithmus von Wu}
+    \bspar1
+    Einbringen von Anti-Aliasing Techniken durch den Algorithmus von Wu {\tiny \url{http://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm
+    }}
+    \begin{itemize}
+      \item Für jeden ermittelten y-Wert einer Linie, setze mehrere Pixel
+      \item Färbe die Pixel entsprechend ihres Abstandes von der wahren Linie
+    \end{itemize}
+    \bspar1
+    \bsfigurecaption[0.8]{rasterrize-wu}{\tiny Bildquelle Wikipedia}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rasterisierung von gefüllten Polygonen}
+    \bspar1
+    Neben effizienten Zeichnen von Linien sollte auch Polygone effizient befüllt werden können.
+    \bspar1
+    \textbf{Painters Algorithmus:} Scanline basiertes Verfahren
+    \bspar1
+    \textbf{Beobachtung}: Die Anzahl der Schnittpunkte eines Polygons definiert, ob ein Punkt innerhalb oder außerhalb des Polygons liegt
+    \begin{itemize}
+      \item Gerade Anzahl - Punkt liegt außerhalb
+      \item Ungerade Anzahl - Punkt liegt innerhalb
+      \item gilt für beliebige Polygone
+    \end{itemize}
+    \bsfigurecaption[0.85]{polygone-und-paritat}{\tiny Bildquelle \cite{Malaka et. al. 2009}}
+  \end{bsslide}
+   
+    
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rasterisierung von gefüllten Polygonen}
+    \bspar1
+    \textbf{Painters Algorithmus} im Überblick
+    \bspar1
+    \begin{itemize}
+      \small
+      \item Scanline: Bestimme für jede Zeile von Pixeln all Schnittpunkte mit den Kanten des Polygons und sortiere sie aufsteigend nach X-Koordinate
+      \item Ermittle für jedes Pixel innerhalb der Zeile seine Parität. Vor dem ersten Schnittpunkt haben alle Pixel die Parität null und bei jedem weiteren wird die Parität um eins erhöht
+      \item Färbe alle Pixel mit ungerader Parität mit der Füllfarbe ein
+    \end{itemize}
+    \bsfigurecaption[0.8]{painters-algorithmus}{\tiny Bildquelle \cite{Malaka et. al. 2009}}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Animationen}
+    \bspar1
+    \textbf{Computeranimationen} können in Vektorgrafiken einfach durch zeitlich Veränderung der Punkte und anschließendem Rendering definiert werden (i.e. Animtaions-transformationen auf Szenegraph)
+    \bspar1
+    \textbf{Keyframeanimation}
+    \begin{itemize}
+      \small
+      \item Kontrollpunkte und primitive geometrische werden zu zwei Zeitpunkten (z.B. Sekunde 0 und Sekunde 10) bestimmt (die sogenannten Schlüsselbilder/Keyframes)
+      \item \textbf{Keyframing:} Die restlichen Bilder dazwischen werden interpoliert
+      \item Interpolation kann linear oder nicht-linear erfolgen (z.B. über Splines zwischen Kontrollpunkten)
+      \item Zusätzlich Interpolation der Farbe
+      \item Benötigt entsprechende Designprogramme (z.B. Adobe Flash)
+    \end{itemize}
+    Weitere Formen der Interaktion:
+    \begin{itemize}
+      \small
+      \item \textbf{Partikelsysteme}: Animation über physikalische Simulation
+      \item \textbf{Scripting}: Animation über Programmcode
+      \begin{itemize}
+        \item Interaktionen können berücksichtigt werden
+        \item Hyperlink Definition möglich
+        \item Beispielformate: Flash und SVG
+      \end{itemize}
+    \end{itemize}
+  \end{bsslide}
+
+
+\renewcommand{\textbufferB}{Zusammenfassung}
+  \begin{bsslide}[\textbufferB]
+    \colortext{Vektorgrafiken}
+    \bspar1
+    \begin{itemize}
+      \item Vektorgrafiken bestehend aus Koordinatensystem und primitiven geometrischen Objekten
+      \item Punkte, Geraden, Kreise und Interpolationskurven 
+      \begin{itemize}
+        \item Bezierkurven
+      \end{itemize}
+      \item Rendering: Szenengraph/Weltkoordinaten, Clipping, Bildschirmkoordinaten, Rasterisierung
+      \begin{itemize}
+        \item Bresenham Algorithmus zur schnellen Rasterisierung
+        \item Antialisasing durch Färbung
+        \item Befüllung von Polygonen - Painters Algorithmus
+      \end{itemize} 
+    \end{itemize}
+  \end{bsslide}
+
+
+\begin{bsslide}
+  \begin{thebibliography}{9}
+
+\bibitem{Malaka et.al. 2009} Malaka, Butz, Hussmann (2009) - Medieninformatik: Eine Einführung (Pearson Studium - IT), Kapitel 7.1 und 7.2
+
+\end{thebibliography}
+
+\end{bsslide}

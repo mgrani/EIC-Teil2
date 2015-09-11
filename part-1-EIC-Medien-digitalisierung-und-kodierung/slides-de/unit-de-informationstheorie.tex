@@ -1,0 +1,549 @@
+%%% DATE.  November, 17th, 2013
+
+\clearpage
+
+%%%%%%%%%%%%%%% METADATA %%%%%%%%%%%%%%%%
+\bsunitname{Informationstheorie}
+\setcounter{bsunit}{3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 2]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Informationstheorie - Ein einf\"uhrendes Beispiel}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Problemstellung}
+  \bspar1
+  Wir haben unterschiedliche Kodierungen mit verschiedenen
+  Eigenschaften kennen gelernt.
+  \bspar2
+  Doch wann ist eine Kodierung optimial, d.h. existiert eine Kodierung die mit
+  weniger Bit die gleiche Information \"ubermitteln kann?
+  \bspar2
+  Wie kann man die Menge der in einer Nachricht erhaltenen Information
+  quantifizieren?
+  \bspar2
+  Wie kann man den Informationsgehalt einer Nachrichtenquellen quantifizieren?
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferA}{\bspar1
+  Nehmen wir an sie haben ein Kartenspiel bestehend aus 4 Karten,
+  $K=\{1,2,3,4\}$.  Person A zieht eine Karte. Person B muss \"uber
+  m\"oglichst wenige ``Ja/Nein'' Antworten herausfinden, um welche
+  Karte es sich handelt.}
+\begin{bsslide}[\textbufferB]
+  \colortext{Beispiel Kartenspiel}
+  \textbufferA
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Beispiel Kartenspiel}
+  \textbufferA
+  \bspar1
+   \bsfigurecaption[1.0]{Codierungstheorie-Beispiel-Code-A}{Beispiel Fragebaum A}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Beispiel Kartenspiel}
+  \textbufferA
+  \bspar1
+   \bsfigurecaption[1.0]{Codierungstheorie-Beispiel-Code-B}{Beispiel Fragebaum B}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Beispiel Kartenspiel}
+\bspar1
+  Jede ``Ja/Nein'' Antwort kann als Bit (``0/1'') verstanden werden,
+  wodurch sich folgender Bin\"arcode ergibt:
+  \begin{center}
+    \begin{tabular}{lrrc}
+      \textbf{Karte} &\textbf{Code A} &\textbf{Code B} &\textbf{Informationsgehalt}\\
+      \hline
+      1                    &                          1&   00  & 2\\
+      2                    &                        10&   01  & 2\\
+      3                    &                      100&   10  & 2\\
+      4                    &                    1000&   11  & 2\\
+    \end{tabular}
+  \end{center}
+  \bspar1
+  Beobachtungen:
+  \begin{itemize}
+  \item  Code B scheint effizienter, da er im Schnitt weniger Fragen (Bits)
+    ben\"otigt.
+  \item  Code B scheint optimal zu sein, da wir f\"ur 4 Zust\"ande 2
+    Bits ben\"otigen ($N = 2^{\#bits}$ bzw. $\#bits = \log_2 (N)$ mit $N$
+    als Anzahl der Karten)
+  \item Alternativ: In Code B reduziert jede Frage die Unsicherheit um 50 \%
+    d.h. die Anzahl der verbleibenden M\"oglichkeiten wird um die
+    H\"alfte reduziert
+  \item Der Informationsgehalt einer Karte kann als minimale
+    Anzahl von  Ja/Nein Fragen aufgefasst werden.
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferA}{\bspar1
+  Ein neues Spiel hat folgende 4 Karten: $K=\{1,1,2,3\}$, d.h. Karte 1
+  kommt 2x vor. Wie \"andert sich der Code?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Beispiel Kartenspiel}
+  \textbufferA
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferA}{\bspar1
+  Ein neues Spiel hat folgende 4 Karten: $K=\{1,1,2,3\}$, d.h. Karte 1
+  kommt 2x vor.
+  \begin{center}
+    \begin{tabular}{lrrc}
+      \textbf{Karte} &\textbf{Code B} &\textbf{Code C}  &\textbf{Informationsgehalt}\\
+      \hline
+      1                    &                    00&   0  & 1\\
+      1                    &                    01&   0  & 1\\
+      3                    &                    10&   01  & 2\\
+      4                    &                    11&   11  & 2\\
+    \end{tabular}
+  \end{center}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Beispiel Kartenspiel}
+  \textbufferA
+  \bspar1
+  \textbf{Fragen}:
+  \begin{itemize}
+  \item \textbf{Bit 0}: Ist es nicht 1?
+  \item \textbf{Bit 1}: Ist es 4?
+    \end{itemize}
+  Der Code ist optimal, da beide Fragen die Unsicherheit um 50\%
+  reduzieren, d.h. die Anzahl der verbleibenden M\"oglichkeiten auf
+  die H\"alfte reduzieren.
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Beispiel Kartenspiel}
+  \textbufferA
+  \bspar1
+  \textbf{Beobachtungen}:
+  \begin{itemize}
+  \item  Code C scheint effizienter, da er im Schnitt weniger Fragen (Bits)
+    ben\"otigt.
+  \item 2 Karten haben dieselbe Bedeutung.
+    \begin{itemize}
+    \item Da es wahrscheinlicher
+    ist, Karte 1 zu ziehen, ist der Informationsgehalt von Karte 1
+    jedoch geringer.
+    \item Alternativ: Da Karte 1 \"ofters gezogen wird, wollen wir der
+      Karte einen k\"urzeren Code geben.
+ \end{itemize}
+ \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Beispiel Kartenspiel}
+  \textbufferA
+  \bspar1
+  Wie hoch ist der Informationsgehalt von Karte 1?
+  \begin{itemize}
+  \item F\"ur 4 Karten benotigen wir 2 bit ($\log_2 (4)$).
+  \item Karte 1 w\"urde dabei 2 Codes erhalten, die jedoch  die
+    gleiche Bedeutung haben und somit redundant sind. D.h. 1 Frage/Bit ($\log_2(2)$) ist redundant.
+  \item $IG(Karte_1) = \log_2 (4)-\log_2 (2)=\log_2 (\frac{4}{2})=\log_2
+    (\frac{1}{p(Karte_1)})$\\
+    wobei $p(Karte_1)$ die Wahrscheinlichkeit darstellt, dass $Karte_1$
+    gezogen wird.
+\item Analog f. Karte 3: $IG(Karte_3) = \log_2 (4)-\log_2 (1)=\log_2 (\frac{4}{1})=\log_2
+    (\frac{1}{p(Karte_3)})$
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferA}{\bspar1
+  Nehmen wir an sie haben ein Kartenspiel bestehend aus 4 Karten,
+  $K=\{1,2,3,4\}$.  Person A zieht eine Karte. Person B muss \"uber
+  m\"oglichst wenige ``Ja/Nein'' Antworten herausfinden, um welche
+  Karte es sich handelt.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Informationstheorie - Formale Definition}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Überblick}
+  \bspar1
+  \begin{itemize}
+  \item Die Informationstheorie nach Shannon wurde 1948 von \textbf{Claude
+      Shannon} entwickelt.
+  \item Sie stellt ein \textbf{mathematisches Modell} f\"ur
+    Kommunikationssysteme dar.
+  \item  Dabei werden Nachrichten als
+    \textbf{stochastische Ereignisse}, die von einer
+    Nachrichtenquelle, dem Sender, ausgesendet und von einem
+    Empf\"anger empfangen werden. \\[-1ex]
+    \begin{itemize}
+    \item Stochastische Prozesse sind zeitlich geordnete, zufällige
+      Prozesse die mit Hilfe der Statistik und
+      Wahrscheinlichkeitsrechnung beschrieben werden
+    \item Nachrichten bestehen somit aus einer endlichen Anzahl
+      diskreter Zeichen, welche mit einer
+      gewissen Wahrscheinlichkeit auftreten.
+    \end{itemize}
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Überblick}
+  \bspar1
+  Kernelemente der Informationstheorie:
+  \begin{itemize}
+  \item Definition einer \textbf{Nachrichtenquellen} und deren Eigenschaften
+  \item Definition des \textbf{Informationsgehaltes bzw. der Information eines Zeichens, $I(x)$}
+  \item Definition der \textbf{Entropie $H(X)$}, d.h. der Informationsdichte bzw. des
+    durchschnittlichen Informationsgehaltes einer Nachrichtenquelle
+   \item Definition von \textbf{optimalen Kodierungen }und darauf aufbauender \textbf{Redundanz}
+  \end{itemize}
+\end{bsslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Nachrichtenquelle}
+    \bspar1
+    \begin{definition}[Diskrete, ged\"achtnislose Nachrichtenquelle]
+      Eine diskrete, ged\"achtnislose Nachrichtenquelle setzt in jedem
+      Zeittakt ein Zeichen $a_i \in A$ aus einem Zeichenvorrat $A$ mit
+      der Wahrscheinlicheit $P(a_i)=p_i$ ab. Die Auswahl der Zeichen
+      ist unabh\"angig von bereits emitierten Zeichen in der Vergangenheit.
+    \end{definition}
+    \bspar1
+    Beispiel mit 3 Quellen, Zeichenvorrat $\{A,B,C,D\}$:
+      \begin{center}
+      \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        Zeichen $a$  	&  A 	& B		& C		&D		\\
+\hline
+Wahrscheinlichkeit $p_a$ in Quelle 1 & 1.0 & 0.0 & 0.0 & 0.0 \\
+Wahrscheinlichkeit $p_a$ in Quelle 2 & 0.25 & 0.25 & 0.25 & 0.25 \\
+Wahrscheinlichkeit $p_a$ in Quelle 3 & 0.5 & 0.25 & 0.125 & 0.125 \\
+\hline
+      \end{tabular}
+    \end{center}
+      \bspar1
+      \begin{itemize}
+      \item Welche Quelle überträgt die meiste Information in einer
+        Nachricht?
+      \item  Wieviel Bit benötigen wir zur Kodierung eines Zeichens einer
+        Quelle?
+       \item Wie hoch ist die Information (bzw. der
+         Informationsgehalt) eines Zeichens?
+      \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Informationsgehalt eines Zeichen}
+    \bspar1
+    \textbf{Axiomatische Definition}\footnote{Axiome sind die Grunds\"atze
+      bzw. fixen Annahmen einer Theorie. In einer Axiomatisch
+      Definition werden dies a-priori festgelegt. Aus den Axiomen
+      werden anschlie\ss end deduktiv weitere Eigenschaften
+      abgeleitet.} des Informationsgehalts \"uber 3 Axiome
+    (grunds\"atzliche Eigenschaften):
+    \begin{enumerate}
+    \item[(I)] Der Informationsgehalt eines Zeichens $a\in A$ mit der
+      Wahrscheinlicheit $p_i$ ist ein nicht-negatives Ma\ss, welches nur
+      von der Wahrscheinlichkeit des Zeichens abh\"angt: $I(p_i)\geq
+      0$
+     \item[(II)] Der Informationsgehalt zweier voneinander unabh\"angiger
+       Zeichen $a_i$ und $a_j$ mit den Wahrscheinlichkeiten $p_i$ und
+       $p_j$ addiert sich: $I(p_i, p_j)=I(p_i) + I (p_j)$
+     \item[(III)] Der Informationsgehalt ist eine stetige Funktion der
+       Wahrscheinlichkeiten der Zeichen.
+    \end{enumerate}
+  \end{bsslide}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferA}{\bspar1
+    \begin{theorem}[Informationsgehalt/Entscheidungsgehalt eines Zeichens]
+    Sei $p_i$ die Wahrscheinlichkeit für das Auftreten von Zeichen $a_i\in A$. Der Entscheidungsgehalt $x_i$  für das Zeichen $a_i\in A$ ist definiert als
+      \[2^{x_a}=1/p_a \Rightarrow x_a = \log_2(1/p_a)\]
+    Die Einheit ist bit (basic indissoluble\footnote{unauflöslich} information unit) pro Zeichen. n bit entsprechen dabei mindestens n Bit (Binary Digits)
+    \end{theorem}}
+
+ \begin{bsslide}[\textbufferB]
+    \colortext{Informationsgehalt eines Zeichen}
+    \textbufferA
+    \bspar1
+     \begin{center}
+      \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        Zeichen $a$  	&  A 	& B		& C		&D		\\
+\hline
+$p_a$ in Quelle 1 & 1.0 & 0.0 & 0.0 & 0.0 \\
+$x_a$ (in bit) in Quelle 1 & 0 & undef. & undef. & undef. \\
+\hline
+$p_a$ in Quelle 2 & 0.25 & 0.25 & 0.25 & 0.25 \\
+$x_a$ (in bit)in Quelle 2 & 2 & 2 & 2 & 2 \\
+\hline
+$p_a$ in Quelle 3 & 0.5 & 0.25 & 0.125 & 0.125 \\
+$x_a$ (in bit)in Quelle  & 1 & 2 & 3 & 3 \\
+\hline
+      \end{tabular}
+     \end{center}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{bsslide}[\textbufferB]
+    \colortext{Informationsgehalt eines Zeichen}
+    \textbufferA
+    \bspar1\small
+    \textbf{Eigenschaften:}
+    \begin{itemize}
+    \item Ein sicheres Ereignis ($p_i=1.0$) besitzt keine Information.
+    \item Unwahrscheinliche Ereignisse besitzen viel Information.
+    \item Der Informationsgehalt spiegelt die Axiome wider, wobei der
+      Logarithmus f\"ur die Additivit\"at (Axiom II) sorgt
+    \item Die Basis des Logarithmus definiert die Einheit. Bei einem
+      $\log_{10}$ w\"uerden Zeichen in einem Dezimalcode kodiert
+      werden.
+   \item Ein bit definiert die kleinste Einheit und kann als
+     ``Ja/Nein'' Entscheidung verstanden werden.
+
+    \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Durchschnittliche Informationsgehalt einer Quelle}
+    \bspar1
+    \begin{definition}[Entropie (durchschnittlichen Entscheidungsgehalt)]
+      Sei $A$ ein Zeichenvorrat einer diskreten, ged\"achtnislosen
+      Quelle und sei $p_i$ die Wahrscheinlichkeit für das Auftreten
+      von Zeichen $a_i\in A$. Dann definiert die Entropie $H$ den \emph{durchschnittlichen
+        Informationsgehalt der Quelle} als:\\
+      \centering{$H=\sum_{a\in A}p_a*\log_2(\frac{1}{p_a})$}
+    \end{definition}
+    \bspar2\small
+    \textbf{Bemerkungen}
+    \begin{itemize}
+      \item $p_a*\log_2(\frac{1}{p_a})=p_a*x_a$ bedeutet das der
+        Entscheidungsgehalt eines Zeichens noch mit dessen
+        Auftrittswahrscheinlichkeit gewichtet wird
+        \begin{itemize}
+        \item Seltene Zeichen besitzen hohe Information, werden jedoch
+          nicht oft gesendet.
+       \item H\"aufige Zeichen besitzen niedrige Information, werden
+         jedoch h\"aufig gesendet.
+        \end{itemize}
+      \item Die Entropie gibt die minimale Anzahl von bit's an die
+        notwendig sind, um
+        Nachrichten einer diskreten, ged\"achtnislosen Quelle zu
+        kodieren. Es gibt keine Kodierung mit weniger bit's.
+      \item Entropie kann im physikalischen Sinn der Thermodynamik auch als
+        Unordnung eines Systems verstanden werden.
+      \item Alternative Darstellung: $\mathbf{-}p_a*\mathbf{\log_2{p_a}}$
+    \end{itemize}
+    \textbf{Frage:} Wann ist die Entropie maximal?
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Informationsgehalt einer Quelle}
+    \bspar1
+    \begin{theorem}[Maximalität der Entropie]
+      Sei $A$ ein Zeichenvorrat einer Quelle und $p_a$ die Wahrscheinlichkeit für das Auftreten von Zeichen $a\in A$. Die \textbf{Entropie-Funktion ist maximal} wenn gilt\\
+      \begin{center}$\forall_{i,j\in A}| p_i=p_j$\\\end{center}
+      d.h. die \textbf{Auftrittswahrscheinlichkeit für alle Zeichen gleich groß ist.}
+    \end{theorem}
+    \bspar1
+    Darstellung für den Fall von zwei Zeichen $A,B$ ($p_a=1-p_b$):
+    \bsfigure[scale=0.6]{entropie}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Beispiel Informationsgehalt einer Quelle}
+    \bspar1
+    \begin{center}
+      \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        Zeichen $a$  	&  A 	& B		& C		&D		\\
+\hline
+ $p_a$ in Quelle 1 & 1.0 & 0.0 & 0.0 & 0.0  \\
+$x_a$ (in bit) in Quelle 1 & 0 & undef. & undef. & undef. \\
+\hline
+ $p_a$ in Quelle 2 & 0.25 & 0.25 & 0.25 & 0.25 \\
+$x_a$ (in bit)in Quelle 2 & 2 & 2 & 2 & 2 \\
+\hline
+ $p_a$ in Quelle 3 & 0.5 & 0.25 & 0.125 & 0.125 \\
+$x_a$ (in bit)in Quelle 3 & 1 & 2 & 3 & 3 \\
+\hline
+      \end{tabular}
+    \end{center}
+    Entropie:
+    \begin{itemize}
+      \item $H_{Quelle 1}=0$
+      \item $H_{Quelle 2}=2$
+      \item $H_{Quelle 3}=1.75$
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Redundanz}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Redundanz einer Kodierung}
+    \bspar1
+    \textbf{Was bedeutet Redundanz?}
+    \begin{itemize}
+      \item Redundanz bedeutet, daß es überflüssige Nachrichtenteile gibt
+      \item Redundante Kodierungen sind nicht optimal. Dies kann
+        gewollt sein (z.B. zur Fehlerkorrektur) oder ungewollt,
+        wodurch mehr Speicher als n\"otig verwendet wird.
+    \end{itemize}
+    Wie hoch ist die Redundanz einer gegebenen Kodierung $c$ für eine Nachrichtenquelle?
+    \bspar1
+    Intuitive Vorgehensweiße:
+    \begin{itemize}
+      \item Ermittle die durchschnittliche (Wort)Länge einer Kodierung in Bits ($L$)
+      \item Vergleiche diese mit dem Informationsgehalt (Entropie) einer Quelle ($H$)
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Wortlänge}
+    \bspar1
+    Was ist die durchschnittliche Länge einer Kodierung in Bits?
+    \bspar2
+    \begin{definition}[Wortlänge (Nachrichtenlänge)]
+      Sie $A^*$ die Menge aller endlichen Sequenzen/Worte (Nachrichten) aus einem Zeichenvorrat $A$. \\
+      Für ein Wort (Nachricht) $w\in A^*$ ist die Länge die Anzahl der in dem Wort (der Nachricht) enthaltenen Zeichen, abgekürzt durch $|w|$. \\
+      Wenn eine Kodierung $c$ einem Zeichen $a\in A$ ein Wort $c(a)\in B^*$ zuweist, dann ist $|c(a)|$ die \textbf{Wortlänge der Kodierung} des Zeichens $a$
+    \end{definition}
+    \bspar1
+    Beispiele
+    \begin{itemize}
+      \item $w_1=<010101> \Rightarrow |w| = 6$
+      \item $c_1(w_1)=c_1(010101)=<ab> \Rightarrow |w| = 2$
+      \item $c_2(w_1)=c_2(010101)=<Medien> \Rightarrow |w| = 6$
+    \end{itemize}
+    Die Einheit der Wortlänge eines Bin\"arcodes ist Bit.
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \begin{bsslide}[\textbufferB]
+    \colortext{Wortlänge}
+    \bspar1
+    \begin{definition}[Durchschnittliche Wortlänge]
+      Bei einer Kodierung $c$ einer Nachrichtenqulle ist die \textbf{durchschnittliche Wortlänge} $L$ die nach Auftrittswahrscheinlichkeit gewichtete Summe der Wortlängen aller Kodierungen der Einzelzeichen, als Formel:\\
+\begin{center}$L=\sum_{a_\in A}p_a*|c(a)|$\end{center}
+    \end{definition}
+    \bspar2
+    Zusammenhang zur Entropie/Informationsgehalt:
+    \begin{itemize}
+  \item $|c(a)|$ ist in Bit angegeben (wenn wir von einem Binärcode ausgehen)
+  \item $\log_{2}(\frac{1}{p_a})$ ist der Informationsgehalt eines Zeichens, ebenfalls in Bit angegeben.
+  \item Der Informationsgehalt stellt die Bits eines idealen Code dar, während $|c(a)|$ die Bitlänge eines echten Codes darstellt
+\end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Beispiel Redundanz}
+    \bspar1
+    Beispiel f\"ur zwei Kodierungen $c_{1}$ und $c_{2}$
+    \bspar1
+    \begin{center}
+      \begin{tabular}{lcccc}
+        \textbf{Zeichen a}   &   \textbf{A}     & \textbf{B}    & \textbf{C}   & \textbf{D}   \\
+        \hline
+        Kodierung $c_{1}$     &      $00$          &      $01$      &      $10$     & $11$ \\
+        Kodierung $c_{2}$     &      $0$           &      $10$      &      $110$     & $111$ \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    \bspar2
+     Beispiel f\"ur eine redundante Kodierungen $c_{1}$
+     \bspar1
+     \begin{center}
+       \begin{tabular}{lcccc}
+         \textbf{Zeichen a}   &   \textbf{A}     & \textbf{B}    & \textbf{C}   & \textbf{D}   \\
+         \hline
+         Wahrscheinlichkeit $p_{a}$ in Quelle $3$    &      $0.5$          &      $0.25$      &      $0.125$     & $0.125$ \\
+         Kodierung $c_{1}$     &      $00$          &      $01$      &      $10$     & $11$ \\
+         Wortl\"ange             &      $2$            &      $2$        &      $2$     & $2$ \\
+         \hline
+       \end{tabular}
+     \end{center}
+
+    \bspar1
+     Durchschnittliche Wortl\"ange $L_{c_{1}}=0.5*2+0.25*2+0.125*2+0.125*2=2$
+\bspar1
+     Informationsgehalt:  $H_{3}=0.5*1+0.25*2+0.125*3+0.125*3=1.75$
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Definition Redundanz}
+    \bspar1\small
+    \begin{definition}[Redundanz R]
+      Die \textbf{Redundanz} $R$ einer binären Kodierung $c$ für eine Nachrichtenquelle ist die Differenz der mittleren Wortlänge und der Entropie:\\
+\begin{center}$R=L-H$\end{center}
+    \end{definition}
+    \bspar1
+    \textbf{Optimale Kodierung}: Eine Kodierung heißt optimal, wenn die Redundanz gleich Null ist ($R=0$)
+    \bspar1
+     \begin{center}
+       \begin{tabular}{lcccc}
+         \textbf{Zeichen a}   &   \textbf{A}     & \textbf{B}    & \textbf{C}   & \textbf{D}   \\
+         \hline
+         Wahrscheinlichkeit $p_{a}$ in Quelle $3$    &      $0.5$          &      $0.25$      &      $0.125$     & $0.125$ \\
+         Kodierung $c_{2}$                                       &      $0$             &      $10$      &      $110$     & $111$ \\
+         Wortl\"ange                                               &      $1$              &      $2$        &      $3$         & $3$ \\
+         \hline
+       \end{tabular}
+       \bspar1
+       Durchschnittliche Wortl\"ange $L_{c_{2}}=0.5*1+0.25*2+0.125*3+0.125*3=1.75$\\
+       Informationsgehalt:  $H_{3}=0.5*1+0.25*2+0.125*3+0.125*3=1.75$
+     \end{center}
+    \bspar3
+    $\Rightarrow$ Eine gute Kodierung berücksichtigt immer die Verteilung der Zeichen in der Nachrichtenquelle\\
+    $\Rightarrow$ Mit Wissen über Medieneigenschaften und wie sie wahrgenommen werden, können gute Kodierungen erreicht werden (JPEG, GIF, MP3 etc.)
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Zusammenfassung}
+  \begin{bsslide}[\textbufferB]
+    \colortext{Informationstheorie}
+    \bspar1
+    \begin{itemize}
+      \item Wir wissen nun was Information ist (Zeichenvorrat, Nachricht, Kodierung)
+      \item Wir können den Informationsgehalt einer Nachricht bestimmen
+      \item Wir können feststelle ob Nachrichten redundante Information enthalten
+    \end{itemize}
+    \bspar4
+    \centering Gibt es eine Möglichkeit, optimale Codes zu erzeugen und beliebige Kodierungen zu "`Komprimieren"'?
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[Bibliographie]
+\bspar4
+\begin{itemize}
+\item \textbf{Malaka, Butz, Hussmann (2009)} -
+  Medieninformatik: Eine Einführung (Pearson Studium - IT), Kapitel
+  2.4
+\item \textbf{Daugmann, John (2012)}- Lecture Notes on Information Theory and Coding, chapter 3\\ \url{http://www.cl.cam.ac.uk/teaching/0809/InfoTheory/InfoTheoryLectures.pdf}
+\end{itemize}
+\end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "part-de-mt-informationstheorie"
+%%% End:

@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Fri Aug 24 17:10:32 CEST 2012
+markTmpDer=true
+builderNum=2
+outputDir=slides-out/
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp/
+mainTexFile=part-de-medientechnik-prolog.tex
+outputFile=part-de-medientechnik-prolog.pdf
+langSpell=en
+markDer=true
+srcDir=slides-de/

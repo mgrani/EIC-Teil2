@@ -1,0 +1,637 @@
+%%% DATE.  November, 17th, 2013
+
+\clearpage
+%%%%%%%%%%%%%%% METADATA %%%%%%%%%%%%%%%%
+\bsunitname{Kompressionsverfahren}
+\setcounter{bsunit}{5}
+\newcommand{\pC}[1]{{\color{upborange}#1}}
+\newcommand{\zC}[1]{{\color{buwblue}#1}}
+\newcommand{\cC}[1]{{\color{red}#1}}
+\newcommand{\constaC}[1]{{\color{buwlightgreen}#1}}
+\newcommand{\constbC}[1]{{\color{violet}#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 2]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[Kompression]
+  \colortext{Lernziel}
+  \bspar1
+  \textbf{Unterthemen}
+  \begin{itemize}
+    \item Kompressionsarten und genereller Prozess
+    \item Lauflängenkodierung
+    \item Huffman Kodierung - Entropie-basiert
+    \item Arithmetische Kodierung
+    \item LZW Kodierung - Wörterbuch-basiert
+  \end{itemize}
+  \bspar3
+  \textbf{Fragestellungen}
+  \begin{itemize}
+    \item Wie kann Information komprimiert werden?
+    \item Wie nutzt man Entropie zur Komprimierung?
+    \item Welche Kompressionsverfahren gibt es?
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Kompressionsverfahren}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+    \colortext{Prozess der Kompression/Dekompression}
+   \bspar1
+   \begin{itemize}
+     \item \textbf{Kompression:} Kodierung der Ausgangsdaten in neuen, kleineren Code
+     \item \textbf{Dekompression:} Dekodierung des kleineren Code in die Ausgangsdaten
+     \item Kompressionscode verwendet i.a. variable lange Codewörter, um  unterschiedlichen Frequenzen der Zeichen im Originalcode zu berücksichtigen
+   \end{itemize}
+   \bspar3
+    \bsfigurecaption{dekodierungsprozess}{}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Definition und Klassifikation}
+    \bspar1
+ \begin{definition}[Kompression]
+     Unter Kompression versteht man die Kodierung eines Datenstroms
+     mit einem neuem, i.a. zu errechnenden Code geringerer
+     Redundanz, sodass die Originaldaten wieder herstellbar sind. Eine optimale Kompression erzeugt eine optimale Kodierung.
+   \end{definition}
+    \bspar1
+    Klassifikation nach \textbf{Anwendungsdomäne}
+    \begin{itemize}\small
+      \item \textbf{Universelle Kompressionsverfahren:} Treffen keine Annahmen über Daten oder Domäne und sind daher universell auf jeden Datenstrom anwendbar
+      \item \textbf{Speziell Kompressionsverfahren:}  Treffen Annahme über Daten bzw. Domäne. Sind daher nur beschränkt einsetzbar, arbeiten i.A. aber auf dieser Domäne effizienter
+    \end{itemize}
+    Klassifikation nach \textbf{Erhaltung der Information}
+    \begin{itemize}\small
+      \item \textbf{Verlustfreie Kompression:} Der Originaldatenstrom kann wieder rekonstruiert werden
+      \item \textbf{Verlustbehaftete Kompression:}  Der Originaldatenstrom kann nicht mehr rekonstruiert werden. Information geht verloren, dafür erreicht man i.A. bessere Kompressionsraten
+    \end{itemize}
+    \bspar2
+    Verlustbehaftete Verfahren werden bei den entsprechenden Medien behandelt
+  \end{bsslide}
+
+   \begin{bsslide}[\textbufferB]
+    \colortext{Überblick verlustfreie Kompressionsverfahren}
+    \bspar1
+    \textbf{Statistische bzw. Entropie-basierte Verfahren}
+    \bspar1
+    \begin{itemize}
+      \item Huffman-Kodierung - Optimale Kodierung im Shannon'schen Sinn
+      \item Arithmetische Kodierung - Erweiterung von Huffman
+    \end{itemize}
+    \bspar2
+    \textbf{Zeichenorientierte Verfahren}
+    \begin{itemize}
+      \item Lauflängen Kodierung (Run Length Encoding)
+      \item LZW-Kodierung (Wörterbuch-basierter Ansatz)
+    \end{itemize}
+    \bspar1
+    \begin{tabular}{l|cc}
+                    & \textbf{Universelle Verfahren   }  & \textbf{Spezielle
+                    Verfahren}\\
+\hline
+\textbf{Verlustfreie Verfahren}   & z.B. Huffman, LZW     & z.B. PNG, AIFF \\
+\textbf{Verlustbehaftete Verfahren}   & (nicht sinnvoll)    & z.B. JPEG, MP3     \\
+\hline
+    \end{tabular}
+  \end{bsslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+    \colortext{Code-B\"aume und Vergleich Codes
+      variabler/nicht-variabler L\"ange}
+    \bspar1
+    \small
+    \textbf{Arten v. Codes}
+    \begin{itemize}
+    \item Codes fixer L\"ange: Jedes Zeichen wird mit der gleichen
+      Anzahl an Bits kodiert (i.a. hohe Redundanz)
+    \item Codes variabler L\"ange: Jedes Zeichen wird mit
+      unterschiedlichen  Anzahl an Bits kodiert
+    \end{itemize}
+    \bspar1
+    \begin{center}
+      \begin{tabular}{lcccc}
+        \textbf{Zeichen a}   &   \textbf{A}     & \textbf{B}    & \textbf{C}   & \textbf{D}   \\
+        \hline
+        Kodierung $c_{1}$     &      $00$          &      $01$      &      $10$     & $11$ \\
+        Kodierung $c_{2}$     &      $0$           &      $10$      &      $110$     & $111$ \\
+        \hline
+      \end{tabular}
+    \end{center}
+    \bspar2
+    \textbf{Code-Baum:} Darstellung der Kodierung als Baumstruktur
+    \bspar1
+    \bsfigurecaption[0.8]{code-baeume-huffmann}{$c_1$ links und
+      $c_{2}$ rechts}
+  \end{bsslide}
+
+    \begin{bsslide}[\textbufferB]
+    \colortext{Codes mit variabler Codelänge}
+   \bspar1
+    Wie trennt man jedoch Zeichen in Codes variabler Bitl\"ange?
+   \bspar1
+    \textbf{Beispiel:} Morse-Code Codebaum
+    \bspar2
+    \bsfigurecaption{morsecode}{\tiny Bildquelle \cite{Herold et. al. 2006}}
+    \bspar2
+    Problem der Dekodierung: Morsecode benötigt ein Trennzeichen (Pause).\\
+    Beispiel: \texttt{"`.....-."'} kodiert \texttt{seen} und \texttt{eier}
+  \end{bsslide}
+
+      \begin{bsslide}[\textbufferB]
+    \colortext{Codes mit variabler Codelänge}
+   \bspar1
+    \begin{definition}[Fano-Bedingung]
+      Ein Code erfüllt die Fano-Bedingung, wenn kein Wort aus dem Code der Anfang eines anderen Wortes desselben Codes ist.
+    \end{definition}
+    \bspar1
+    \begin{itemize}
+      \item Präfix ist die Teilfolge von Zeichen die am Beginn eines Wortes stehen
+      \item z.B. \texttt{C}, \texttt{Co}, \texttt{Cod} und \texttt{Code} wären Präfixe des Wortes \texttt{Code}
+      \item Codes die der Fano-Bedingung genügen nennt man \textbf{präfixfreie Codes}
+      \item Präfixfreie Codes können ohne Trennzeichen dekodiert werden
+    \end{itemize}
+    \bspar2
+    \textbf{Beispiel}:
+    \begin{center}
+      \begin{tabular}{|cc|}
+        \hline
+        Zeichen & Code\\
+        \hline
+        a & 0 \\
+        b & 10 \\
+        c & 11 \\
+        \hline
+      \end{tabular}
+    \bspar1
+    \texttt{10111011001011}\\
+    \texttt{b c b c aab c }\\
+    \end{center}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Huffmann Kodierung}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Fragestellung}
+    \bspar1
+    Gegeben sei folgende Quellen:
+    \bspar5
+     \begin{center}
+       \begin{tabular}{lcccc}
+         \textbf{Zeichen a}   &   \textbf{A}     & \textbf{B}    & \textbf{C}   & \textbf{D}   \\
+         \hline
+         Quelle 1: Wahrscheinlichkeit $p_{a}$    &      $0.5$
+         &      $0.25$      &      $0.125$     & $0.125$ \\       
+ \hline
+         Quelle 2: Wahrscheinlichkeit $p_{a}$    &      $0.35$          &      $0.3$      &      $0.20$     & $0.15$ \\       
+         \hline
+       \end{tabular}
+       \bspar1
+     \end{center}
+    \bspar5
+    Wie kann der pro Quelle dazugeh\"orige optimale Code konstruiert werden und
+    wie sieht dieser optimale Bin\"arcode aus?
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Grundidee Huffman-Kodierung}
+    \bspar1
+    Entwickelt von David Huffman als PhD Student 1952 am MIT
+    \begin{itemize}
+      \item Zeichen größerer Häufigkeit werden durch kürzere Codes repräsentiert
+      \item Dies führt zu Codes mit variabler Länge
+      \item Für eine effiziente Kodierung/Dekodierung muss die Fano Bedingung erfüllt sein
+      \item Beobachtung: Wenn der \textbf{Code optimal} ist, müssen die beiden Symbole der \textbf{niedrigsten Häufigkeit mit gleicher Länge }kodiert sein.\\
+      \item Beweis Skizze:\small
+      \begin{itemize}
+        \item  Wären die \textbf{Längen verschieden}, könnte man das längere Wort bei \textbf{der Länge des kürzeren abschneiden}
+        \begin{itemize}
+          \item Dann sind die beiden \textbf{entsehenden Codes verschieden}, da \textbf{sonst die Fano-Bedingung vorher verletzt} gewesen wäre
+          \item\textbf{ Kein anderes Codewort kann länger sein} (da
+            Zeichen niedrigster Häufigkeit und Code optimal ist), also
+            kann die Kürzung selbst nicht die Fano-Bedingung
+            verletzen, das ein anderes Wort mit der Kürzung kodiert
+            wird
+          \item [$\Rightarrow$] \textbf{Die Fano-Bedingung bleibt nach
+              der K\"urzung erhalten}
+        \end{itemize}
+        \item Dann hätten wir einen \textbf{neuen Code mit kleinerer durchschnittlicher Wortlänge} und der erste Code wäre nicht optimal gewesen.
+      \end{itemize}
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \begin{bsslide}[\textbufferB]
+    \colortext{Vorgehensweise Huffman-Kodierung}
+    \bspar1
+    \textbf{Gegeben}: Zeichenvorrat und Häufigkeitsverteilung
+    \bspar3
+    \textbf{Gesucht}: Kodierung (ist optimal, wenn alle Häufigkeiten Kehrwerte von Zweierpotenzen sind)
+    \begin{itemize}
+      \item \emph{Schritt 1}: Ersetze die beiden Einträge niedriger Häufigkeit durch einen Code-Teilbaum mit zwei Ästen "`0"' und "`1"'
+      \item \emph{Schritt 2}: Trage die Summe der Häufigkeiten als Häufigkeit für den neuen Code-Teilbaum ein
+      \item Wiederhole 1 und 2 bis alle Zeichen im Codebaum enthalten sind
+     \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{bsslide}[\textbufferB]
+    \colortext{Vorgehensweise Huffman-Kodierung - Beispiel}
+   \bsfigurecaption[0.7]{huffman-beispiel-codierung}{\tiny Bildquelle \cite{Malaka et.al. 2009}}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Experiment Bilddaten}
+  \bspar1
+  \begin{itemize}
+    \item Graubild, 256x256 Pixel, 8 Bit (i.e. 256 Graustufen)
+    \item Unkopmrimiert: 256*256 = 65 536 Bytes
+    \item Mit Huffman: 40.543 Bytes (ca. 38\% Reduktion)
+    \item Einfacher Zusatztrick:
+    \begin{itemize}
+      \item Umwandlung der Kodierung vor Kompression: Differenzkodierung
+        \begin{itemize}
+        \item Differenz zwischen benachbarten Pixeln
+        \end{itemize}
+      \item Huffman Kodierung auf dieser Differenzkodierung erreicht 33 880 Bytes (50\% Reduktion)
+      \item Differenzkodierung verwendet Domänenwissen $\Rightarrow$ keine universelle Kompression mehr (Details siehe Bild-Kapitel)
+    \end{itemize}
+  \end{itemize}
+   \textbf{Weitere Anwendungsgebiete:}
+   \begin{itemize}
+   \item JPEG, MP3, PNG als Teil der Kompressionsschritte
+   \item bzip bzw. bzip2
+   \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Eigenschaften}
+  \bspar1
+  \begin{itemize}
+    \item Code-Baum muss für Dekodierung übergeben werden
+    \item Häufigkeiten in einer Domäne können vorgegeben werden
+      \begin{itemize}
+      \item z.B. Zeichen der deutschen Sprache
+      \end{itemize}
+    \item Optimaler Code (im Sinne der Entropie) wenn
+      Wahrscheinlichkeiten von der Form $1/2^n$ sind (e.g. 0.5, 0.25, 0.125)
+      \begin{itemize}
+      \item 1-Bit Auflösung pro Häufigkeit moeglich
+      \item In der Praxis kaum gegeben, d.h. digitale Repr\"asentation
+        ist nicht optimal
+      \item Ein Zeichen welches häufiger wie 50\%
+       auftritt, kann kein Code < 1-Bit gegeben werden
+       \item F\"ur eine optimale Repr\"asentation m\"uss das Alphabet
+         ver\"andert werden (z.B. Betrachtung von Teilworten anstatt Zeichen)
+      \end{itemize}
+    \item Anzahl der Codewörter steigt exponentiell wenn man Teilworte
+      als Einzelzeichen verwendet (e.g Einzelzeichen 01 od. 10),
+      d.h. der Code Baum w\"achst exponentiell.
+    \item[$\Rightarrow$] Arithmetische Codierung
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Arithmetische Codierung}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Überblick}
+    \bspar1
+    \textbf{Idee}
+    \begin{itemize}
+      \item Verwende \textbf{unendliche genaue reele Zahlen} in einem definierten Intervall und unterteilt dieses Intervall auf Basis der Daten
+      \item Die durch diese Teilung entstandene Zahl entspricht dem komprimierten Code
+       \end{itemize}
+  \textbf{Verfahren}\small
+          \begin{itemize}
+      \item[1.] Starte mit vereinbarten Intervall (e..g $[0,1)$)
+      \item[2.] Zerlege das aktuelle Intervall in Subintervalle,
+        sodass jedes Zeichen ein Subintervall  hat.
+        Die Gr\"osse der Subintervall entspricht der
+        Auftrittswahrscheinlichkeit des Zeichens. Die
+        Zeichenreihenfolge (und damit die Intervallreihenfolge) ist vereinbart
+        \item[3.] Find das Subintervall f\"ur das aktuell zu
+          kodierende Zeichen $z$.
+      \item[4.] Mache dieses Subintervall zum neuen Intervall. Wenn es noch weitere Zeichen gibt gehe zu 2.
+      \item[5.] Ausgabe einer beliebigen Zahl $x$ aus dem aktuellen Intervall plus die Anzahl der kodierten Zeichen, sodaß die Zahl möglichst wenige Nachkommastellen hat.
+    \end{itemize}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \begin{bsslide}[\textbufferB]
+    \colortext{Kodierung - Beispiel}
+    \bspar1
+   \small  Arithmetische Kodierung der Zeichenkette "`AAABAAAC"'
+    \bspar1
+    \bsfigurecaption[0.7]{beispiel-arithmetische-kodierung}{\tiny Bildquelle Wikipedia}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Dekodierung}
+    \bspar1
+    \begin{itemize}
+      \item[1.] Starte mit vereinbarten Intervall (e.g. $[0,1)$)
+      \item[2.] Unterteile das Intervall in Subintervalle deren Größe
+        von der Häufigkeit der Zeichen abhängt. Die
+        Zeichenreihenfolge ist mit dem Kodierer vereinbart.
+      \item[3.] Finde das Subintervall der übertragenen Zahl und gib das Zeichen aus
+      \item[4.] Wiederhole 2 solange noch Zeichen auszugeben sind
+    \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Eigenschaften}
+    \bspar1
+       \begin{itemize}
+         \item Erzeugt einen theoretische optimalen Code, der jedoch durch Rundungseffekte der reelen Zahl i.a. nicht optimal abgebildet werden kann.
+         \begin{itemize}
+           \item Bei der Implementierung muss das Intervall wieder vergrößert werden, d.h. ändert sich eine Stelle sicher nicht mehr, dann wird diese Stelle ausgegeben und das Intervall neu skaliert
+           \item Die Teilung des Intervalls sowie das Intervall selbst muss dem Kodierer und Dekodierer bekannt sein.
+      \end{itemize}
+      \item Implementierung meist aufwendig und langsam, da Divsion ausgeführt werden muss oder mehrmals kodiert werden muss
+    \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Laufl\"angenkodierung}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Überblick}
+    \bspar1
+    \begin{itemize}
+     \item Einfache From der Datenkomprimierung
+     \item Zeichenkette-basiertes Verfahren ohne statistischen Hintergrund
+     \end{itemize}
+     \textbf{Verfahren}
+      \begin{itemize}
+     \item  Für gleiche, aufeinander folgende Zeichen wird die Anzahl der Zeichen und das Zeichen gespeichert
+     \end{itemize}
+     \textbf{Beispiel}
+     \begin{itemize}
+       \item \texttt{AAAABBCD}
+       \item RLE Kodierung: \texttt{4A2B1C1D}
+     \end{itemize}
+     \url{http://www.daniel-lemire.com/blog/archives/2009/11/27/run-length-encoding-part-2/}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{bsslide}[\textbufferB]
+    \colortext{Unerschiedliche Formate}
+    \bspar1
+    \begin{itemize}
+     \item Zähler wird nur verwendet wenn ein Zeichen zweimal vorkommt, um unötige Zähler zu vermeiden (\texttt{AAABBBBBZWWK} $\Rightarrow$ \texttt{AA1BB3ZWWK})
+     \item Benutzung eines Bits pro Zeichen zur Spezifikation ob ein Zähler verwendet werden soll od. nicht
+     \item Es wird nicht der Zähler, sondern die Position gespeichert. Dies erlaubt randomisierten Zugriff in $O(log(n))$, verhindert aber Zählervermeidungsstrategien (\texttt{AAABBBBBZWWK} $\Rightarrow$ \texttt{1A4B9Z10W11K})
+     \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{bsslide}[\textbufferB]
+    \colortext{Eigenschaften}
+    \bspar1
+    \begin{itemize}
+     \item RLE komprimierte Daten können in einem Lauf gelesen und geschrieben werden (keine Statistik)
+     \item Auf einen in RLE repräsentierte Vektor $V$ können Skalarfunktionen in $O(|V|)$ angewendet werden (lineare Laufzeit)
+     \item Lineare Laufzeit auch für Addition zweier Vektoren
+     \item Langsamer randomisierter Zugriff
+     \item Gute Komprimierung benötigt lange Sequenz gleicher Zeichen
+     \item Burrows-Wheeler Transformation ermöglicht die Erzeugung langer Sequenzen
+     \item Anwendung der Burrows-Wheeler Transformation in bzip2
+     \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{LZW Kompression}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Überblick}
+    \bspar1
+    \textbf{Geschichte:}
+    \begin{itemize}
+     \item Entwickelt 1978 von Abraham Lempel und Jacob Ziv (LZ78)
+     \item Einige Verbesserungen von Terry A. Welch (LZW)
+     \item Angewendet in Bildformat GIF
+     \end{itemize}
+     \textbf{Verfahren}
+      \begin{itemize}
+        \item Wörterbuch-basiertes Verfahren bei dem das Wörterbuch automatisch aufgebaut wird
+        \item Während dem Einlesen des Datenstroms, wir für jede noch nicht bekannte Sequenz ein Wörterbucheintrag angelegt
+        \item Gibt es schon einen Wörterbucheintrag, wird diesr Code raus geschrieben.
+        \item Das Wörterbuch muss nicht mitübertragen werden
+     \end{itemize}
+  \end{bsslide}
+
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kodierung}
+    \bspar1
+    \begin{itemize}
+      \item[1.] \pC{Präfix} ist Leer und Wörterbuch ist mit allen vorkommenden Zeichen initialisiert
+      \item[2.] lies das nächste Zeichen $\zC{z}$ vom Eingabestrom
+      \item[3.] Ist "`\pC{Präfix}+$\zC{z}$"' im Wörterbuch?
+      \begin{itemize}
+        \item [] Ja: \pC{Präfix} = \pC{Präfix} +$\zC{z}$
+        \item [] Nein:
+          \begin{itemize}
+          \item[] \textbf{Gib \cC{Code} für \pC{Präfix}} aus
+          \item[] trage \textbf{\pC{Präfix}+$\zC{z}$ im Wörterbuch} ein
+          \item[] \pC{Präfix} = $\zC{z}$
+          \end{itemize}
+
+      \end{itemize}
+      \item[4.] Ist das Ende des Eingabestroms erreicht?
+      \begin{itemize}
+        \item [] Nein: Gehe zu Schritt 2
+        \item []  Ja: Ist \pC{Präfix} nicht leer, gib den korrepsondierenden Code aus
+      \end{itemize}
+    \end{itemize}
+  \end{bsslide}
+
+  \begin{bsslide}[\textbufferB]
+    \colortext{Beispiel}
+    \bspar1
+    Kodiere ABBABABAC (Z steht für Zeichen, P für Präfix)
+\begin{tabular}{||ccc||c|ccc||}
+  \hline
+  &&&\multicolumn{4}{c||}{\pC{P}+$\zC{z}$ im Wörterbuch?}\\
+  &&&Ja&\multicolumn{3}{c||}{Nein}\\
+   $\zC{z}$& \pC{P} & \pC{P}+$\zC{z}$ & Neues \pC{P} & \cC{Ausgabe} & Wörterbuch & Neues \pC{P}\\
+    &   &     &         &         & 1:A,2:B,3:C& \\
+  \hline
+  \hline
+   A &   &  A   & \zC{A}       &         &            & \\
+   B &A  &  \pC{A}\zC{B}  &         &   1     &  4:AB      &  B\\
+   B &B  &  \pC{B}\zC{B} &         &   2     &  5:BB      &  B\\
+   A &B  &  \pC{B}\zC{A}  &         &   2     &  6:BA      &  A\\
+   B &A  &\pC{A}\zC{B}  & AB      &         &            &   \\
+   A &AB &  \pC{AB}\zC{A} &         &   4     &  7:ABA     &  A\\
+   B &A  &  \pC{A}\zC{B}  & AB      &         &            &   \\
+   A &AB &  \pC{AB}\zC{A} & ABA     &         &            &   \\
+   C &ABA&  \pC{ABA}\zC{C}&         &   7     &  8:ABAC    &   \\
+   - & C &      &         &   3     &            &\\
+   \hline
+\end{tabular}
+  \end{bsslide}
+
+
+    \begin{bsslide}[\textbufferB]
+    \colortext{Dekodierung}
+    \bspar1
+    Dekodierer benötigt den Code plus das \textbf{initiale} Wörterbuch.
+    Das vollständige Wörterbuch kann w\"ahrend der Dekodierung generiert werden.
+    \bspar1
+    \textbf{Beobachtung}: Wann gibt ein Kodierer den Code aus?
+    \begin{itemize}
+      \item Wenn die Zeichenkette "\pC{Präfix}+$\zC{z}$"' \textbf{nicht} im Wörterbuch ist, wird der \cC{Code} für "`\pC{Präfix}"' geschrieben und "`$\zC{z}$"' wird das neue \pC{Präfix}
+      \item Lesen wir also den \cC{Code}, so wissen wir, daß "\pC{Präfix}+ \zC{?} "'  (\zC{?} steht für ein beliebiges Zeichen) zu dieser Kodierung geführt hat.
+      \begin{itemize}
+        \item  \pC{Präfix} ist bekannt und steht im WB
+        \item \zC{?} kann ermittelt werden, da es das \textbf{erste \zC{Zeichen} vom nächsten \cC{Code}} ist
+        \item[$\Rightarrow$] wir müssen für jeden \cC{Code} den wir ausgeben,
+         das erste \zC{Zeichen} des \cC{Code} plus die \zC{Zeichen} des vorhergehenden \cC{Code}  (der im WB ist) ins Wörterbuch eintragen
+         \item[$\Rightarrow$] Das Wörterbuch des Dekodierers ist immer um einen Schritt hinter dem des Kodierers hinterher, da wir ja den Wörterbucheintrag über
+         den \textbf{aktuell gelesenen} Code und den \textbf{zuvor} gelesenen Code erstellen
+      \end{itemize}
+    \end{itemize}
+  \end{bsslide}
+
+      \begin{bsslide}[\textbufferB]
+    \colortext{Dekodierung}
+    \bspar1
+   Wann ist nun ein Code nicht im Wörterbuch des Dekodierers?
+    \begin{itemize}
+      \item Annahme: $z\Omega z$ wird derzeit kodiert und $z\Omega$ ist im Wörterbuch\\
+      {\small $\Omega$ ist eine beliebige Zeichenkette und $z$ ein einzelnes Zeichen}
+      \item Der Kodierer schreibt nun den Code für $z\Omega$ in die
+        Ausgabe und fügt $\pC{z\Omega}\zC{z}$ zum Wörterbuch hinzu. $\pC{z}$ wird
+        neues Pr\"afix.
+      \item Liest der Kodierer gleich darauf nochmals die Sequenz
+        $\zC{\Omega z}$ ein, was mit dem Pr\"afix $\pC{z}$ die Sequenz $\pC{z\Omega}
+       \zC{z}$ ergibt, gibt er den Code für das zuvor hinzugefügt $\pC{z\Omega}\zC{z}$ aus.
+      \item Da der Dekodierer immer um einen Wörterbucheintrag hinterher hinkt, kann er den Code nicht kennen.
+      \item Da diese Situation \textbf{nur genau dann Auftritt, wenn $z\Omega z$} zuvor zum Wörterbuch hinzugefügt wurde, kann der Dekodierer den neuen Wörterbucheintrag aus dem alten Code $z\Omega$ vollständig rekonstruieren
+    \end{itemize}
+  \end{bsslide}
+
+    \begin{bsslide}[\textbufferB]
+    \colortext{Dekodierung}
+    \bspar1
+    \small
+    \begin{itemize}
+      \item[1.] Wörterbuch mit allen vorkommenden Zeichen initialisiert
+      \item[2.] \cC{Code}  = erster Code aus dem Eingabstrom (immer ein Zeichen)
+      \item[3.] Ausgabe des Eintrags für \cC{Code}  und
+      \item[4.] Speicher \cC{Code}  in \constaC{\constaC{altCode}}
+      \item[5.] \cC{Code}  = nächster Code im Eingabestrom
+      \item[6.] Ist \cC{Code}  im Wörterbuch?
+      \begin{itemize}
+        \item [] Ja:
+        \begin{itemize}
+          \item[-] Gib \zC{Zeichen}  von "`\cC{Code} "' aus
+          \item[-] `\pC{Präfix} = Zeichen von "`\constaC{altCode}"'
+          \item[-] \zC{Zeichen} = erstes Zeichen von "`\cC{Code} "'\\
+          \item[-] Trage "``\pC{Präfix}+\zC{Zeichen}"' ins Wörterbuch ein
+           {\tiny vgl. die Beobachtungvon vorher}
+        \end{itemize}
+        \item [] Nein (bei Zeichenfolgen $z\Omega z\Omega z$)
+         \begin{itemize}
+          \item[-] \pC{Präfix} = Zeichen von "`\constaC{altCode}"' (=$\pC{z\Omega}$)
+          \item[-] \zC{Zeichen}  = erstes Zeichen \textbf{von
+              "`\constaC{altCode}}"' (=$\pC{z}$)
+          \item[-] Trage "``\pC{Präfix}+\zC{Zeichen}"' (=$\pC{z\Omega z}$) in Wörterbuch ein\textbf{ UND gib es aus}
+        \end{itemize}
+      \end{itemize}
+      \item[7.] Solange noch Zeichen existieren, lese neuen \cC{Code}  und gehe zu 4.
+    \end{itemize}
+  \end{bsslide}
+
+  \begin{bsslide}[\textbufferB]
+    \colortext{Beispiel}
+    \bspar1
+    Code: 122473
+    \bspar1\small
+  \begin{tabular}{|cc|c|ccc|c|}
+  \hline
+  \cC{C} & Ausgabe      & WB? & \pC{Präfix}              & \constaC{altCode} & Wörterbuch     & Bemerkung                                     \\
+         &              &     & =code(\constaC{altCode}) &                   & 1:A,2:B,3:C    &                                               \\
+  \hline
+  \hline
+   1     & A            & J   &                          &                   &                & \tiny Erstes Zeichen muss im WB sein: Ausgabe \\
+   2     & B            & J   & A                        & 1                 & \constbC{4:AB} & \tiny Präfix + neues Zeichen ins WB           \\
+   2     & B            & J   & B                        & 2                 & 5:BB           & \tiny neuer Präfix ist alter Code (hier 2)    \\
+   4     & \constbC{AB} & J   & B                        & 2                 & 6:BA           & \tiny Neuer WB Eintrag Präfix+Zeichen         \\
+   7     & ABA          & N   & AB                       & 4                 & 7:ABA          & \tiny neuer Code \textbf{nicht} im Wörterbuch \\
+   3     & C            & J   & ABA                      & 7                 & 8:ABAC         &                                               \\
+   -     &              &     &                          &                   &                &                                               \\
+   \hline
+\end{tabular}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Zusammenfassung}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kompression}
+    \bspar1
+    \textbf{Verschiedene Kompressionsarten}
+    \begin{itemize}
+      \item Verlustfrei/Verlustbehaftet
+      \item Unviersell/Speziell
+    \end{itemize}
+    \textbf{Verlusfreie Kompression}
+    \begin{itemize}
+      \item Entropy-basierte, optimale Kodierungen Huffman-Code, Artihmetische Kodierung
+      \begin{itemize}
+        \item Aufbau von Code-Bäumen mit variabler Code Lönge
+        \item Rechenintensive
+      \end{itemize}
+      \item  Zeichenketten-basierte Kodierung
+      \begin{itemize}
+        \item Lauflängenkodierung: Wiederholende Zeichen als Anzahl-Zeichen Paar
+        \item LZW Kodierung: Automatische Erzeugung eines Wörterbuchs
+      \end{itemize}
+    \end{itemize}
+  \end{bsslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+\colortext{Bibliographie}
+\bspar2
+\begin{itemize}
+\item \textbf{Malaka, Butz, Hussmann (2009)} -
+  Medieninformatik: Eine Einführung (Pearson Studium - IT), Kapitel
+  2.4
+\item \textbf{Herold, Lurz, Wohlrab (2006)} - Grundlagen der Informatik, Pearson Studium
+\end{itemize}
+\end{bsslide}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "part-de-mt-informationstheorie.tex"
+%%% End:

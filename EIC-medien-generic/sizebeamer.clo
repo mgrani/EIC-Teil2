@@ -1,0 +1,115 @@
+%%% Last Modification. August, 2004.
+%%% A class option for seventeen point fonts with constant listskips.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{beamersize.clo}
+
+%%% Standard font sizes and baselineskips in size11.clo.
+%%% {8}{9.5}	%\scriptsize
+%%% {9}{11}	%\footnotesize
+%%% {10}{12}	%\small
+%%% {11}{13.6}	%\normalsize
+%%% {12}{14.5}	%\large
+%%% {14.4}{18}	%\Large
+%%% {17.28}{23}	%\LARGE
+%%% {20.74}{26}	%\huge
+%%% {24.88}{32}	%\Huge
+
+\def\slidelist{\leftmargin\leftmargini
+               \topsep 2\p@ \@plus2\p@ \@minus2\p@
+               \parsep 2\p@ \@plus\p@ \@minus\p@
+               \itemsep\parsep}
+
+\renewcommand\normalsize{%
+   \@setfontsize\normalsize{17.28}{23}%
+   \abovedisplayskip 12\p@ \@plus3\p@ \@minus5\p@
+   \abovedisplayshortskip \z@ \@plus4\p@
+   \belowdisplayshortskip 8\p@ \@plus3\p@ \@minus3\p@
+   \belowdisplayskip \abovedisplayskip
+   \let\@listi\@listI}
+\normalsize
+\renewcommand\small{%
+   \@setfontsize\small{14.4}{18}%
+   \abovedisplayskip 10\p@ \@plus3\p@ \@minus5\p@
+   \abovedisplayshortskip \z@ \@plus3\p@
+   \belowdisplayshortskip 7\p@ \@plus2\p@ \@minus2\p@
+   \def\@listi{\slidelist \leftmargin2\leftmargini}
+   \belowdisplayskip \abovedisplayskip
+}
+\newcommand\smallnarrow{%
+   \@setfontsize\small{14.4}{16}%
+   \abovedisplayskip 12\p@ \@plus3\p@ \@minus7\p@
+   \abovedisplayshortskip \z@ \@plus3\p@
+   \belowdisplayshortskip 7\p@ \@plus4\p@ \@minus3\p@
+   \def\@listi{\slidelist \leftmargin2\leftmargini}
+   \belowdisplayskip \abovedisplayskip
+}
+\renewcommand\footnotesize{%
+   \@setfontsize\footnotesize{12}{14.5}
+   \abovedisplayskip 12\p@ \@plus3\p@ \@minus7\p@
+   \abovedisplayshortskip \z@ \@plus3\p@
+   \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+   \def\@listi{\slidelist}%
+   \belowdisplayskip \abovedisplayskip
+}
+\renewcommand\scriptsize{\@setfontsize\scriptsize{10}{12}}
+\renewcommand\tiny{\@setfontsize\tiny{8}{9.5}}
+\renewcommand\large{\@setfontsize\large{20.74}{26}}
+\renewcommand\Large{\@setfontsize\Large{24.88}{32}}
+\renewcommand\LARGE{\@setfontsize\LARGE{29.86pt}{35}}
+\renewcommand\huge{\@setfontsize\huge{35.83pt}{41}}
+\renewcommand\Huge{\@setfontsize\Huge{42.99pt}{52}}
+
+\setlength\smallskipamount{3\p@ \@plus 1\p@ \@minus 1\p@}
+\setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
+\setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
+
+\setlength\floatsep    {15\p@ \@plus 4\p@ \@minus 4\p@}
+\setlength\textfloatsep{25\p@ \@plus 5\p@ \@minus 5\p@}
+\setlength\intextsep   {16\p@ \@plus 5\p@ \@minus 5\p@}
+\setlength\dblfloatsep    {15\p@ \@plus 4\p@ \@minus 4\p@}
+\setlength\dbltextfloatsep{25\p@ \@plus 5\p@ \@minus 5\p@}
+\setlength\@fptop{0\p@ \@plus 1fil}
+\setlength\@fpsep{12\p@ \@plus 2fil}
+\setlength\@fpbot{0\p@ \@plus 1fil}
+\setlength\@dblfptop{0\p@ \@plus 1fil}
+\setlength\@dblfpsep{12\p@ \@plus 2fil}
+\setlength\@dblfpbot{0\p@ \@plus 1fil}
+\setlength\partopsep{\z@ \@plus \z@ \@minus \p@}
+
+\def\@listi{\slidelist \leftmargin2\leftmargini}
+\let\@listI\@listi
+\@listi
+\def\@listii {\leftmargin\leftmarginii
+              \labelwidth\leftmarginii
+              \advance\labelwidth-\labelsep
+              \slidelist}
+\def\@listiii{\leftmargin\leftmarginiii
+              \labelwidth\leftmarginiii
+              \advance\labelwidth-\labelsep
+              \parsep \z@
+              \slidelist}
+\def\@listiv {\leftmargin\leftmarginiv
+              \labelwidth\leftmarginiv
+              \advance\labelwidth-\labelsep}
+\def\@listv  {\leftmargin\leftmarginv
+              \labelwidth\leftmarginv
+              \advance\labelwidth-\labelsep}
+\def\@listvi {\leftmargin\leftmarginvi
+              \labelwidth\leftmarginvi
+              \advance\labelwidth-\labelsep}
+
+% From {texmf/tex/latex/base/article.cls}
+\setlength\leftmargini  {1.5em}% This line is different in sizenup.clo.
+\leftmargin\leftmargini
+\setlength\leftmarginii {0.5em}
+\setlength\leftmarginiii{0.5em}
+\setlength\leftmarginiv {0.5em}
+\setlength\leftmarginv  {0.5em}
+\setlength\leftmarginvi {0.5em}
+\setlength\labelsep{.5em}
+\setlength\labelwidth{\leftmargini}
+\addtolength\labelwidth{-\labelsep}
+
+\endinput
+%%

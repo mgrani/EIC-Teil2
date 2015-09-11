@@ -1,0 +1,31 @@
+
+
+\begin{exercise}{Farbmodelle - Umrechnung}
+\label{ex-de-mt-Farbmodelle Umrechnung}
+
+Rechnen Sie die folgenden RGB Werte in das CYM, CIE-XYZ, YUV und das YCrCb Farbsystem um:
+
+\begin{itemize}
+  \item RGB(255,255,0)
+  \item RGB(0,255,0)
+  \item RGB(0,0,0)
+  \item RGB(92,33,28)
+\end{itemize}
+
+\answer{\url{http://start.farben.rehbein.net/} od. \url{http://www.informatics.occursus.de/hp/Farben/Java/SyncFM.htm}
+od. \url{http://www.cg.info.hiroshima-cu.ac.jp/~miyazaki/knowledge/teche01.html}
+
+
+Werte sind auf 0-1 normiert.
+\small
+\begin{tabular}{c|cccc}
+  RGB             & CMY          & CIE-XYZ           &    YUV/YIQ				& YCrCb \\
+  RGB(1,1,0)  & CMY(0,0,255) 		& 	XYZ(0.772,0.929,0.15)& YUV(0.886, 0.321, -0.314) & 210/255, 16/255, 146/255\\
+  RGB(0,1,0) & CMY(255 ,0 ,255) 	&0.342,0.707,0.13		 & 154/255, 54/255, 34/255  \\
+  RGB(0,0,0) & CMY(255,255,255) & 0,0,0 & 0,0,0 & 16/255, 128/255, 128/255\\
+  RGB(0.36,0.123,0.1) & 0.638, 0.877, 0.9&0.216,0.174,0.117&0.192,0.15,0.044& 59/255, 117/255, 154/255\\
+\end{tabular}
+}
+
+\end{exercise}
+

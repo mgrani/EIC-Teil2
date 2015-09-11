@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Tue Oct 23 10:11:14 CEST 2012
+markTmpDer=true
+builderNum=2
+outputDir=slides-out/
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp/
+mainTexFile=part-de-mt-digitalisierung.tex
+outputFile=part-de-mt-digitalisierung.pdf
+langSpell=de
+markDer=true
+srcDir=slides-de/

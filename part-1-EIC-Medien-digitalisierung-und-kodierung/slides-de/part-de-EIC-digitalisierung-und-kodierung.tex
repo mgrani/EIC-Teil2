@@ -1,0 +1,110 @@
+%Use  export TEXINPUTS="../../EIC-medien-generic:" under linux/mac to set the correct path for lecture documentclass
+\documentclass{lecture}
+\usepackage{multicol}
+\usepackage{xparse}
+\usepackage{todo}
+\usepackage{../../EIC-medien-generic/EIC-medien} %
+\usepackage[latin1]{inputenc}
+%\usepackage[OT2,T1]{fontenc}
+\usepackage{array}
+%\DeclareSymbolFont{cyrletters}{OT2}{wncyr}{m}{n}
+%\DeclareMathSymbol{\Sha}{\mathalpha}{cyrletters}{"58}
+
+
+\bsauthor{GRANITZER M., KOSCH H.}
+\bsyear{2014}
+
+\renewcommand{\outline}{
+\begin{bsslide}[\bsparthead]
+\bspar1
+\begin{bspartenumerate}[1]
+\coloritem[\emcolor]
+EIC Teil 2- Medien und Information
+\begin{itemize}
+\small
+\coloritem Digitalisierung 
+\coloritem Kodierung
+\coloritem Informationstheorie
+\coloritem Kompression
+\end{itemize}
+\end{bspartenumerate}
+\end{bsslide} 
+} 
+
+\begin{document}
+
+\bscollection{EIC Teil 2- Medien und Information}
+\bspartname{Digitalisierung und Kodierung}
+
+\setcounter{bspart}{1}
+
+\begin{bsslide}
+\bspar9
+\begin{center}
+{\large\bfseries Einf\"uhrung Internet Computing Teil 2 \bspar1 Medien und Information}
+\bspar4
+ Kapitel 1: Digitalisierung und Kodierung
+\bspar4
+\small 
+Michael Granitzer
+\bspar2
+Harald Kosch
+\bspar2
+Universität Passau
+\end{center}
+\end{bsslide}
+
+\outline
+
+
+\begin{bsslide}[Lernziele]
+  \bspar4
+  \begin{itemize}
+    \item Digitalisierung und Abtasttheorem - wie entstehen digitale Medien?
+    \item Kodierung von Medien - wie werden digitale Medien
+      repr\"asentiert?
+    \item Informationstheorie - wie kann man den Gehalt von
+      Information messen und was sind gute Repr\"asentationsformen von
+      Medien?
+    \item Kompression - wie kann ich Repr\"asentationsformen
+      automatisiert optimieren, d.h. k\"urzere Kodierungen f\"ur die
+      gleiche Information finden?
+  \end{itemize}
+  \bspar1
+\end{bsslide}
+
+%\input{unit-de-kanaele-und-medien}
+
+\begin{bsslide}[Einleitung]
+  \colortext{Digitale Medien}
+  \bspar1
+  \begin{definition}[Digitale Medien]
+    Digitale Medien sind Medien, welche in digitaler Form
+    gespeichert, verarbeitet oder manipuliert werden.
+  \end{definition}
+  \bspar3
+  Typische Beispiele digitaler Medien und Computer-gest\"utzter Funktionen:
+  \begin{itemize}
+    \item\textbf{Datentr\"ager/Darstellungstechniken}: eBooks, digitales
+    Fernsehen, digitale Bilder
+    \item \textbf{Neue Medien und Interaktionsparadigmen}:  World Wide Web, Hypertext,
+    Ubiquitous Computing
+    \item \textbf{Erstellung/Manipulation von Inhalten}: Rechner-basierte Authoring
+    Tools und Programme zur Medienbearbeitung
+  \end{itemize}
+
+   \centering \textbf{Wie k\"onnen Medien digitalisiert und  kodiert werden?}
+  \end{bsslide}
+
+\outline
+\input{unit-de-digitalisierung}
+
+\outline
+\input{unit-de-kodierung} 
+
+\outline
+\input{unit-de-informationstheorie}
+\outline
+\input{unit-de-kompression}
+ 
+\end{document}

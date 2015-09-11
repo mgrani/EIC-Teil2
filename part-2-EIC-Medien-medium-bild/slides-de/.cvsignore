@@ -1,0 +1,13 @@
+.project
+*.aux
+*.bld
+*.blg
+*.dvi
+*.lof
+*.log
+*.out
+*.pdf
+*.ps
+*.toc
+*.bak
+*.wsp

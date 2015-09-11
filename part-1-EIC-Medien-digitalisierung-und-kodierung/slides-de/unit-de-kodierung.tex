@@ -1,0 +1,458 @@
+%%% DATE.  November, 17th, 2013
+
+\clearpage
+
+%%%%%%%%%%%%%%% METADATA %%%%%%%%%%%%%%%%
+\bsunitname{Kodierung}
+\setcounter{bsunit}{1}
+%%% TODO: Improve Storyline. The storyline is not the best one. Maybe
+%%% try starting out with an example and keep the example consistent.
+%%% Card game could be the example: take 32 cards, numbers and
+%%% symbols, colors as properties. Szenario is a cheating system for
+%%% poker playing where you have minimum amount of eye twinks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%% SOURCE. \cf[Kapitel 2]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\renewcommand{\textbufferB}{Kodierung - Repr\"asentation von Information}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+    \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Was ist Information?}
+  \bspar1
+  Information ist ein nichtstoffliches Ph\"anomen, welches durch die Interpretation Zeichen entsteht, die man die Repr\"asentation der Information nennt. In der physikalischen Welt erfolgt diese Repr\"asentation durch analoge Signale. \bspar1
+
+  In der Informatik repr\"asentiert man Information im Allgemeinen durch folgende Komponenten:
+  \bspar1
+  \begin{itemize}
+  \item \textbf{Zeichenvorrat:} Mengen von endlichen Zeichen zur Repr\"asentation von Information (z.B. Buchstaben bei Sprache, Zahlen bei Bild)
+  \item \textbf{Nachricht:} Eine Sequenz von Zeichen aus einem
+    Zeichenvorrat $A$ bezeichnet man als Nachri
+cht.
+  \item Die Menge aller Nachrichten wird mit $A^*$ bezeichnet
+  \end{itemize}
+  \bspar2
+  Beispiele f\"ur Nachrichten
+  \begin{itemize}
+  \item Nachricht$=<01010101>$; Zeichenvorrat$=\{0,1\}$
+  \item Nachricht 1 $=<Medien>$, Nachricht 2 $=<nedi>$; Zeichenvorrat = $\{M,e,d,i,e,n\}$
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Kodierung von Information}
+  \bspar1
+  \begin{definition}[Kodierung]
+    Seien $A$ und $B$ Zeichenvorr\"ate. Eine Kodierung $c$ ist eine Abbildung von Nachrichten in $A$ auf Nachrichten in $B$\\
+    \centering{$c:A\rightarrow B*$}
+  \end{definition}
+  Beispiele:
+  \begin{itemize}
+  \item $ababa\rightarrow 000100010100101010100101010101$
+  \item $127, 168, 24 \rightarrow\;Michael$
+  \item \includegraphics[width=2cm]{medium-video}$\rightarrow 10$
+  \end{itemize}
+  \bspar1 
+  Fragen:
+  \begin{itemize}
+  \item Welche Arten von Kodierungen kann man Unterscheiden?
+  \item Was sind nun effiziente Kodierungen f\"ur verschiedene
+    Informationen?
+  \item Wieviel Information steckt in einer Nachricht?
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\renewcommand{\textbufferB}{Kodierung - Bin\"arcodes und das bin\"are Zahlensystem}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+    \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Motivation}
+  \bspar1
+  Digitale Ger\"ate basieren auf digitalen Schaltungen welche zwei Zust\"ande unterscheiden k\"onnen:
+  \begin{itemize}
+  \item Strom Ein (oder $1$)
+  \item Strom Aus (oder $0$)
+  \end{itemize}
+  \bspar1
+  Auf digitalen Ger\"aten wird  Information daher als Bin\"arcode repr\"asentiert. Die Digitalisierung kann somit auch als Kodierung eines analogen Signales in einen Bin\"arcode verstanden werden. \\
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Formale Definition}
+  \bspar1
+  \begin{definition}[Bin\"arcode]
+    Ein Bin\"arcode $c$ ist eine Kodierung, bei dem der
+    Ziel-Zeichenvorrat $B$ (die Bildmenge) aus genau zwei Symbolen besteht. Diese werden als Bit (binary digit) bezeichnet.
+  \end{definition}
+  \bspar3
+  \begin{itemize}
+  \item Das duales Zahlensystem bestehend aus dem Zeichenvorrat $A=\{0,1\}$ erm\"oglicht arithmethische Operationen im Bin\"arcode
+  \item Die Boolesche Algebra (Aussagenlogik), bestehend aus dem Zeichenvorrag $A=\{Wahr,Falsch\}$,  erm\"oglicht logische Operationen 
+  \item Alle weiterf\"uhrenden Kodierungen, wie z.B. Zeichens\"atze,
+    Audio, Bilder, Videos, Programme etc. werden auf bin\"are Codes zur\"uckgef\"uhrt.
+  \end{itemize}
+\end{bsslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Duales Zahlensystem}
+  \bspar1
+  \textbf{Fragestellung:} Wie sieht ein Bin\"arcode zur Repr\"asentation eines analogen Signals (z.B. Schalldruck) aus, sodass die arithmetische Operationen wie Addition, Subtraktion, Multiplikation erhalten bleiben?
+
+  \bspar2
+  Ein solcher Code erm\"oglicht beispielsweise die Addition zweier Signale oder die mathematische Analyse mittels digitalen Ger\"aten (Bild- oder Videobearbeitung, digitale Signalanalyse, Musikkomposition etc.).
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Duales Zahlensystem - Definition}
+  \bspar1
+  \textbf{Beobachtung:} Unser dezimales Zahlensystem ist ein Positionssystem mit der \textbf{Basis 10}, in dem eine Zahl in 10er Potenzen zerlegt wird.
+  \bspar1
+  \begin{definition}[Positionszahlensystem]
+    Ein Positionszahlensystem mit der Basis $B$ zerlegt ein Zahl $n=<b_0,b_2,\ldots,b_{N-1}>$ in Ziffern $<b_0,b_2,\ldots,b_{N-1}>$ mit $N$ Stellen aufsteigend geordnet nach Potenzen von B. Der Wert der Zahl $n$ kann als folgende Summe berechnet werden:
+    \[
+    \sum_{i=0}^{N-1}b_i\cdot B ^i
+    \]
+    wobei gilt
+    \begin{itemize}
+    \item $B\in \mathbb{N}$ uynd $B\geq 2$ 
+    \item $b_i \in \mathbb{N}_0$, $0\geq b_i< B$
+    \end{itemize}
+  \end{definition}
+
+\end{bsslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Duales Zahlensystem - Beispiele}
+  \bspar1
+  Mit \"Anderung der Basis \"andert sich auch das Zahlensystem und die notwendige Anzahl der Ziffernzeichen:
+  \begin{itemize}
+  \item Dezimalsystem: $B=10$, Ziffern $0-9$
+  \item Bin\"ar- bzw. Dualsystem: $B=2$, Ziffern $\{0,1\}$
+  \item Octalsystem: $B=8$, Ziffern $0-7$
+  \item Hexadezimalsystem: $B=16$, Ziffern $\{0-9, A, B, C, D, E, F\}$
+  \end{itemize}
+  \bspar1
+  Beispiele: 
+  \begin{itemize}
+  \item $n_2=1101$\\
+    Zahlenwert $n_{10}= 1*2^3+1*2^2+0*2^1+1*2^0=1*8+1*4+0*2+1*1=13$
+  \item $n_{16}=BAB$\\
+    Zahlenwert $n_{10}= 11*16^2+10*16^1+11*16^0=11*256+10*16+11*1 = 2987$
+  \item $n_{8}=3110$\\ 
+    Zahlenwert $n_{10}= 3*8^3+1*8^2+1*8^1+0*8^0=1608$
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Duales Zahlensystem - Hex, Octal und Bin\"ar}
+  \bspar1\small
+  Das Hexadezimal- und Oktalsystem stellen eine k\"urzere, einfach ermittelbare Schreibweise zum Bin\"arsystem dar, da ihre Basen Potenzen von 2 darstellen. Eine Umrechnung ist einfach m\"oglich, da Hexadezimalzahlen durch 4 Bit und Oktalzahlen durch 3 Bit repr\"asentiert werden k\"onnen:
+  \bspar1
+  \begin{center}
+    \begin{tabular}{lcccc}
+      \textbf{$n_{10}$}   &   \textbf{$n_2$}     & \textbf{$n_{8}$}    & \textbf{$n_{16}$}  \\
+      \hline
+      0  &      $0000$          &      $0$      &      $0$     \\
+      1  &      $0001$          &      $1$      &      $1$     \\
+      2  &      $0010$          &      $2$      &      $2$     \\
+      3  &      $0011$          &      $3$      &      $3$     \\
+      4  &      $0100$          &      $4$      &      $4$     \\
+      5  &      $0101$          &      $5$      &      $5$     \\
+      6  &      $0110$          &      $6$      &      $6$     \\
+      7  &      $0111$          &      $7$      &      $7$     \\
+      8  &      $1000$          &      $10$      &      $8$     \\
+      9  &      $1001$          &      $11$      &      $9$     \\
+      10  &      $1010$          &      $12$      &      $A$     \\
+      11  &      $1011$          &      $13$      &      $B$     \\
+      12  &      $1100$          &      $14$      &      $C$     \\
+      13  &      $1101$          &      $15$      &      $D$     \\
+      14  &      $1110$          &      $16$      &      $E$     \\
+      15  &      $1111$          &      $17$      &      $F$     \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Duales Zahlensystem - Umwandlung aus dem Dezimalsystem}
+  \bspar1
+  F\"ur die Umwandlung einer Dezimalzahl $x$ in ein Zahlensystem mit der Basis $B$ kann folgender Algorithmus verwendet werden:
+  \begin{enumerate}
+  \item Division durch Basis: $\frac{x}{B} = y\;Rest\;z$
+  \item Mache $y$ zum neuen $x$
+  \item Solange $x$ ungleich 0 gehe zu Schritt 1
+  \item Die ermittelten Reste $z$ von unten nach oben nebeneinander (von links nach rechts) geschrieben ergeben die entsprechende Zahl zur Basis $B$
+  \end{enumerate}
+  \bspar1
+  \textbf{Warum?}
+  \bspar1
+  Laut Hornerschema kann ein Zahl zur Basis $B$ wie folgt zerlegt werden:
+  \[
+  \sum_{i=0}^{N-1}b_i\cdot B ^i = (\ldots(((b_N*B_N+b_{N-1})*B+b_{N-2})*B+\ldots+b_1)*B+b_0
+  \]
+
+  Eine Division der obigen Summe durch $B$ ergibt:\\
+  $
+  y = (\ldots(((b_N*B_N+b_{N-1})*B+b_{N-2})*B+\ldots+b_1)
+  $
+  und 
+  $
+  z = b_0
+  $
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Duales Zahlensystem - Umwandlung aus dem Dezimalsystem}
+  \bspar1
+  Beispiel: $n_{10}=68$ im Dualsystem?
+  \begin{center}
+    \begin{tabular}{ccc}
+      \textbf{$x$}   &   \textbf{$y$}     & \textbf{$z$}  \\
+      \hline
+      68  &     34 &  0       \\
+      34  &     17 & 0       \\
+      17  &     8   & 1       \\
+      8  &     4   & 0       \\
+      4  &     2   & 0       \\
+      2 &      2  & 0\\
+      1 &      2  & 1\\
+      0 &      -  & -\\
+      \hline
+    \end{tabular}
+  \end{center}
+  $n_{10}=68\rightarrow n_2=1000100$ 
+\end{bsslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\renewcommand{\textbufferB}{Kodierung - Rechnen im  bin\"aren Zahlensystem}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+    \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Arithmetische Operationen}
+  \bspar1
+  Das bin\"are Zahlensystem erlaubt alle arithmetischen Operationen und ist somit \"aquivalent zum Dezimalsystem. Es gelten die gleichen Rechenregeln:
+  \begin{center}
+    \begin{tabular}{cc|c|c|c|c|}
+      \textbf{$x$}   &   \textbf{$y$}     & \textbf{$x+y$} & \textbf{$x-y$}& \textbf{$x*y$}& \textbf{$x/y$}  \\
+      \hline
+      0    & 0 & 0 & 0 & 0 & not defined (n.d.) \\
+      0    & 1 & 1 & -1 bzw. 11\footnote{In B-Komplementdarstellung, siehe n\"achsten Folien} & 0 & 0\\
+      1    & 0 & 1 & 1 & 0 & not defined (n.d.) \\
+      1    & 1 & 10 & 0 & 1 & 1  \\
+      \hline
+    \end{tabular}
+  \end{center}
+\bspar1\tiny
+Bei der Subtraktion entspricht  11 der  B-Komplementdarstellung, die
+auf den n\"achsten Folien erkl\"art wird.
+\end{bsslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Arithmetische Operationen}
+  \bspar1
+  Beispiel Addition mehrstelliger Zahlen:
+  \bspar3
+  \begin{center}
+    \begin{tabular}{lrr}
+      {x} &                10011011 & (155) \\
+      {y} &                00111110 & (62)\\
+      \hline
+      {\"Ubertrag} & 01111100 &\\
+      \hline
+      {Ergebnis} &    11011001& (217)\\   
+    \end{tabular}
+  \end{center}
+  Wichtig: der \"Ubertrag erfolgt immer wenn die Summe gr\"o\ss er 1 wird
+\end{bsslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Arithmetische Operationen}
+  \bspar1
+  \textbf{Zur Subtraktion} m\"ussen wir noch \"uberlegen, wie negative Zahlen dargestellt werden k\"onnen. Im Normalfall werden negative Zahlen durch ihren Betrag mit vorangestellten Minus dargestellt, worauf ein Bit verwendet werden k\"onnte. Um jedoch die Subtraktion rechnerisch mittels Addition abzubilden (und somit die Rechnerarchitektur zu vereinfachen), wird auf die so genannten \textbf{Zweierkomplementdarstellung} zur\"uckgegriffen. 
+  \bspar1
+  In der Zweierkomplementdarstellung (oder auch B-Komplement
+  darstellung wobei B die Basis, im dual System also 2, angibt) werden negative Zahlen durch ein auf 1 gesetztes f\"uhrendes Bit dargestellt. Die positiven Zahlen inklusive $0$ werden durch ein auf $0$ gesetztes f\"uhrendes Bit dargestellt. 
+  \bspar1
+\end{bsslide}
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Arithmetische Operationen}
+  \bspar1
+  Zweierkomplement: Beispiel mit drei Bit:
+  \begin{center}
+    \begin{tabular}{lcccc}
+      \textbf{Dezimal}   &   \textbf{B-Komplement}     & \textbf{mit Vorzeichen Bit}  \\
+      -4  &     100  &   NA       \\
+      -3  &     101  &    111      \\
+      -2  &     110  &    110       \\
+      -1  &     111  &    101       \\
+      0 &     000  &    000 od. 100      \\
+      1 &     001  &    001       \\
+      2 &     010  &    010      \\
+      3 &     011  &    011  \\
+      \hline
+    \end{tabular}
+  \end{center}
+  Wie erkennbar ``verschwendet'' das Vorzeichenbit zwei Bin\"aerzahlen zur Kodierung der 0.
+\end{bsslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Arithmetische Operationen}
+  \bspar1
+  Das Zweierkomplement wird wie folgt erzeugt:
+  \begin{enumerate}
+  \item Konvertiere die Zahl ohne Vorzeichen in das Bin\"arsystem
+  \item Invertiere die Bits der konvertierten Zahl
+  \item Addiere 1 zur invertierten Zahl.
+  \end{enumerate}
+  \bspar1
+  Beispiel f\"ur -5:
+  \begin{center}
+    \begin{tabular}{lr}
+      {Umwandeln} & 0101     \\
+      {Invertieren} &  1010 \\
+      {+1} & 1011 \\    
+    \end{tabular}
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{Arithmetische Operationen}
+  \bspar1
+  Beispiel Subtraktion mehrstelliger Zahlen: 155-62.
+  \bspar1
+  \begin {enumerate}
+  \item Wir rechnen 155 + (-62).
+    \bspar1
+  \item     Zweierkomplementdarstellung von 62:
+    \begin{center}
+      \begin{tabular}{lr}
+        {Umwandeln} & 000111110     \\
+        {Invertieren} &  111000001 \\
+        {+1} &              111000010 \\
+      \end{tabular}
+    \end{center}
+    \bspar1
+  \item Durchf\"uhren der Addition:
+    \begin{center}
+      \begin{tabular}{lrr}
+        {x} &                010011011 & (155) \\
+        {y} &                111000010 & (-62)\\
+        {\"Ubertrag} & 100000100& {Das f\"uhrende \"Ubertragsbit wird verworfen}\\
+        \hline
+        {Ergebnis} &    001011101&  (93)\\   
+      \end{tabular}
+    \end{center}
+  \end {enumerate}
+\end{bsslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\renewcommand{\textbufferB}{Kodierung - ASCII Code}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+    \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{bsslide}[\textbufferB]
+  \colortext{ASCII Code}
+  \bspar1
+   Eine ander Art der Kodierung sind Zeichensatzkodierungen, wie der
+   \textbf{American Standard Code for Information Interchange (kurz
+     ASCII Code).} 
+\bspar1
+   Der Zeichensatz kodiert mit 7-Bit das lateinische Alphabet in
+   Gro\ss- und Kleinschreibung, die arabischen Ziffern sowie
+   Satzzeichen und Sonderzeichen. Er beinhaltet alle wesentlichen Zeichen einer Tastatur. 
+\bspar1
+   Jedem Zeichen des Zeichensatzes wird dabei ein
+   Bin\"arcode per Definition zugewiesen. D.h. es gibt 128
+   verschiedene Bitmuster.
+\end{bsslide}
+
+
+\begin{bsslide}[\textbufferB]
+  \colortext{ASCII Code}
+  \bspar1
+  \bsfigurecaption[0.8]{asciifull}{\tiny Bildquelle \url{http://www.asciitable.com/}}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Kodierung -Zusammenfassung}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[Zusammenfassung]
+  \colortext{Kodierung}
+  \bspar1
+  \begin{itemize}	
+  \item Repr\"asentation von Information mittels Zeichen und Nachrichten
+  \item Kodierung als Vorschrift zur \"Uberf\"uhrung Nachrichten
+    aus einem Zeichensatz in den anderen. 
+  \item Bin\"arcodes bestehen aus genau zwei Zeichen, welche
+    unterschiedliche interpretiert werden k\"onnen:
+    \begin{itemize}
+    \item Als Zahl im dualen Zahlensystem
+      \begin{itemize}
+      \item Positionszahlensystem zur Basis 2
+      \item Arithmetische Operationen
+      \item Subtraktion als Addition mittels Zweierkomplement
+      \end{itemize}
+    \item Als Zeichen einer Tastatur (ASCII Code)
+    \item Als Wahrheitswerte (Wahr/Falsch) im Bereich der Aussagenlogik
+    \end{itemize}
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[Bibliographie]
+  \bspar4
+  \begin{itemize}
+  \item \textbf{Malaka, Butz, Hussmann (2009)} -
+    Medieninformatik: Eine Einf\"uhrung (Pearson Studium - IT), Kapitel
+    2.4
+ \item \textbf{Herold, Lurz, Wohlrab} - Grundlagen der Informatik,
+   Pearson Studium, Kapitel 3
+  \end{itemize}
+\end{bsslide}

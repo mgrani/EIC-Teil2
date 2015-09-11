@@ -1,0 +1,49 @@
+
+%%%%%%%%% Style file stuff begin %%%%%%%%
+% Added September, 2013, mgrani
+% Command to use figures with captions 
+\newcommand{\bsfigurecaption}[3][1.0]{%
+  % #1 scale
+  % #2 file name
+  % #3 caption
+  \par\vspace{\parskip}
+  \centerline{\bsfigureaux[scale=#1]{#2}
+  }
+  \centerline{\tiny{#3}}
+}  
+
+%%%%%% Commands for managing intra-unit sections %%%%%%
+\newcounter{bsunit}
+\newcommand{\bsunitname}[1]{\renewcommand{\bsunitnameaux}{#1}}
+\newcommand{\bsunitnameaux}{}
+\newcommand{\bsunithead}{\arabic{bsunit}-\bsunitnameaux}
+\setcounter{bsunit}{0}
+\newcommand{\unitoutline}{}
+\newcommand{\outline}{}
+\newcommand{\unitoutlineheading}{ \Roman{bspart}-\arabic{bsunit}: \bscollectionaux -\bspartnameaux - \bsunitnameaux}
+\newenvironment{bsunitenumerate}[1][1]{% Usage pattern for partial toc: \begin{bsunitenumerate}[\value{bsunit}]
+  \begin{enumerate}
+    \renewcommand{\labelenumi}{\Roman{enumi}.}
+    \setcounter{enumi}{#1}\addtocounter{enumi}{-1}}
+  {\end{enumerate}}
+
+%%%%%%%%%%%%%%%%%%%%% Bibliography Section %%%%%%%%%%%%%
+%%% Main Sources
+\newcommand{\MalakaEtAl}[1] {Malaka, Butz, Hussmann
+  (2009)-Medieninformatik: Eine Einf\"uhrung (Pearson Studium - IT) #1 }
+%%%% perception and physiology 
+\newcommand{\GroeneOnline} {Gr\"one Thorsten, - \emph{Unverstandenes Genie: das visuelle
+Gehirn},\url{http://www.tg8.eu/webseiten/gehirn1.html}}
+\newcommand{\AlonsoChen} {Jose-Manuel Alonso and Yao Chen (2008), Receptive field,Scholarpedia, 4(1):5393. \url{ 	doi:10.4249/scholarpedia.5393}}
+\newcommand{\Helmich}{Ulrich Helmich (2007), Sinneszellen und
+  Sinnesorgane (online, zuletzt besucht 1.10.2012)
+  \url{http://www.u-helmich.de/bio/neu/2/index2.html}}
+\newcommand{\Notfallmanagement}{
+Kap. 5: Menschliche Wahrnehmung: Die Sicht der
+Dinge, Notfallmanagement, 2005,
+\url{http://dx.doi.org/10.1007/3-540-27014-0_5}, Springer}
+%%%% Signal Analysis
+\newcommand{\FourierYoo}{Yoo, Y. (2001). Tutorial on Fourier Theory.}
+\newcommand{\DigImProc}{Digital Image Processing, chapter 3 and 8.2.3. Addison-Wesley Publishing
+Company, 1993.}
+

@@ -1,0 +1,543 @@
+%%% DATE. November, 23rd, 2013
+
+\clearpage
+
+%%% Unit statistics.
+%%%
+%%% corollary:   0
+%%% definition:  0
+%%% lemma:       0
+%%% page:        0
+%%% proof:       0
+%%% theorem:     0
+%%% theorem:     0
+%%%%%%%%%%%%%%% METADATA %%%%%%%%%%%%%%%%
+\bsunitname{Digitalisierung und Kodierung digitaler Bilder}
+\setcounter{bsunit}{2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 3]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[Digitalisierung und Kodierung digitaler Bilder]
+  \colortext{Lernziel}
+  \bspar1
+  \textbf{Unterthemen}
+  \begin{itemize}
+    \item Digitalisierung - Grundlegende Eigenschaften von Bildern nach der Digitalisierung
+    \item Kodierung - Bilddateiformate (Digital), Aufbau und Anwendungsbereich
+  \end{itemize}
+  \bspar3
+  \textbf{Fragestellungen}
+  \begin{itemize}
+    \item Was sind die Eigenschaften digitaler Bilder?
+    \item Was ist Rasterung und welche Farbtiefen werden verwendet?
+    \item Was versteht man unter Dithering?
+    \item Welche (wichtigen) Bildformate gibt es?
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Digitalisierung}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Klassifikation von Bilddatenformaten}
+    \bspar1
+    \textbf{Rastergrafik (Bitmap)}
+    \begin{itemize}
+      \item Speicherung der Abtastung eines Bilds (Pixel-Bild/Rasterisierung).
+      \item Kompression
+      \begin{itemize}
+        \item Verlustfreie Kompression: BMP, TIFF
+        \item Verlustbehaftete Kompression: JPEG
+        \item Erweiterte Bitmap-Format mit Zusatzfunktionalität
+          (e.g. Animationen): GIF, PNG
+      \end{itemize}
+    \end{itemize}
+    \textbf{Vektorgrafik}
+    \begin{itemize}
+      \item Beschreibung von Einzelobjekten (z.B. Linien, Kreis etc.)
+      \item Beispiel SVG (Scalable Vector Graphics)
+    \end{itemize}
+    \textbf{Meta-Files}
+    \begin{itemize}
+      \item Kombination von Vektor- und Rastergrafik
+      \item Beispiele: WMF (Windows Meta File), Macintosh PICT, PDF, EPS, RTF
+    \end{itemize}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Räumliche Auflösung: Bildgröße und Auflösung}
+    \bspar1
+    \textbf{Pixel (Picture Element):} Kleinste Einheit eines Bildes; Bildpunkt
+    \begin{itemize}
+      \item tatsächliche Größe eines Pixels hängt vom Ausgabegerät ab
+      \item Seitenverhältnis muss nicht 1 sein
+    \end{itemize}
+    \bspar1
+    \textbf{Bildgröße}: Größenangabe eines Bildes in Pixel (100 x 200 Pixel)
+    \bspar1
+    \textbf{Auflösung}: Anzahl der Pixel die auf einer bestimmten Strecke zur Darstellung zu Verfügung stehen
+    \begin{itemize}
+      \item Angabe in ppi (pixel per inch), Standardwert 72 ppi
+      \item $Breite[pixel]=Breite[in]*Auflösung[ppi]$
+    \end{itemize}
+    \textbf{Skalierung:} Konversion des Bildes auf andere Auflösung (resampling)
+    \begin{itemize}
+      \item Abwärtsskalierung durch Bildung von Mittelwerten
+      \item Aufwärtsskalierung durch Interpolation der Bildpunkte (e.g. ``Bi-kubische Interpolation); nur eingeschränkt automatisierbar
+    \end{itemize}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rasterbild - Räumliche Auflösung}
+    \bspar1
+    \bsfigurecaption[0.8]{bild-beispiel}{}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rasterbild - Räumliche Auflösung}
+    \bspar1
+    \bsfigurecaption[0.8]{aufloesung}{}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Räumliche Auflösung: Bildgröße und Auflösung}
+    \bspar1
+    \textbf{Beispiel Anzahl Pixel}
+    \bsfigurecaption[0.8]{bsp-anzahl-pixel}{\tiny Bildquelle Butz - Medieninformatik}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Farbtiefen und Farbkanäle}
+    \bspar1
+    \textbf{Farbtiefe (color resolution):} Anzahl der Farben, die pro Pixel gespeichert werden können
+    \begin{itemize}
+      \item 2 Farben (1-bit) für schwarz-weiß Bild
+      \item 16 Fraben (4-bit)
+      \item 256 Farben (8-bit)
+      \item 16,7 Millionen Farben (24 bit)
+      \item 24 bit Farbtiefe (1 Byte je Grundfarbe RGB) - ``True Color'' ausreichend für menschliche Wahrnehmung
+      \item Moderne Kameras liefern oft mehr 16 Bit/Kanal
+      \item High-Dynamic-Range-Bilder: 32 Bit/Kanal
+    \end{itemize}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Farbtiefen und Farbkanäle}
+    \bspar1
+    \textbf{Farbkanal:} Teil der gespeicherten Information der sich auf eine der Primärkomponenten des gewählten Farbmodells bezieht
+    \begin{itemize}
+      \item Bei Rohdaten meist Rot, Grün und Blau (RGB-Modell)
+      \item Bei Druckvorbereitung auch CMY bzw. CMYK (``Vierfarbendruck'')
+    \end{itemize}
+    \bspar2
+    \textbf{Alpha Kanal} als zusätzlicher Kanal: Spezifikation der Transparenz (Durchlässigkeit)
+    \begin{itemize}
+      \item Transparenzabstufung abhängig von Auflösung
+      \begin{itemize}
+        \item 1 Bit: Pixel ist transparent oder nicht
+        \item 8 Bit: Grad der Transparenz
+      \end{itemize}
+      \item Formate: PNG, TIFF, PSD (8-bit und mehr), GIF definiert lediglich eine Farbe als Hintergrund (1-Bit Kanal)
+    \end{itemize}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Farbpaletten und indizierte Farben}
+    \bspar1
+    \textbf{Farbpalette} die Menge der in einem konkreten Bild tatsächlich enthaltenen Farben (meist Teilmenge aller möglichen Farben)
+    \bspar1
+    \textbf{Indizierte Speicherung}
+    \begin{itemize}
+      \item Farbpalette (Tabelle) enthält die im Bild vorkommenden Farben
+      \item Pro Pixel wird nur der Index in die Palettentabelle gespeichert
+      \item Änderung der Farben bei Änderung der Palette
+    \end{itemize}
+    \bsfigurecaption{farbpalette.png}{\tiny Bildquelle Malaka - VO Digitale Medien}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Beispiel Rastergrafik}
+    \bspar1
+    \bsfigurecaption[0.9]{rasterbild-beispiel}{\tiny Bildquelle Wikipedia}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Beispiel Alphakanal}
+    \bspar1
+    \bsfigurecaption[0.5]{alphakanal}{\tiny Bildquelle Wikipedia}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Dithering}
+    \bspar1
+    \begin{minipage}{0.55\linewidth}
+      \textbf{Dithering (Fehlerdiffusion)} simuliert Farbverläufe durch bestimmte Pixel-Anordnung (Trade-off Räumliche Auflösung vs. Farbauflösung)
+      \begin{itemize}
+        \item  Bei zu geringer Farbtiefe lassen sich Farbverläufe schwer darstellen
+        \item  Simulation einer Farbe ähnlich eines Röhrenmonitors
+        \item Verschiedene Algorithmen
+        \begin{itemize}
+          \item Floyd-Steinberg
+          \item Jarvis-Algorithmus
+          \item Stucki
+        \end{itemize}
+        \item \textbf{Anti-Aliasing} ist die gegens\"atzliche
+          Operation. Hier wird ein zu geringe r\"aumliche Aufl\"osung
+          durch Verwendung von Farbeaufl\"osung kompensiert, indem
+          benachbarte Pixel eine \"ahnliche Farbe bekommen.
+        \bspar4
+
+      \end{itemize}
+    \end{minipage}
+    \begin{minipage}{0.40\linewidth}
+      \bsfigurecaption[0.7]{dithering-wikipedia}{Bildquelle Wikpedia}
+    \end{minipage}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Kodierung}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Überblick}
+    \bspar1 Für die Speicherung von Bilddaten sind unterschiedliche Formate definiert, die unterschiedlichen Zwecken dienen.
+    \begin{itemize}
+      \item Unterschiedliche Einsatzbereiche/Eigenschaften (e.g. Kompression, Farbtiefe, Auflösung, Metadaten)
+      \item Wir betrachten: TIFF, EXIF, BMP, PNG, GIF, JPG im Detail
+    \end{itemize}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rasterformate - TIFF (Tagged Image File Format)}
+    \bspar1
+    \begin{itemize}
+      \item Weit verbreitetes Format im Amateur und Profi Bereich für hohe Farbtiefe
+      \item Entwickelt von Aldus (jetzt Adobe) 1986 als einheitliches Format für Scans; Derzeitige Version 6.0 (von 1992)
+      \item Ermöglicht \textbf{flexible Kombination} unterschiedlicher Eigenschaften
+      \begin{itemize}
+        \item Verlustfreie (LZW) /verlustbehaftete Kompression (JPG)
+        \item Einbettung von JPG
+        \item Ebenen und Seiten
+        \item Einbettung von Metadaten
+      \end{itemize}
+      \item Unterscheidung unterschiedlicher Ausprägungen aufgrund der Flexibilität (Thousands of Incompatible File Formats)
+      \begin{itemize}
+        \item Baseline TIFF (max. 4 GB große Files)
+        \item TIFF Extensions
+        \item BigTiff - 64-bit Variante
+      \end{itemize}
+      \item \textbf{Mime type:} \texttt{image/tiff}
+    \end{itemize}
+  \end{bsslide}
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Rasterformate - BMP (bitmap; Device Independent Bitmap)}
+    \bspar1
+    Format zur Geräte-unabhängigen Speicherung von Rasterbildern
+    \begin{itemize}
+      \item Windows/MS DOS Standardformat
+      \item Farbtiefen: 1, 4, 8 und 24 bit
+      \item Verwendung einer Farbpaletten bei Farbiefe < 24 Bit
+      \item RLE (verlustfreie) Kompression
+    \end{itemize}
+    \textbf{Format}
+    \begin{itemize}
+      \item File Header mit fixer Größe (Signatur, Größe, Offset zu Pixel Array)
+      \item DIB (BMP) Header mit Metainformation zum Bild (Breite, Höhe, Kompression, Farbpalette)
+      \item Farbtabelle (optional)
+      \item Datenbereich (Bitdaten)
+      \item ICC Color Profile
+    \end{itemize}
+    \textbf{Mime-Type:} \texttt{image/bmp} oder \texttt{image/x-bmp}
+  \end{bsslide}
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Rasterformate - GIF (Graphics Interchange Format)}
+  \bspar1
+  \small
+  \textbf{GIF-Überblick}
+  \begin{itemize}
+    \item Entwickelt 1987 von CompuServe (Version GIF87a; Erweiterung GIF89a )
+    \item Limitierte Farbtiefe von 8-bit (256 Farben)
+    \item Spezifikation der globalen/lokalen Farbpalette aus 24-Bit RGB Farben
+    \item Kompression über LZW. Da LZW von UniSys patentiert war, gab es einen Patentstreit. Wegen der Lizenzforderungen wurde das Format PNG 1994 entwickelt
+    \item GIF war eines von zwei der ersten Bildformate im WWW
+    \item Annimationsfähigkeiten in Version GIF89a
+    \item Interlacing zur schnelleren Darstellung im Web
+  \end{itemize}
+  \textbf{Format}
+  \begin{itemize}
+    \item Header mit Fixer Größe (Version, Logischer Darstellungsbereich)
+    \item Globale Farbpalette
+    \item $n$ Segmente welche jeweils den logischen Darstellungsbereich füllen und die lokale Farbpalette spezifizieren
+    \item Jedes Segment definiert ein Bild ($\Rightarrow$ Animation)
+    \item Definition einer Hintergrundfarbe (1-Bit Alphakanal) in
+      globaler Farbtabelle möglich (keine echte Transparenz/Halo Effekt)
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Rasterformate - GIF }
+  \bspar1
+  Interlacing in GIF
+  \begin{itemize}
+    \item Ziel: Kürzere empfundene Ladezeit für Betrachter
+    \item Ablauf: Das Bild wird schrittweise in Zeilen aufgebaut
+    \begin{itemize}
+      \item 1. Durchlauf: Jede 8. Zeile beginnend mit Zeile 0
+      \item 2. Durchlauf: Jede 8. Zeile beginnend in Zeile 4
+      \item 3. Durchlauf: Jede 4. Zeile beginnend in Zeile 2
+      \item 4. Durchlauf: jede 2. Zeile beginnend in Zeile 1
+    \end{itemize}
+  \end{itemize}
+  \bspar3
+
+  \bsfigurecaption[0.5]{interlacing}{\tiny Bildquelle \url{http://www.schaik.com/png/adam7.html}}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Rasterformate - PNG }
+  \bspar1
+  \textbf{Geschichte}
+  \begin{itemize}
+    \item Entwickelt aufgrund GIF Lizenzforderungen für GIF Format (1994)
+    \item Erste Version 1996, Standardisierung März 2004: ISO/IEC 15948:2004
+  \end{itemize}
+  \bspar1
+  \textbf{Eigenschaften}
+  \bspar1
+  \begin{itemize}
+    \item Verlustfreie Kompression (DEFLATE/zlib)
+    \item ``Full Color'' oder Paletten-basiert (24-Bit RGB oder 32-bit RGBA, Graubilder mit od. ohne Alphakanal)
+    \item Fokus Bilddaten im Internet, keine Unterstützung nicht RGB basierter Farbräume wie CMYK
+    \item Verbessertes Interlacing (7-pass vertikal und horizontales Interlacing. Adam7-algorithm)\\
+    {\tiny  Vergleich PNG (Adam7) zu GIF Interlacing: \url{http://www.schaik.com/png/adam7.html}}
+    \item Animationen nur mit MNG (Multiple Image Network Graphics)
+  \end{itemize}
+  \bspar1
+  \textbf{Mime Typ:}\texttt{image/png}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Rasterformate - PNG }
+  \bspar1
+  \textbf{Format}
+  \begin{itemize}
+    \item Header mit fixer Größe
+    \item Danach eine Menge von Chunks (Länge, Typ des Chunks als 4-byte ASCII, Data und CRC Code)
+    \bspar1
+    \bsfigurecaption[0.6]{png-chunk}{}
+    \begin{itemize}
+      \item Critical Chunks:
+      \begin{itemize}
+        \small
+        \item Metadaten (Typ=IHDR)
+        \item Paletten (Typ=PLTE)
+        \item Bilddaten (Typ=Data)
+        \item Bildende (Typ=IEND)
+      \end{itemize}
+      \item Ancillary Chunks:
+      \begin{itemize}
+        \small
+        \item ICC Profile (iCCP)
+        \item Gamma (gAMA)
+        \item Text/Metadaten (tEXT)
+        \item $\ldots$
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Rasterformate - PNG }
+  \bspar1
+  \textbf{Alpha Kanal}
+  \begin{itemize}
+    \item Alpha Werte mit jedem Pixel gespeichert
+    \item 4 Bytes pro Pixel: ``RGBA''-Farbmodell ermöglicht elegante Schatten und Übergänge
+    \item Vermeidet Wechselwirkung zwischen Anti-Aliasing und Transparenzfarbe, wie dies in GIFs bei einem 1-Bit Alphakanal auftreten kann:\\
+    \begin{itemize}
+      \item Anit-Aliasing interpoliert Pixel zur Auflösung von ``Unstetigkeiten''
+      \item Farbwert entspricht nicht der Hintergrundfarbe
+      \item[$\Rightarrow$] Randeffekte (Halo Effekt)
+    \end{itemize}
+  \end{itemize}
+  \bsfigurecaption{png-halo}{\tiny \url{http://www.lunaloca.com/tutorials/antialiasing/}}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Rasterformate - PNG - Kompression}
+  \bspar1
+  2 Schritte verlustfreier Kompressionsprozess
+  \begin{itemize}
+    \item Vorfilter (prediction): \\
+    Überführung der Daten in einen besser komprimierbaren Binär-Stream
+    \item compression: \\
+    \begin{itemize}
+      \item DEFLATE (zlib library unter Linux/Mac)
+      \item Patentfreier, verlustfreier Kompressionsalgorithmus
+      \begin{itemize}
+        \item Basiert auf LZ77 Algorithmus (Vorgänger von LZW) kombiniert mit Huffman Kodierung
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Rasterformate - PNG}
+  \bspar1\small
+  \textbf{Filter}
+  \begin{itemize}
+    \item Komprimiere nicht die Rohwerte, sondern die Differenz sequentiell aufeinander folgender Pixelwerte, z.B. $<1,2,3,4,5,6,7,9,11>\Rightarrow<1,1,1,1,1,1,1,2,2>$
+  \end{itemize}
+  \bspar1
+  \begin{minipage}{0.45\linewidth}
+    \begin{itemize}
+      \item Heuristische Selektion aus unterschiedlichen Filter je nach Bildzeile:
+      \begin{itemize}
+        \item Aktuelles Pixel ist X
+        \item \textbf{Sub} -Differenz zu  Pixel A
+        \item \textbf{Up} - Differenz zu Pixel B
+        \item \textbf{Average} - Differenz zu $\frac{B+A}{2}$
+        \item \textbf{Path} - Differenz zu $Px=A+B-C$
+      \end{itemize}
+    \end{itemize}
+  \end{minipage}
+  \begin{minipage}{0.45\linewidth}
+    \bspar 1
+
+    \bsfigurecaption[0.7]{png-filter}{\tiny Bildquelle Wikipedia}
+  \end{minipage}
+  \bspar3
+  Beispiel: PNG Bild mit 256 Farben (oben) komprimiert auf 251 Byte durch Vorfilterung (unten)
+  \bsfigurecaption{png-vorfilter-beispiel}{\tiny Bildquelle Wikipedia}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Rasterformate - JPEG/JFIF}
+  \bspar1\small
+  \textbf{Geschichte}
+  \begin{itemize}
+    \item Entwickelt von der Joint Photographic Experts Group 1992
+    \item ISO/IE 10918-1 (CCITT) (1994)
+    \item Standard für Digitalbilder
+  \end{itemize}
+  \bspar1
+  \textbf{Eigenschaften}
+  \bspar1
+  \begin{itemize}
+    \item JPEG - Beschreibt die Kompressions CODECS (Codierung/Decodierung. Details später)
+    \item Kombination verlustfreier und verlustbehafteter Kompression bis zu 10:1 ohne sehbaren Verlust
+    \item JPEG File Interchange Format (JFIF) beschreibt das Fileformat (Weitere Varianten: SPIFF, JNG)
+    \item Maximale Auflösung 65535x65365
+    \item Farbraum YCbCr
+    \item Format: Header + Segmente (äquivalent zu Tags in TIFFs)
+  \end{itemize}
+  \bspar1
+  \textbf{Mime Typ:}\texttt{image/jpeg}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Bildmetadaten - EXIF (Exchangeable Image File Format)}
+  \bspar1
+  Dateiformat zur Speicherung von Metadaten über digitale Bilder
+  \begin{itemize}
+    \item Standardisiert durch Japan Electronic and Information Technology Industries Association
+    \item EXIF Daten werden direkt in JPEG oder TIFF im Header verwendet
+    \item Nahezu all Digitalkameras unterstützen das Format
+  \end{itemize}
+  \bspar1
+
+  \begin{minipage}{0.55\linewidth}
+    \textbf{Metdaten}
+    \begin{itemize}
+      \item Datum/Uhrzeit
+      \item Orientierung (Hoch/Quer), Brennweite, Belichtungszeit, Blendeinstellung
+      \item Belichtungsprogramm, ISO-Wert, GPS Koordinaten, Thumbnail
+      \item IPTC-Daten (Kommentar, Name)
+    \end{itemize}
+  \end{minipage}
+  \begin{minipage}{0.40\linewidth}
+    \vspace{1cm}
+    \bsfigurecaption[0.55]{exif}{\tiny Quelle Wikipedia}
+  \end{minipage}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Anwendungsbereiche}
+  \bspar1
+  {Web-Grafik} (klein, geringe Farbanzahl) $\rightarrow$ GIF od. PNG
+  \bspar2
+  {Scanner/Bilderzeugung}  $\rightarrow$ TIFF
+  \bspar2
+  {Austausch zwischen Geräten}  $\rightarrow$ TIFF
+  \bspar2
+  {Hochauflösende Bilder mit vielen Farben} $\rightarrow$
+  \begin{itemize}
+    \item JPEG - bessere Kompression
+    \item PNG - bessere Qualität, gute Kompression bei grossen einheitlichen Farbflächen
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+  \colortext{Anwendungsbereiche - Vergleich Kompression}
+  \bspar1
+  \bsfigurecaption[0.6]{jpeg-n-png-123-photo}{\tiny \url{http://rightyaleft.com/others/png-or-jpeg-or-gif-which-is-best-way-to-choose-your-image-file/}}
+  \bspar1
+
+  \bsfigurecaption[0.4]{jpeg-n-png-1}{\tiny \url{http://rightyaleft.com/others/png-or-jpeg-or-gif-which-is-best-way-to-choose-your-image-file/}}
+  \bspar1
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    \begin{bsslide}[\textbufferB]
+%     \colortext{Anwendungsbereiche - JavaScript und Verwendung im Web}
+%     \bspar1
+%     \todo{HTML und Java Script tags einfügen}
+%   \bspar1
+%   \end{bsslide}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[Zusammenfassung]
+  \colortext{Digitalisierung und Kodierung}
+  \bspar1
+  \textbf{Digitalisierung}
+  \begin{itemize}
+    \item Rastergrafik, Vektorgrafik, Meta-Files
+    \item Pixel, Bildgröße, Auflösung, Skalierung, Farbtiefe, Farbkanäle, Paletten
+    \item Anti-Aliasing, Dithering
+  \end{itemize}
+  \textbf{Kodierung}
+  \begin{itemize}
+    \item Generelle Formate: TIFF, BMP
+    \item  Web-optimierte Formate: GIF, PNG, JPEG
+    \item Metadaten: EXIF
+    \item Kompression: verlustbehaftet oder verlustfrei
+  \end{itemize}
+\end{bsslide}
+
+\begin{bsslide}[Zusammenfassung]
+\colortext[Bibliographie]
+\bspar4
+\begin{itemize}
+\item \textbf{Malaka, Butz, Hussmann (2009)} -
+  Medieninformatik: Eine Einführung (Pearson Studium - IT)
+\item \textbf{Butz (2011)}-  Prof. Andreas Butz, Vorlesung Digitalen Medien - LMU München, 2011
+\end{itemize}
+\end{bsslide}
+

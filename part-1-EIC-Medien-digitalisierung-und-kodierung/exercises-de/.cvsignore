@@ -1,0 +1,7 @@
+.project
+*.aux
+*.dvi
+*.log
+*.out
+*.pdf
+*.ps

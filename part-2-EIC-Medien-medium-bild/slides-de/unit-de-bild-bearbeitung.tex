@@ -1,0 +1,760 @@
+%%% DATE.  November, 23st, 2013
+
+\clearpage
+\bsauthor{GRANITZER}
+\bsyear{2013}
+
+%%% Unit statistics.
+%%%
+%%% corollary:   0
+%%% definition:  0
+%%% lemma:       0
+%%% page:        0
+%%% proof:       0
+%%% theorem:     0
+%%% theorem:     0
+%%%%%%%%%%%%%%% METADATA %%%%%%%%%%%%%%%%
+\bscollection{Medientechnik}
+\bspartname{Medium Bild}
+\setcounter{bspart}{4}
+\bsunitname{Bildbearbeitung}
+\setcounter{bsunit}{4}
+
+%%%%%%%%%%%%%%% TODO %%%%%%%%%%%%%%%%
+% Show that affine transformations are associative. At least in an
+% example: Math therefore: http://math.stackexchange.com/questions/104502/show-that-affine-transformations-are-associative
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 2]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[Bildbearbeitung]
+  \colortext{Lernziel}
+  \bspar1
+  \textbf{Unterthemen}
+  \begin{itemize}
+    \item Art und Anwendung von Bildmanipulationen
+    \item Punktoperationen
+    \item Filter
+    \item Geometrische Transformationen
+  \end{itemize}
+  \bspar3
+%   \textbf{Fragestellungen}
+%   \begin{itemize}
+%     \item xx
+%   \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Art und Anwendung von Bildmanipulationen}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Bildbearbeitung}
+    \bspar1
+    \textbf{Bildbearbeitung} beschäftigt sich mit der Manipulation von Bildern und baut auf Bildverarbeitung (Kodierung/Kompression)
+    Anwendungsbereiche:
+    \begin{itemize}
+      \item Skalierung für die richtige Anzeigengröße
+      \item Aufbereitung für Druck, Grafik, Web
+      \item Drehung, Entzerrung, Filterung von Bildern (Rauschen, Rote Augen)
+      \item Schnitt, Montage, Manipulation
+    \end{itemize}
+    \bspar1
+    \textbf{Bilderkennung} beschäftigt sich mit dem Erkennen von Mustern in Bildern (nicht Gegenstand hier). Es werden ähnliche Bildmanipulationen verwendet, meist in Kombination mit Data Mining/Maschinellen Lernverfahren
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Bildbearbeitung}
+    \bspar1
+    Beispiele
+    \bspar1
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.7]{bild-op-fotomontage}{\tiny Fotomontage - Bildquelle Wikipedia}
+      \bspar1
+      \bsfigurecaption{bild-op-farb-beispiel}{\tiny  Farbanpassung -  Bildquelle Wikipedia}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.7]{bild-op-montage-2}{\tiny  Fotomontage -  Bildquelle Wikipedia}
+      \bspar1
+      \bsfigurecaption{bild-op-orientierung}{\tiny Rotation - Bildquelle Wikipedia}
+    \end{minipage}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Arten von Bildoperationen}
+    \bsfigurecaption{bild-op-prozess}{}
+    \bspar1
+    \begin{itemize}
+      \item Bildpunktoperationen - Änderung der Werte von Einzelpixel ohne Berücksichtigung von Nachbarschaftspixeln
+      \begin{itemize}
+        \item Auf ein Bild
+        \item Überlagerung mehrerer Bilder
+      \end{itemize}
+      \item Nachbarschaftsoperationen/Filter
+      \item Geometrische Operationen - (Verschiebung, Streckung, Zerrung etc.)
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Punktoperationen}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Überblick}
+    \bspar1
+    \bsfigurecaption[0.7]{bild-op-punkt}{}
+    \begin{center}
+      \[
+      B^{Neu}(x,y) = fkt(B(x,y))
+      \]
+    \end{center}
+    \begin{minipage}{0.45\linewidth}
+      \small
+      Der Farbwert eines Bildpunktes im neuen Bild ergibt sich genau aus dem Farbwert des gleichen Bildpunktes im Ausgangsbild
+      \bspar1
+      \begin{itemize}
+        \item Helligkeits- und Kontrastanpassungen
+        \item Farbkorrekturen, Tonwertkorrekturen
+        \item Bildüberlagerungen
+      \end{itemize}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.4]{bild-op-histogramm-anpassung}{}
+    \end{minipage}
+  \end{bsslide}
+  
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Negativ Erzeugung}
+    \bspar1
+    \bsfigurecaption{bild-op-negativ}{}
+    \begin{center}
+      \[
+      B^{Neu}(x,y) = 255 - B(x,y)
+      \]
+    \end{center}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Farbhistogramm}
+    \bspar1
+    \begin{definition}[Farbhistogramm]
+      Ein \textbf{Farbhistogramm $h_c(i)$} stellt die Anzahl der Pixel für einen spezifischen Farbwert $i$ in jedem Kanal $c$ eines Farbraumes dar
+    \end{definition}
+    \begin{itemize}
+      \item Bei Grauwertbildern spricht man auch vom Intensitätshistogramm
+      \item Erkennen von Grundeigenschaften von Bildern (e.g. Kontrastarme Bilder sind meist im Luminanz/Grauwertbereich limitiert)
+      \item Grundlagen der meisten Punktoperationen (e.g. Farbanpassung, Aufhellung)
+      \item Anwendbar auf jeden Farbkanal od. Grauwertkanal
+      \item Kumulativen Histogramms $H_c(i)=\sum_i h_c(i)$ = Summation der H\"aufigkeiten der Grauwerte $i$
+    \end{itemize}
+    \bspar1
+    
+  \end{bsslide}
+   
+  \begin{bsslide}[\textbufferB]
+    \colortext{Farbhistogram}
+    \bspar1\small
+      Beispiel Histogramm pro Farbkanal {\tiny Im Beispiel hier: R, G, B, RGB Composit und Luminanz}
+      \bsfigurecaption[0.7]{bild-op-color-histogram}{\tiny \url{http://blog.epicedits.com/2007/04/14/working-with-image-histograms/}}
+    % \todo{Übung: Charakterisieren von Bildern anhand der Histogramme - Nutzung von GIMP}
+    \bspar1
+    Beispiel Histogramm (links) und entsprechendes kumulatives Histogramm (rechts)
+    \bsfigurecaption[0.5]{bild-op-histogram-kumulativ}{\tiny Bildquelle \bscite{Steinbrecher 1993}}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kontrastanreicherung durch Spreizung}
+    \bspar1
+    \bsfigurecaption[0.65]{bild-op-historgram-ausgleich.png}{\tiny Bildquelle \bscite{Malaka et. al. 2009}}
+    \bspar1
+    \small
+    \[
+    B^{Neu}(x,y) = \frac{B(x,y)-h_{min}}{h_{max}-h_{min}}*w_{max}
+    \]
+    \begin{itemize}
+      \item $h_{min}$ minimaler Grauwert/Farbwert im Histogramm
+      \item $h_{max}$ maximaler Grauwert/Farbwert im Histogramm
+      \item $w_{max}$ maximal möglicher Grau-/Farbwert
+    \end{itemize}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Lineare Histogramm Anpassung}
+    \bspar1
+    \[
+    B^{Neu}(x,y) = k*B(x,y)+b
+    \]
+    \begin{itemize}
+      \item $k$ Steigung, $b$ Verschiebung
+    \end{itemize}
+    \bsfigurecaption[0.5]{bild-op-lineare-aufhellung}{}
+  \end{bsslide}
+  
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Lineare Histogramm Anpassung}
+    \bspar1
+    \begin{itemize}
+      \item Beispiel: $k=1$, $b>0$ Grauwertverschiebung (Farbwertverschiebung)
+    \end{itemize}
+    \bsfigurecaption{bild-op-grauwertverschiebung}{\tiny \bscite{Steinbrecher 1993}}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Histogramm Einebnung/Histogrammausgleich/Histogrammäqualisation}
+    \bspar1\small
+    \textbf{Ziel}: möglichst gleichmäßige Verteilung der Intensitätsstufen
+    \begin{itemize}
+      \item Betrachtung des kumulativen Grauwerthistogramms $H(i)$ (entspricht der Anzahl der Pixel mit Grauwert < i)
+      \item Berechnung einer Lookup-Tabelle $G'(i)$ für Grau-/Farbwerte $i$:
+      \[
+      G'(i) = round(\frac{G_{max}}{T}\cdot H(i))
+      \]
+      \item $G_{max}$ maximal möglicher Grauwert, $T$ Anzahl der Pixel
+      \item $G'(i)$ entspricht dem neuen Grauwert für vorigen Grauwert $i$
+      \item[$\rightarrow$] Entspricht einer linearen Interpolation des kumulativen Histogramms
+    \end{itemize}
+    \bsfigurecaption[0.4]{bild-op-schema-histogramm-einebnung}{Schematische Darstellung Histogrammeinebnung (Bildquelle Wikipedia)}
+  \end{bsslide}
+  
+%   \begin{bsslide}[\textbufferB]
+%     \colortext{}
+%     \bspar1
+%     Histogrammeinebnung als (ideale) Projektion auf ein lineares, kumulatives Grauwerthistogramm 
+%     \bspar1
+%    	\bsfigurecaption{histogram-einebnung-projektion}{}
+% Stimmt die Projektionsrichtung hier?
+%   \end{bsslide}
+
+\begin{bsslide}[\textbufferB]
+    \colortext{Histogramm Einebnung/Histogrammausgleich/Histogrammäqualisation}
+    \bspar1
+    \begin{minipage}[t]{0.45\linewidth}
+    \bsfigurecaption[0.45]{bild-op-einebnung-original-beispiel.png}{Dunkle Graustufenphotografie \footnote{\url{http://theiszm.wordpress.com/tag/histogram-manipulation/}}}
+  \end{minipage}
+  \begin{minipage}[t]{0.45\linewidth}
+    \bsfigurecaption[0.45]{bild-op-histogram-einebnung-ergebnis.png}{Histogramm-Einebnung \footnote{\url{http://theiszm.wordpress.com/tag/histogram-manipulation/}}}
+  \end{minipage}
+  \bspar1
+  \small Histogramm zu Bild jeweils rechts-oben, kumulatives Histogram jeweils rechts unten
+  \end{bsslide}
+%TODO: Beispiele und bessere erklärung der Formeln
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Filteroperationen}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Filter - Allgemein}
+    \bspar1
+    Filteroperationen berücksichtigen die Nachbarschaft eines zu transformierenden Bildpunkts
+    \bspar1
+    \begin{center}
+
+    \[
+    B^{neu}(x,y) = fkt(Nc(x,y))
+    \]
+    \end{center}
+    \bspar1
+    \begin{itemize}
+      \item $N_c$ definiert einen bestimmten Typ von Nachbarschaft
+      \item Anwendungen: Schärfung, Weichzeichnung, Entstörung, Kantenbestimmung
+    \end{itemize}
+    \bspar1
+    \bsfigurecaption{bild-op-filter.png}{}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Filter - Allgemein}
+    \bspar1
+    Filteroperationen berücksichtigen die Nachbarschaft eines zu transformierenden Bildpunkts:
+    \begin{itemize}
+      \item Vierer od. von Neumann Nachbarschaft $N_4(x,y)$
+      \bsfigure[scale=0.3]{bild-op-4er-np}
+      \bspar1
+      \item Achter Nachbarschaft $N_8(x,y)$
+      \bsfigure[scale=0.3]{bild-op-8er-np}
+      \bspar1
+      \item Nachbarschaft nach Metrik (z.B. Manhatten) $N_c=\{i,j: |x-i|+|y-j|\leq c\}$\\
+      \bsfigurecaption[0.3]{bild-op-manhatten-np}{}
+    \end{itemize}
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Filter - Allgemein} 
+    \bspar1
+    Bei jeder Nachbarschaft kommt es zum Randproblem
+    \bsfigurecaption[0.7]{bild-op-nachbarschaft-rand.png}{}
+    Lösungen
+    \begin{itemize}
+      \item Randpixel werden nicht betrachtet. D.h. aber das das Bild bei jeder Operation schrumpft
+      \begin{itemize}
+      \item Nachbarschaft wird verkleinert (d.h. Filter wird ungenauer)
+      \item Extrapolation - Extrapolationsfehler
+      \item Periodische Fortsetzung des Bildes - nicht bei allen Bildern eine gültige Annahme
+      \end{itemize}
+    \end{itemize} 
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Lineare Filter}
+    \bspar1
+    \textbf{Linearer Filter:} Jeder Pixelwert wird durch einen linear Kombination der Pixelwerte in seiner Nachbarschaft ermittelt
+    \begin{itemize}
+  \small
+  \item Die Nachbarschaft wird auch als \textbf{Kernelregion oder Kernel K} bezeichnet
+  \item Die Multiplikation des Originalbilds mit dem Kernel ist eine \textbf{Faltung} 
+\end{itemize}
+    \bsfigurecaption[0.4]{bild-op-kernel}{}
+    \[
+    B^{Neu}(x,y)=K*B(x,y)=\begin{pmatrix}
+    0 & a & 0\\
+    b & c & d \\
+    0 & e & 0
+    \end{pmatrix}
+    =\sum_{i=-M}^{M}\sum_{j=-N}^{N} K(i,j)*B(x-i,y-j)
+    \]
+  \end{bsslide}
+    
+  \begin{bsslide}[\textbufferB]
+    \colortext{Relieffilter}
+    \bspar1
+    \textbf{Relief}: $B^{neu}(x,y) = 2*B(x,y)-B(x,y-1)-B(x-1,y)+128$
+    \bspar1
+    Matrix-Schreibweise {\tiny ($3x3$ Nachbarschaft, $*$ punktweise
+      Multiplikation mit anschl. Summation $\Rightarrow$ Faltung )}:
+    \[
+    B^{neu}(x,y) = \begin{pmatrix}
+    0  & -1 & 0 \\
+    -1 & 2  & 0 \\
+    0  & 0  & 0 \\
+    \end{pmatrix}
+    * N_8(x,y)+128
+    \]
+    \bspar1
+    \hspace{0.5cm}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-image-passau-original}
+      {\tiny Original}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-image-passau-relief-equalize}
+      {\tiny Relief plus anschließenden Histogrammausgleich}
+    \end{minipage}
+  \end{bsslide}
+
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Glättungsfilter (Mittelwert)}
+  \bspar1
+    \[
+    B^{neu}(x,y) = \frac{1}{9}\begin{pmatrix}
+    1  & 1 & 1 \\
+    1 & 1  & 1 \\
+    1  & 1  & 1 \\
+    \end{pmatrix}
+    * N_8(x,y)
+    \] 
+    \bspar1
+    \hspace{0.5cm}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-image-passau-original}
+      {\tiny Original}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-passau-blurr-average}
+      {\tiny Mehrmaliges anwenden}
+    \end{minipage}
+\end{bsslide}
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Glättungsfilter (Gauß)}
+  \bspar1
+  Gauß-Kern zur Verbesserung von Glättungen
+    \[
+    B^{neu}(x,y) = \frac{1}{16}\begin{pmatrix}
+    1  & 2 & 1 \\
+    2 & 4  & 2 \\
+    1  & 2  & 1 \\
+    \end{pmatrix}
+    * N_8(x,y)
+    \] 
+    \bspar1
+    \hspace{0.5cm}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-image-passau-original}
+      {\tiny Original}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-image-passau-gauss.png}
+      {\tiny Anwendung mit 5x5 Umgebung}
+    \end{minipage}
+\end{bsslide}
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Glättungsfilter (Gauß)}
+  \bspar1
+ Gauß-Kern Eigenschaften:
+ \begin{itemize}
+  \item Rotationssymmetrisch
+  \item Nur ein Maximum und abfallend vom Zentrum, d.h. weniger starke Eckenverzerrung
+  \item Fourier Transformierte ist wieder eine Gauß-Kurve, d.h. die Grundlegenden Eigenschaften des Signals bleiben erhalten. 
+  \item Gauß-Filter entfernen hoch-frequente Störungen, behalten aber Kanteneigenschaften gut bei
+  \item Effiziente Implementierung für große Filter möglich
+\end{itemize}
+\end{bsslide}
+
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Scharfzeichner (Boost Filter)}
+  \bspar1
+  Boost-Filter
+    \[
+    B^{neu}(x,y) = \begin{pmatrix}
+    -1  & -1 & -1 \\
+    -1 & 9   & -1 \\
+    -1  & -1  & -1 \\
+    \end{pmatrix}
+    * N_8(x,y)
+    \] 
+    \bspar1
+    \hspace{0.5cm}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-image-passau-original}
+      {\tiny Original}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-image-passau-scharf.png}
+      {\tiny Anwendung mit 5x5 Umgebung}
+    \end{minipage}
+\end{bsslide}
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Kantendetektor (Laplace)}
+  \bspar1
+  Laplace Funktion (2. Ableitung zur Identifikation von Extremwerten):
+    \[
+    \Delta B(x,y) =\frac{\delta^2 f}{\delta x^2}+\frac{\delta^2 f}{\delta y^2} \Rightarrow B^{neu}(x,y) = \begin{pmatrix}
+    0  & -1 & 0 \\
+    -1 & 4  & -1 \\
+    0  & -1  & 0 \\
+    \end{pmatrix}
+    * N_8(x,y) + 128
+    \] 
+    \bspar1
+    \hspace{0.5cm}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-image-passau-original}
+      {\tiny Original}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-image-passau-laplace.png}
+      {\tiny Anwendung mit 5x5 Umgebung}
+    \end{minipage}
+\end{bsslide}
+
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Kantendetektoren (Laplace Filter)}
+  \bspar1
+  Unterschiedliche Filter bei Laplace. z.B. mit 45 Grad Geraden:
+   \[
+     \begin{pmatrix}
+    -1  & -1 & -1 \\
+    -1 & 8  & -1 \\
+    -1  & -1  & -1 \\
+    \end{pmatrix}
+    * N_8(x,y)
+    \] 
+  \bspar1
+  Weitere Kantendetektoren
+  \begin{itemize}
+    \item Sobel Filter - basierend auf erste Ableitung. Detektion von spezifischen Kantenrichtungen. Wird angewendet im Canny Algorithmus
+    \item Scharr Filter - rotationssymmetrische Variante des Sobel Filters
+    \item Prewitt - Sobel Operator aber ohne Gewichtung der Hauptrichtung
+    \item Roberts - Einfacher (und alter) Ansatz mit überkreuzten Pixel; schlecht für verrauschte Bilder 
+  \end{itemize}
+\end{bsslide}
+
+ 
+\begin{bsslide}[\textbufferB]
+  \colortext{Kombination Weichzeichnen und Kantendetektion}
+  \bspar1
+  \textbf{Problem:} Kantendetektoren erkennen hochfrequente Anteile\bspar1
+  Solche Anteile können auch durch Rauschen/Abtastfehler entstehen\bspar1
+  \begin{itemize}
+    \item [$\Rightarrow$] Vor Anwendung des Kantentdetektors sollte ein Weichzeichner verwendet werden 
+   \item Beispiel Laplacian of Gaussian (LoG)  
+  \end{itemize}
+   \hspace{0.5cm}
+    \begin{minipage}{0.45\linewidth}
+      \centering 
+      \includegraphics[width=\textwidth]{bild-op-image-passau-log}
+      {\tiny Laplace of Gaussian}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{bild-op-image-passau-laplace}
+      {\tiny Laplace Filter}
+    \end{minipage}
+\end{bsslide}
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Nicht-lineare Filter}
+  \bspar1
+  Lineare Operatoren besitzen in manchen Fällen Nachteile: So unterdrückt ein linearer Glättungsoperator zwar das Rauschen, aber er verursacht gleichzeitig Unschärfe bei den Kanten. Man benutzt daher auch nichtlineare Filter, von denen die Rangordnungsoperatoren einen wichtigen Typ darstellen.\bspar2
+  \textbf{Rangordnungsoperatoren}:  Rangordnungsoperatoren ordnen zunächst die Nachbarpixel eines Bildpunktes in einer aufsteigenden Folge und ermitteln einen neuen Grauwert aufgrund einer Position in der Reihe
+  \bspar2
+  Beispiele nicht-lineare Filter
+  \begin{itemize}
+    \item Medianfilter 
+    \item Morphologische Operationen (Erosion, Dilatation)
+     
+  \end{itemize}
+\end{bsslide}
+
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Median-Filter}
+  \bspar1
+  \textbf{Funktionsweise:} Sortieren der Pixel in der Nachbarschaft nach Grauwert und Selektion des Median-Pixels (50\% Pixel)\bspar1
+  \textbf{Beispiel:}
+  \[\begin{pmatrix}
+	128 & 234 & 12 \\
+	13 & 13 & 14\\
+	128 & 234 & 1\\
+	\end{pmatrix}
+	\Rightarrow \{1, 12, 13, 13, 14,128, 128, 234, 234\} \Rightarrow 14
+	\]
+	\bspar1
+	\textbf{Anwendung}: Reduktion von Störpixeln\bspar1
+	\bsfigurecaption[0.7]{bild-op-medianfilter-weise-pixel}{\tiny Bildquelle Wikipedia}
+\end{bsslide}
+
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Median-Filter}
+  \bspar1
+ Eliminierung weißer Schrift
+ \bspar2
+  \bsfigurecaption[0.7]{bild-op-median-weisse-schrift}{\tiny Bildquelle Wikipedia}
+\end{bsslide} 
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Median-Filter}
+  \bspar1
+  Median Filterung der Viking Sonde
+  \bspar1 
+  \bsfigurecaption{median-filter-mars-viking1}{\tiny Bildquelle Wikipedia}
+\end{bsslide} 
+ 
+\begin{bsslide}[\textbufferB]
+  \colortext{Erosion} 
+  \bspar1
+  Notation: $A\ominus B$ (Bild minus Maske, Aufbrechen geschlossener Bereiche)
+  \begin{itemize}
+    \item Ausgangspunkt: Binärbild (i.e. Pixel ist 0 oder 1)
+    \item Definition einer speziellen Strukturmaske (z.B. Kreis)
+    
+    \item Für jedes Pixel im Bild wird nun geprüft, ob das Strukturelement vollständig in den Pixel passt (d.h. alle Pixel der Strukturmaske um den Pixel 1 sind)
+    \item Gilt dies für Pixel nicht, wird der Pixel aus dem Bild entfernt
+  \end{itemize} 
+  \bspar2
+  \bsfigurecaption{bild-op-erosion}{\tiny Bildquelle Wikipedia}
+  
+\end{bsslide}
+
+\begin{bsslide}[\textbufferB]
+  \colortext{Dilatation}
+  \bspar1
+  Notation: $A\oplus B$ (Bild plus Maske, Schließen offener Bereiche)
+  \begin{itemize} 
+    \item Ausgangspunkt: Binärbild (i.e. Pixel ist 0 oder 1)
+    \item Definition einer speziellen Strukturmaske (z.B. Kreis)
+    \item Für jedes Pixel mit Wert 1 im Bild, werden alle Pixel, welche von der Strukturmaske besetzt sind, auf 1 gesetzt
+  \end{itemize}
+  \bspar2
+  \bsfigurecaption[0.8]{bild-op-dilatation}{\tiny Bildquelle Wikipedia}
+\end{bsslide}
+
+\begin{bsslide}[\textbufferB]
+    \colortext{Beispiel Erosion und Dilatation}
+    \bspar4
+    \bsfigurecaption{bild-op-erosion-dilatation-beispiel}{}
+  \end{bsslide}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Geometrische Transformationen}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen}
+    \bspar1
+    Punkt- und Filteroperationen belassen Pixel noch auf ihren Platz\bspar2
+    \textbf{Geometrische Transformationen } verschieden die Pixelposition
+    \begin{itemize}
+      \item Verschiebung (Translation)
+      \item Streckung/Stauchung (Verkleinerung/Vergrößerung)
+      \item Drehung (Rotation)
+      \item Scherung (Parallelverschiebungen)
+    \end{itemize}
+    \textbf{Affine Transformation:}
+    \begin{itemize}
+      \item Beschränkte Objekte bleiben beschränkt.
+      \item Parallele Objekte bleiben parallel
+      \item Längen-, Flächen- und Volumenverhältnisse bleiben erhalten.
+    \end{itemize}
+  \end{bsslide}
+  
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen - Affine Transformationsmatrix}
+    \bspar1
+    \textbf{Skalierung:} Änderung der Größe eines Objektes
+    \bspar2
+    \bsfigurecaption[0.8]{geom-skalierung}{\tiny \url{http://www.computergrafik.informatiker-wissen.de/transformationen.html}}
+    \bspar1 
+    Sonderform Spiegelung: $sx=-1$ und $sy=1$
+  \end{bsslide}
+  
+  
+    \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen - Affine Transformationsmatrix}
+    \bspar1
+    \textbf{Rotation:} Drehung eines Objektes
+    \bspar2
+    \bsfigurecaption[0.8]{geom-rotation}{\tiny \url{http://www.computergrafik.informatiker-wissen.de/transformationen.html}}
+    \bspar1 
+  \end{bsslide}
+  
+      \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen - Affine Transformationsmatrix}
+    \bspar1
+    \textbf{Verschiebung:} Verschiebung jedes Punktes
+    \bspar2
+    \bsfigurecaption[0.8]{geom-translation}{\tiny \url{http://www.computergrafik.informatiker-wissen.de/transformationen.html}}
+    \bspar1
+  \end{bsslide}
+  
+  
+       \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen - Affine Transformationsmatrix}
+    \bspar1
+    \textbf{Scherung:} Prallelverschiebung einzelner Bildteile
+    \bspar2
+    \bsfigurecaption[0.8]{geom-scherung}{\tiny \url{http://www.computergrafik.informatiker-wissen.de/transformationen.html}}
+    \bspar1
+    Komplexe Transformation durch Kombination Skalierung, Rotation, Scherung, Translation 
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen - Affine Transformationsmatrix}
+    \bspar1
+    \textbf{Zusammengesetzte Transformationsmatrix} für alle Operationen
+    \bspar1
+    \bsfigurecaption[0.7]{geom-homogene-koodrinaten}{\tiny \url{http://www.computergrafik.informatiker-wissen.de/transformationen.html}}
+    \bspar1
+    Transformationsmatrizen sind assoziative, d.h. mehrere Transformationen können zu einer Transformation zusammen geführt werden!
+    \bspar1
+    \textbf{Homogene Koordinaten:} Vereinheitlichung von Punkt- und Vektorkoordinaten durch hinzufügen einer weiteren Dimension
+  \end{bsslide}
+  
+  
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen - Stauchung auf Rasterbildern}
+    \bspar1\small
+    Effekte von geometrischen Transformationen auf Pixelbilder:
+    \bspar1
+    \bsfigurecaption{geom-op-ueberblick.png}{\tiny Bildquelle \bscite{Malaka et. al. 2009}}
+    \bspar1
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen - Stauchung auf Rasterbildern}
+    \bspar1
+    \textbf{Problem bei Stauchung:} Nicht jedes Ausgangspixel kann genau einem Zielpixel zugeordnet werden
+    \bspar1
+    Lösung z.B. über Mittelwert-Bildung, wenn mehrere Pixel auf ein Pixel abgebildet werden sollen
+    \bspar2
+    \textbf{Problem:} Reduktion der Pixel durch z.B. Mittelwertbildung kann zu einer Unterabtastung führen ($\Rightarrow$ Morie-Effekt)
+    \bspar1
+    Verhindern des Morie-Effeks durch Weichzeichner vor Skalierung (=Tiefpassfilter)\bspar1
+  \end{bsslide}
+  
+  \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen - Stauchung auf Rasterbildern}
+    \bspar1
+    Beispiel: Morie Effekt durch Skalierung
+    \bsfigurecaption[0.9]{geom-op-bild-unterabtastung.png}{\tiny Bildquelle \bscite{Malaka et. al. 2009}} 
+    \bspar1
+  \end{bsslide}
+  
+    \begin{bsslide}[\textbufferB]
+    \colortext{Geometrische Transformationen - Streckung auf Rasterbildern}
+    \bspar1
+    \textbf{Problem-Streckung:} Ein Ausgangspixel wird mehreren Zielpixeln zugeordnet \bspar1
+    Es kommt zu Aliasing Effekten 
+    \bsfigurecaption{geom-op-alias-effekt}{\tiny Bildquelle \bscite{Malaka et. al. 2009}}
+    \bspar1
+    Lösung über Anwendung eines Weichzeichners (Tiefpassfilter) nach Streckung
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Zusammenfassung}
+  \begin{bsslide}[\textbufferB]
+    \colortext{Bildbearbeitung}
+    \bspar1
+    \begin{itemize}
+      \item Punktoperationen
+      \item Filteroperationen (Faltung)
+      \item Nicht-lineare Filter (Medien, Erosion, Dilatation)
+      \item Geometrische Transformationen
+    \end{itemize}
+    \bspar4
+    \centering
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[\textbufferB]
+\colortext{Bibliographie}
+\bspar4
+\begin{itemize}
+\item \textbf{Malaka et. al. 2009} Malaka, Butz, Hussmann (2009) - Medieninformatik: Eine Einführung (Pearson Studium - IT), Kapitel 2.3
+\item \textbf{Steinbrecher 1993} R. Steinbrecher - Bildverarbeitung in der Praxis, Kapitel 10, Oldenburg Verlag \url{http://www.rst-software.de/dbv/dbv_buch.html}
+\end{itemize}
+\end{bsslide}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "part-de-medium-bild"
+%%% End: 

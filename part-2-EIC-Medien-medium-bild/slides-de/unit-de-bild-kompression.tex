@@ -1,0 +1,109 @@
+%%% DATE. November, 23rd, 2013
+
+\clearpage
+\bsauthor{GRANITZER}
+\bsyear{2013}
+
+%%% Unit statistics.
+%%%
+%%% corollary:   0
+%%% definition:  0
+%%% lemma:       0
+%%% page:        0
+%%% proof:       0
+%%% theorem:     0
+%%% theorem:     0
+%%%%%%%%%%%%%%% METADATA %%%%%%%%%%%%%%%%
+\bsunitname{JPEG Kompression}
+\setcounter{bsunit}{3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 2]{Malak, Butz, Hußmann - Einführung Medieninformatik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{JPEG Kopmpression im \"Uberblick}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Verlustbehaftete Kompression}
+    \begin{itemize}
+      \item \textbf{Problem:} Theoretische und praktische Grenzen von verlustfreien Kompressionsverfahren
+      \item \textbf{Lösung:} Zur Erhöhung der Kompressionsraten muss Wissen über die Daten eingebracht werden
+      \item JPEG-Kompression ist ein mehrstufiges Verfahren, welches Wissen über visuelle Wahrnehmung nutzt
+      \begin{itemize}
+        \small
+        \item Die Wahrnehmung wertet nicht alle Informationen des Bildes gleich gut aus
+        \item Beispiel: Helligkeit vs. Farbigkeit
+        \item Beispiel: Feinabstufung von Verläufen
+        \item JPEG eignet sich daher am besten für Bilder realistischer Szenen (Photographie)
+        \item Weniger gut bei Linienzeichnungen, Icons etc.
+        \item Mehrmaliges editieren verschlechtert die Qualität
+      \end{itemize}
+      \item Interlaced Modus: JPEG Progressiv
+    \end{itemize}
+ 	Hier: Überblick über das Verfahren. Details werden in Master-Vorlesungen behandelt.
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{JPEG Kompression: Vergleich}
+    \bspar1
+    \bsfigurecaption[0.8]{jpeg-vergleich}{\tiny Bildquelle \url{http://www.mathematik.de/spudema/spudema_beitraege/beitraege/rooch/nkap04.html}}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{JPEG Kompression: Ablauf}
+    \bspar1
+   \bsfigurecaption{jpeg-overview}{}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \begin{bsslide}[\textbufferB]
+    \colortext{JPEG Kompression: Ablauf}
+    \bspar1
+    \textbf{Ablauf}
+    \begin{itemize}
+      \item[1.] Konvertierung von RGB nach $Y'C_BC_R$ (Luminanz + 2 Chroma Kanäle)
+      \item[2.] \textbf{Chroma Subsampling:} Reduktion der Chroma Kanäle (Farbe)
+      \item[3.] Split in 8x8 Pixel Blöcke und \textbf{Discrete Cosinus Transformation} auf jeden Kanal
+      \item[4.]  \textbf{Quantisierung} der Amplituden der Frequenzen (Hochfrequenz Bereiche ungenauer)
+      \item[5.]  \textbf{Entropie-Kodierung}: ``Zick-Zack'' Lauflängenkodierung und Huffman Kodierung
+    \end{itemize}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \begin{bsslide}[\textbufferB]
+    \colortext{JPEG Kompression: Effekte}
+    \bspar1
+    \small
+    \begin{center}
+      \begin{minipage}{0.45\linewidth}
+        High Quality,  83k, 2.6:1 Ratio
+          \bspar1
+        \bsfigurecaption[0.6]{jpg-hq-83k}{\tiny Bildquelle Wikipedia}
+        \bspar2
+        Medium-High Quality,  9k, 23:1 Ratio
+          \bspar1
+        \bsfigurecaption[0.6]{jpg-q-25-9k}{\tiny Bildquelle Wikipedia}
+      \end{minipage}
+      \begin{minipage}{0.45\linewidth}
+        Medium Quality,  15kk, 46:1 Ratio
+          \bspar1
+        \bsfigurecaption[0.6]{jpg-q-50-15k}{\tiny Bildquelle Wikipedia}
+          \bspar2
+        Low Quality,  4k, 144:1 Ration
+          \bspar1
+        \bsfigurecaption[0.6]{jpg-q-10-4k}{\tiny Bildquelle Wikipedia}
+      \end{minipage}
+    \end{center}
+  \end{bsslide}
+
+
+\begin{bsslide}[\textbufferB]
+\colortext{Bibliographie}
+\bspar4
+\begin{itemize}
+\item \textbf{Malaka et.al. 2009} Malaka, Butz, Hussmann (2009) - Medieninformatik: Eine Einführung (Pearson Studium - IT), Kapitel 2.3
+
+\item \textbf{Kerr} Chrominance Subsampling in Digital Images, \url{http://dougkerr.net/pumpkin/articles/Subsampling.pdf}
+
+\item \textbf{Poynton 2008} Charles Poynton, Chroma subsampling notation, 2008 \url{http://scanline.ca/ycbcr/Chroma_subsampling_notation.pdf}
+
+\end{itemize}
+
+\end{bsslide}

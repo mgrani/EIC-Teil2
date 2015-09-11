@@ -1,0 +1,742 @@
+%%% DATE.  November, 23st, 2013
+
+\clearpage
+\bsauthor{GRANITZER}
+\bsyear{2013}
+
+%%% Unit statistics.
+%%%
+%%% corollary:   0
+%%% definition:  0
+%%% lemma:       0
+%%% page:        0
+%%% proof:       0
+%%% theorem:     0
+%%% theorem:     0
+%%%%%%%%%%%%%%% METADATA %%%%%%%%%%%%%%%%
+\bsunitname{Farbwahrnehmung und Farbmodelle}
+\setcounter{bsunit}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SOURCE. \cf[Kapitel 3]{Malak, Butz, Hußmann - Einführung
+%%% Medieninformatik}
+%%% Vermischung Wahrnehmung mit Farbmodellen nicht
+%%% ideal. Z.B. Beispiel Chromatische Adaption passt nicht, da
+%%% Farbmodelle ja lediglich Farbwerte umrechnen, aber in dem Sinn
+%%% nichts mit Farbwahrnehmung zu tun haben.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[Farbwahrnehmung und Farbmodelle]
+  \colortext{Lernziel}
+  \bspar1
+  \textbf{Themen}
+  \begin{itemize}
+    \item Licht
+    \begin{itemize}
+      \item Welche physikalischen Größen repräsentieren Licht?
+    \end{itemize}
+    \item Farbwahrnehmung
+    \begin{itemize}
+      \item Wie nehmen wir Licht wahr?
+      \item Wie wirkt sich die Wahrnehmung auf die Farbgestaltung aus?
+    \end{itemize}
+    \item Farbmodelle
+    \begin{itemize}
+      \item Was sind Farben?
+      \item Wie kann man Farben charakterisieren?
+      \item Sind Farben abhängig vom Gerät und von der Person?
+      \item Wie spezifizieren wir Farben in digitalen Medien?
+    \end{itemize}
+  \end{itemize}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Licht}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Charakterisierung von Licht}
+    \bspar1
+    Licht als eine \textbf{elektromagnetische Welle} (oder als Teilchen)
+    \bspar1
+    \bsfigurecaption[0.5]{em-welle}{\tiny Quelle Wikipedia}
+    \bspar1
+    \small
+    \textbf{Eigenschaften}
+    \begin{itemize}
+      \item Lineare Ausbreitungsrichtung
+      \item Wellencharakter: Brechung, Beugung, Dispersion, Streuung
+      \item Teilchen (Photonen): Absorption, Emission
+      \item Polarisation (Ausbreitungsebene): linear, zirkular, elliptisch
+      \item Charakterisiert durch Wellenlänge $\lambda$, Frequenz $f$, Periodendauer $T$
+      \item $f=1/T$ [Hz]
+      \item $T=\lambda /c$ [s]
+      \item $f=c/\lambda$ [Hz]
+      \item $c=2,998 \cdot 10^8$ m/s
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Spektrum der elektromagnetischen Strahlung}
+    \bspar1
+    \bsfigurecaption[0.8]{em-spectrum}{\tiny Quelle Wikipedia}
+    \bspar1
+    \begin{itemize}
+      \item Reale Strahlung i. A. Überlappung verschiedener Frequenzen
+      \item Wie nehmen wir nun diese elektromagnetischen Strahlung wahr?
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Farbwahrnehmung}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% Siehe Wikipedia http://de.wikipedia.org/wiki/Farbwahrnehmung
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Wahrgenommene Frequenzbereiche}
+    \bspar1\small
+    \begin{itemize}
+      \item Stäbchen: Hell/Dunkelwahrnehmung (120 Millionen, skotopisches Sehen, Nachtsehen)
+      \item Zapfen: Farbwahrnehmung (7 Million, photopisches Sehen/Tagessehen)
+      \begin{itemize}
+        \item 3 Typen: Rot, Grün, Blau
+        \item Dunkeladaption: Änderung der Farbwahrnehmung bei Dunkelheit
+        \item Chromatische Adaption: Weißabgleich im Auge bei geänderter Farbtemperatur
+      \end{itemize}
+      \bsfigurecaption{wh-empfindlichkeit-zapfen}{\tiny Bildquelle
+        Wikipedia}
+    \item 3 Farbentheorie nach Young-Helmholtz
+    \end{itemize}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{bsslide}[\textbufferB]
+    \colortext{Wahrgenommene Frequenzbereiche}
+    \bspar1\small
+    \begin{itemize}
+      \item Wahrgenommene Farbe hat keine ein-eindeutige Abbildung zum Frequenzspektrum
+      \item Beispiel: Blaue und gr\"une  Rezeptorkurven ($R_{blue}$
+        bzw. $R_{green}$) und zwei unterschiedliche Signale. Die
+        Aktivierung beider Rezeptoren ist f\"ur beiden Signale $s_{1}$
+        und $s_{2}$ gleich gross.
+    \end{itemize}
+    \bspar2
+    \bsfigure{metamere}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Farbsignalverarbeitung im menschlichen Gehirn}
+    \bspar1\small
+    Neuronale Verarbeitung der Signale R,G, B.
+    \begin{itemize}
+      \item Summensignal Helligkeit (Gelb) $Y=R+G$
+      \item Differenzsignal Rot/Grün Unterscheidung $R-G$
+      \item Differenzsignal Blau/Gelb Unterscheidung $Y-B$
+      \item Y (Yellow) wird als Luminanzsignal bezeichnet und die
+        Paare $(R,G)$ und $(Y,B)$ als Gegenfarben
+       \item[$\Rightarrow$] Gegenfarbentheorie nach Hering
+    \end{itemize}
+    \bspar1
+    Konsequenzen
+    \begin{itemize}
+      \item Gelb-Anteil ist wesentlich für Helligkeitswahrnehmung
+      \item Blau-Anteil spielt keine Rolle bei Helligkeitswahrnehmung (kühle Farbe)
+      \item Farbkontraste Rot/Grün und Blau/Gelb besonders klar erkennbar
+    \end{itemize}
+    \bspar2
+    \bsfigurecaption{wh-differenz-signale}{}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Farbsignalverarbeitung im menschlichen Gehirn}
+    \bspar1
+    Schematischer Überblick
+    \bspar1
+    \bsfigure{farbwahrnehmung-schema}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Anzahl wahrnehmbarer Farben}
+    \bspar1
+    Unterscheidung zwischen
+    \begin{itemize}
+      \item 128 verschiedenen Farbt\"onen (hues)
+      \item 130 verschiedenen Farbsättigungen (Farbreinheit)
+      \item 16 (im gelben) - 26 (im Blauen) verschiedene Helligkeitswerte
+    \end{itemize}
+
+    \bspar2 ca. 380 000 verschiedene Farben\\
+    Sichere Unterscheidung gleichzeitig dargestellter Farben in Experimenten ca. bei 15 Farben
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\textbufferB}{Farbmodelle}
+\begin{bsslide}
+  \bspar1
+  \begin{center}
+ \vspace{0.4\textheight}
+    \large\textbufferB
+  \end{center}
+\end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% Ressources
+  %http://neuronresearch.net/vision/files/metameres.htm
+  % TODO:  Incorporate information from
+  % http://dpbestflow.org/color/color-space-and-color-profiles
+  % TODO: Incorporate information from
+  % http://www.poynton.com/PDFs/coloureq.pdf
+  % TODO http://compression.ru/download/articles/color_space/ch03.pdf
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Begriffsbestimmungen Farbe}
+    \bspar1
+    \textbf{Farbe} ist eine \textbf{individuelle} Wahrnehmung des Lichts durch das menschliche Auge
+    \begin{definition}[Farbe]
+      Farbe ist diejenige \textbf{Gesichtsempfindung} eines dem Auge des Menschen \textbf{strukturlos erscheinenden Teiles} des Gesichtsfeldes, durch die sich dieser Teil bei \textbf{einäugiger Beobachtung mit unbewegtem Auge} von einem gleichzeitig gesehenen, ebenfalls \textbf{strukturlosen angrenzenden Bezirk allein unterscheiden kann}. (Nach Din 5033)
+    \end{definition}
+    \bspar1
+    \begin{itemize}
+      \item Farbe entsteht durch Reizung der RGB Rezeptoren
+      \item \textbf{Farbreiz} - Licht emittiert von einer Lichtquelle
+        (unabhängig vom Betrachter)
+        \begin{itemize}\small
+        \item Schwarzk\"orperstrahlung; Spektrum einer Lichtquelle
+        \end{itemize}
+      \item \textbf{Farbvalenz} - Aufnahme des Farbreizes durch die
+        Augen
+        \begin{itemize}\small
+        \item Rezeptorkurven multipliziert mit Farbreiz
+        \end{itemize}
+      \item \textbf{Farbempfindung} - Aufnahme der Farbvalenz im
+        Gehirn
+        \begin{itemize}\small
+        \item Wahrnehmung; Neuronale Adaption
+        \end{itemize}
+    \end{itemize}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Subjektivit\"at der Farbwahrnehmung}
+    \bspar1
+    \begin{minipage}{0.55\linewidth}
+      \bsfigurecaption[0.8]{chromatische-adaption}{\tiny Bildquelle Wikipedia}
+    \end{minipage}
+    \begin{minipage}{0.40\linewidth}
+      Welche der Karten hat in beiden Bildern die gleiche Farbe?
+    \end{minipage}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Subjektivit\"at der Farbwahrnehmung}
+    \bspar1
+    \begin{minipage}{0.55\linewidth}
+      \bsfigurecaption[0.8]{chromatische-adaption}{\tiny Bildquelle Wikipedia}
+    \end{minipage}
+    \begin{minipage}{0.40\linewidth}
+      \begin{itemize}
+        \item Bilder mit unterschiedlicher Farbtemperatur (Annahme unterschiedlicher Lichtquellen)
+        \item Die zweite Karte von Links hat in beiden Bildern die gleiche Farbe
+        \item Die Wahrnehmung betrügt uns, wegen dem höheren Rotanteil
+          im unteren Bild. Das Auge führt automatisch eine
+          Farbanpassung durch (bezeichnet als \textbf{Chromatische Adaption}).
+      \end{itemize}
+    \end{minipage}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Motivation Farbmodelle}
+    \bspar1  \small
+    % http://colorusage.arc.nasa.gov/lum_and_chrom.php
+    Betrachtung des Zusammenhangs zwischen den physikalischen Kenngrößen des Lichtes (Spektrum und Stärke) und der Wahrnehmung.\\
+    \bspar1
+    Physikalische Eigenschaften
+    \begin{itemize}
+
+      \item \textbf{Luminanz} - Helligkeit der Farbe (Stärke des Signals) $cd/m^2$
+      \item \textbf{Chromatizität} - der aktuelle Farbwert der Farbe  (Frequenzspektrum)
+
+    \end{itemize}
+    \bspar1
+    Überführung in die menschliche Wahrnehmung:
+    \begin{itemize}
+      \small
+      \item Für Mensch sind \textbf{Luminanz plus 2 Chrominanzsignale}
+        ausreichend (für z.B. Bienen nicht)
+      \item Farbmischung durch Überlagerung der drei Grundfarben (Dreifarbentheorie/Tristimulustheorie nach Helmholtz und Young).
+      \item Andere Parameter möglich: Farbton (Hue), Helligkeit (Brightness), Sättigung (Saturation)
+    \end{itemize}
+    \bspar1
+    Mehrdeutigkeit der Wahrnehmung:
+    \begin{itemize}
+      \small
+      \item Wahrenommene Luminanz eines Teilbildes ist abhängig von Luminanz UND
+        Chromatizit\"t des gesamten Bildes!
+      \item Metamere - Farbreize unterschiedlicher Spektralverteilung aber mit gleicher wahrgenommener Farbe
+    \end{itemize}
+    $\Rightarrow$ \textbf{Übersetzung durch Farbmodelle notwendig}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Farbmodelle}
+    \bspar1
+    \begin{definition}[Farbmodell, Farbraum]
+      Ein Farbmodell ist \textbf{ein mathematisches Modell}, im
+      Allgemeinen basierend auf 3 Parametern, zur Beschreibung des
+      durch den Menschen wahrgenommen Farbreizes. Die konkrete
+      Instanzierung eines Farbmodells nennt man \textbf{Farbraum}. Die
+      technische, numerische Realisierung nennt man \textbf{Farbprofil}.
+    \end{definition}
+    \bspar1
+    \textbf{Eigenschaften}
+    \begin{itemize}
+      \item Abbildung von verschiedenen Ger\"ateeigenschaften:
+        \begin{itemize}
+        \item Wie repr\"asentiert sich die Farbe ``Rot'' am LCD
+          Bildschirm, am R\"ohrenbildschirm?
+        \item Das Auge als Ger\"at: Welchen Farbreiz nehmen wir als ``Rot'' wahr?
+        \end{itemize}
+      \item  Keine Behandlung wahrnehmungsspezifischer Eigenschaften
+        wie chromatischer Adaption.
+    \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Kategorisierung von Farbmodellen}
+    \bspar1
+    \textbf{3 Klassen von Farbmodellen:}
+    \bspar1
+    \begin{itemize}
+      \item \textbf{Allgemeine Farbmodelle:} CIE-Farbraum, CIE-L*a*b
+        (kurz Lab)\\
+      Vollständige Abbildung aller wahrnehmbaren Farben; Referenzfarbraum für Transformationen
+      \item \textbf{Präsentationsmedium bezogene Farbmodelle}: RGB, CMY, CMYK, YUV, YIQ\\
+      Abbildung der durchs Medium abbildbaren Farben und entspr. Medieneigenschaften
+      \item \textbf{Physiologisch orientierte Farbmodelle}: HLS, HSV\\
+      Abbildung der Wahrnehmungseigenschaften von Farben
+    \end{itemize}
+    Standardisierungsgremium: CIE (Commision on Illumination)\\
+    \small
+    Applet für Experimente \url{http://dcssrv1.oit.uci.edu/~wiedeman/cspace/}
+  \end{bsslide}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Allgemeine Farbmodelle - CIE-Normvalenzsystem (CIE-xyY-Modell)}
+    \bspar1
+    \begin{minipage}{0.55\linewidth}
+      \bsfigurecaption[0.55]{cie-normtafel.png}{CIE Normtafel, Bildquelle Wikipedia}
+    \end{minipage}
+    \begin{minipage}{0.4\linewidth}
+      \small
+      \begin{itemize}
+        \item Allgemeines Farbmodell: experimentell entwickelter Zusammenhang zwischen Farbreiz und Farbwahrnemung
+        \item Standardisiert durch CIE (Commision on Illumination)
+        \item Hufeisenform der wahrnehmbaren Farben
+        \item umgrenzt durch Spektralfarblinien und Purpurlinie
+        \item \textbf{Weißpunkt} $(1/3,1/3,1/3)$
+        \item \textbf{Black-Body-Kurve}: Kurve eines Schwarzen Strahlers
+        \item \textbf{Farbton}: W-P gerade gleicher Farbtöne bzw. W-Q als Komplementärfarbe
+        \item \textbf{Sättigung}: Abstand Weißpunkt-Farbort (W-P = 100\%)
+        \item \textbf{Gamut}: Farbunterraum eines Geräts repräsentiert als Dreieck von X,Y,Z Werten des Gerätes
+      \end{itemize}
+    \end{minipage}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Allgemeine Farbmodelle - L*a*b*-Farbraum (DIN EN ISO 11664-4)}
+    \bspar1
+    Dreidimensionales Farbmodell der CIE entwickelt 1976
+    \begin{itemize}
+      \item Luminanz plus zwei Chrominanz-Werte (L= Luminanz, a=Grün/Rot, b=Blau/Gelb)
+      \item 3D Darstellung: Gleiche Abstände entsprechen empfindungsgemäß gleichen Farbabständen (nichtlineare Darstellung)
+      \item Keine einfache Umrechnung zu RGB Farbräumen
+    \end{itemize}
+    \begin{minipage}{0.65\linewidth}
+      \bsfigurecaption{cie-lab-color-space.jpg}{\tiny
+        \url{http://www.colorcodehex.com/color-model.html}}
+    \end{minipage}
+    \begin{minipage}{0.30\linewidth}
+      \begin{itemize}
+     \small
+      \item Verwendet z.B. intern in Adobe Produkten (z.B. Photoshop) zur
+        Umrechnung von Farbr\"aumen
+      \end{itemize}
+    \end{minipage}
+
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Präsentationsmedium-spezifische Farbmodelle}
+    \bspar1
+    Betrachtung der Eigenschaften von Präsentationsmedien und der mit dem Medium verbundenen Farbwahrnehmung (e.g. Drucker, Bildschirm)
+    \begin{itemize}
+      \item Betrachten im Allgemeinen nur einen Ausschnitt allgemeiner Farbmodelle (\textbf{Gamut})
+      \item Umrechnung zwischen Präsentationsmedium-spezifischen Farbmodellen i.a. nicht verlustfrei. Die Verwendung von allgemeinen Farbmodellen ist notwendig
+      \item Geräte spezifizieren entsprechende \textbf{Farbprofile
+          (International Color Consortium - ICC)}
+        \begin{itemize}
+        \item ICC Profile definieren eine Abbildung zwischen
+          Ger\"ate-spezifischen Farben v. Ein/Ausgabeger\"aten und den
+          CIE LAB oder CIE xyY Farbraum.
+        \end{itemize}
+      \item Einbettung in Bilddaten möglich (z.B. als EXIF Metadaten -
+        siehe Digitalisierung)
+    \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Präsentationsmedium-spezifische Farbmodelle - RGB}
+    \bspar1
+    RGB Farbmodell - Additives Farbmodell
+    \bspar1
+    \begin{minipage}{0.30\linewidth}
+      \bsfigurecaption[0.9]{rbg-gamut-xyz}{}
+    \end{minipage}
+    \begin{minipage}{0.30\linewidth}
+      \bsfigurecaption[0.9]{rgb-farbraum-2d}{}
+    \end{minipage}
+    \begin{minipage}{0.30\linewidth}
+      \bsfigurecaption[0.9]{rgb-farbraum-3d}{\tiny Quelle Butz}
+    \end{minipage}
+    \begin{itemize}
+      \small
+      \item Meist verwendetes Modell für aktive Lichterzeugende Ausgabemedien
+      \item Spektrale Intensität der Komponenten werden addiert
+      \item Gamut als Dreieck definiert die erzeugbaren Farben, welche
+        (i) von den Prim\"arquellen abh\"angen und (ii) i.a. nicht
+        alle wahrnehmbaren Farben abdecken.
+    \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Präsentationsmedium-spezifische Farbmodelle - RGB}
+    \bspar1        \small
+    Beispiele v. RGB Farbr\"aumen und Farbprofilen:
+    \bspar1
+    \begin{minipage}{0.40\linewidth}
+      \begin{itemize}
+
+      \item \textbf{sRGB:} Standardard Format definiert v. HP und
+        Microsoft 1996. \\Kleiner Farbraum, der oft den kleinsten
+        gemeinsamen Nenner zwischen Ger\"aten
+        darstellt. Standardeinstellung bei den meisten Photo
+      \item \textbf{Adobe RGB:} Umfangreicher als sRGB. Bilder
+        erscheinen dunkler wenn keine Umrechnung in sRGB erfolgt.
+      \item \textbf{Adobe wide RGB:} Umfangreicher als Adobe RGB mit
+        puren Spektralfarben als Prim\"arfarben.
+      \item \textbf{RGBA:} RGB mit Alpha Kanal. Kein eigentliches Farbmodell
+      \item \textbf{UHDTV:} RGB Farbraum f. Ultra High Definition TV.
+      \end{itemize}
+    \end{minipage}
+    \begin{minipage}{0.55\linewidth}
+      \bsfigurecaption[0.7]{Adobe-RGB-vs-sRGB-gamut-diagram}{Adobe RGB
+        Gamut vs. sRGB Gamut.\footnote{\tiny\url{http://photo.net/learn/digital-photography-workflow/advanced-photoshop-tutorials/using-lab-color-adjustments/}}}
+    \end{minipage}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Präsentationsmedium-spezifische Farbmodelle - CMY(K)}
+    \bspar1
+    CMY(K) Farbmodell - Subraktives Farbmodell
+    \bspar1
+    \begin{minipage}{0.40\linewidth}
+      \bsfigurecaption[0.9]{cmy-farbraum-2d}{}
+    \end{minipage}
+    \begin{minipage}{0.40\linewidth}
+      \bsfigurecaption[0.9]{cmy-farbraum-3d}{\tiny Quelle Butz}
+    \end{minipage}
+    \begin{itemize}
+      \small
+      \item Meist verwendetes Modell zur Ausgabe auf reflektierenden Ausgabemedien (z.B. Drucker)
+      \item Einfallendes Licht wird gefiltert (e.g. Magenta filtert Grün)
+      \item Für Tintendrucker oft 4.Farbe K = blacK (aus rein praktischen Gründen)
+    \end{itemize}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Präsentationsmedium-spezifische Farbmodelle - CMY(K)/RGB}
+    \bspar1
+    \small
+    RGB zu CMY transformation
+    \bspar1
+    \begin{equation*}
+f_{RGB}=\begin{pmatrix}
+f_R\\
+f_G\\
+f_B\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+f_{max}-f_C\\
+f_{max}-f_M\\
+f_{max}-f_Y\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+f_{max}\\
+f_{max}\\
+f_{max}\\
+\end{pmatrix}
+-
+\begin{pmatrix}
+f_C\\
+f_M\\
+f_Y\\
+\end{pmatrix}
+= white_{RBG}-f_{CMY}
+\end{equation*}
+\bspar2
+Entsprechend gilt:
+\begin{equation*}
+f_{CMY}=\begin{pmatrix}
+f_C\\
+f_M\\
+f_Y\\
+\end{pmatrix}
+=
+white_{RGB}-
+\begin{pmatrix}
+f_R\\
+f_G\\
+f_B\\
+\end{pmatrix}
+= white_{RBG}-f_{RGB}
+\end{equation*}
+\bspar1
+Beispiel bei 8 Bit Farbiefe, Türkiston
+\begin{equation*}
+f_{CMY}
+=
+\begin{pmatrix}
+255\\
+255\\
+255\\
+\end{pmatrix}
+-\begin{pmatrix}
+80\\
+200\\
+130\\
+\end{pmatrix}
+= \begin{pmatrix}
+175\\
+55\\
+125\\
+\end{pmatrix}
+\end{equation*}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Präsentationsmedium-spezifische Farbmodelle - YCrCb}
+    \bspar1
+    YCrCB/YPbPr Farbmodell - Helligkeitssignal und zwei Chrominanz Signale
+    \bspar1
+    \begin{itemize}
+      \item Y bezeichnet die Helligkeit
+      \item CrCB/PbPr repräsentieren Chrominanz Signale
+      \item Entsteht aus einfacher linearer Transformation aus dem RGB Modell
+      \item YCrCb Digitaltechnik
+      \item YPbPr analoge Version von YCrCb
+    \end{itemize}
+     \bspar1
+\centering
+      RCA connector (Chinch) for Component Video.
+      \bspar1
+      \bsfigure{YPbPr-component_video}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Präsentationsmedium-spezifische Farbmodelle - YCrCb}
+    \bspar1
+    YCrCB Konvertierung von RGB
+    \bspar2
+    \begin{equation*}
+f_{YCbCr}
+=
+\begin{pmatrix}
+f_Y\\
+f_{Cb}\\
+f_{Cr}\\
+\end{pmatrix}
+= \begin{pmatrix}
+0\\
+128\\
+128\\
+\end{pmatrix}
++
+\begin{pmatrix}
+0.299 & 0.587 & 0.114 \\
+-0.168736 & -0.331264 & 0.5\\
+0.5 & -0.418688 & -0.081312\\
+\end{pmatrix}
+\begin{pmatrix}
+f_R\\
+f_G\\
+f_B\\
+\end{pmatrix}
+\end{equation*}
+\bspar2
+\begin{itemize}
+  \item Y (Helligkeit) Kanal beinhaltet die meiste Information (nutzbar für Kompression oder effiziente Fernsehübertragung)
+  \item Entspricht eher dem natürlichen Farbempfinden
+  \item Farbkanäle enthalten wenig Information (und daher haben wir ein angepasstes Sehsystem)
+  \item Entspricht der Abbildung in der Natur: mehr Flächen gleicher Farbe im Vergleich zu kontrastreichen Licht/Schatten
+\end{itemize}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Präsentationsmedium-spezifische Farbmodelle - YCrCb}
+    \bspar1
+    Beispielvergleich YCrCB mit RGB
+    \bsfigurecaption[0.7]{rgb-YCrCb}{\tiny Bildquelle Malaka, Butz, Hussmann}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Physiologische Farbmodelle - HSV + HSL}
+    \bspar1
+    Physiologische Farbmodelle
+    \begin{itemize}
+      \item entsprechen menschlicher Wahrnehmung
+      \item relativ einfache Selektion von Farben
+      \begin{itemize}
+        \item Wähle zuerst den Farbton
+        \item Passe dann Helligkeit und Sättigung an
+      \end{itemize}
+    \end{itemize}
+    HSB, HSV, HSI:
+    \begin{itemize}
+      \item Hue, Saturation, Value bzw. Brightness (absolute Helligkeit)
+      \item Hue, Saturation, Lightness (relative Helligkeit)
+      \item Hue, Saturation, Intensity (Lichtintensität)
+      \item Unterschied bezogen auf Anwendungsbereich (Phototechnik)
+    \end{itemize}
+  \end{bsslide}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Physiologische Farbmodelle - HSV + HSL}
+    \bspar1
+    HSV Farbmodell im Detail
+    \bspar1
+    \begin{minipage}{0.45\linewidth}
+      \bsfigurecaption[0.7]{hsv-cone}{\tiny HSV Kegel - Quelle Wikipedia}
+      \bsfigurecaption[0.7]{hsv-hue-skala}{\tiny HSV Farbton Skala - Quelle Wikipedia}
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+      \small
+      \textbf{Polar-Koordinaten}
+      \begin{itemize}
+        \item Farbton als Farbwinkel H auf dem Farbkreis
+        \begin{itemize}
+          \item  Wertebereich: 0° Rot, 120° Grün, 240° Blau)
+          \item Physikalisch Interpretation: dominante Wellenlänge
+        \end{itemize}
+        \item Sättigung in Prozent
+        \begin{itemize}
+          \item  Wertebereich: 0\% = Neutralgrau, 100\% = reine Farbe)
+          \item  Physikalische Interpretation: Hinzumischung von Weiß
+        \end{itemize}
+        \item Hellwert V als Prozentwert
+        \begin{itemize}
+          \item  Wertebereich: 0\%=keine Helligkeit, 100\% = volle Helligkeit
+          \item  Physikalische Interpretation - Gesamtenergiegehalt
+        \end{itemize}
+      \end{itemize}
+    \end{minipage}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Physiologische Farbmodelle - HSV + HSL}
+    \bspar1
+    \textbf{Visualisierung des Farbraums}
+    \bspar1
+    \begin{minipage}{0.3\linewidth}
+      Als Kegel
+      \bspar3
+      \bsfigurecaption[0.7]{hsv-cone-}{\tiny Bildquelle Wikipedia}
+    \end{minipage}
+    \begin{minipage}{0.3\linewidth}
+      Als Zylinder
+      \bspar3
+      \bsfigurecaption[0.7]{hsv-cylinder}{\tiny Bildquelle Wikipedia}
+    \end{minipage}
+    \begin{minipage}{0.3\linewidth}
+      Farbwähler f. Programme
+      \bspar1
+      \bsfigurecaption[0.6]{hsv-farbwaehler}{\tiny Bildquelle Wikipedia}
+    \end{minipage}
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Farben in HTML}
+    \bspar1
+    Spezifikation von Farben im RGB Modell
+    \begin{itemize}
+      \item jeweils 8 bit, d.h. zweistellige Hexadezimalzahl: \texttt{\#rrggbb}
+      \item Beispiel: ``Kiefer'' \texttt{\#006633}
+    \end{itemize}
+    Anbindung an HTML Tags durch CSS
+    \begin{itemize}
+      \item Hintergrundfarben, Farben für Pseudovermate (e.g. Verweise)
+      \item Beispiel \texttt{<body style=\"background-color\":\#CCFFFF\">}
+    \end{itemize}
+    \bspar1
+    Websichere Farben (mit festgelegter Palette für Geräte mit geringerer Farbtiefe):
+    \begin{itemize}
+      \item Standardpalette von 216 RGB Farben
+      \item RBG-Werte durch 51 teilbar
+      \item Eingeführt von Netscape
+    \end{itemize}
+
+  \end{bsslide}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{bsslide}[\textbufferB]
+    \colortext{Farben in HTML}
+    \bspar1
+    \bsfigurecaption{html-farbtabelle}{Farbtabelle und HTML Namen}
+  \end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{bsslide}[Zusammenfassung]
+  \colortext{Farbwahrnehmung und Farbmodelle}
+  \bspar1
+  \textbf{Licht}
+  \begin{itemize}
+    \item Elektromagnetische Welle mit physikalischen Kenngrößen
+    \item Unabhängig von Wahrnehmung
+  \end{itemize}
+  \textbf{Farbwahrnehmung}
+  \begin{itemize}
+    \item Erfolgt über drei Zapfen-Rezeptortypen (RGB bzw. SML) und Mischung dieser
+    \item Farben sind subjektiv, individuell und entstehen durch Mischung der 3 Grundfarben
+  \end{itemize}
+  \textbf{Farbmodell}
+  \begin{itemize}
+    \item Mathematisches Modell für die Definition von Farben
+    \item Allgemeine Modelle (Alle Farben), Präsentationsmediums spezifische Modelle (Drucker, Monitor etc.), Physiologisch orientierte Farbmodelle (beruhen auf Wahrnehmung)
+  \end{itemize}
+  \bspar4
+  \centering
+\end{bsslide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{bsslide}[Zusammenfassung]
+\colortext[Bibliographie]
+\bspar4
+\begin{itemize}
+\item \textbf{Malaka, Butz, Hussmann (2009)} -
+  Medieninformatik: Eine Einführung (Pearson Studium - IT)
+\item \textbf{Kerr (2010)}- The CIE XYZ and xyY Color Spaces\\ \url{http://graphics.stanford.edu/courses/cs148-10-summer/docs/2010--kerr--cie_xyz.pdf}
+\end{itemize}
+\end{bsslide}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "part-de-medium-bild"
+%%% End:
